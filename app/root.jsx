@@ -8,13 +8,16 @@ export const links = () => [{ rel: 'stylesheet', href: styles }];
 
 export default function App() {
   return (
-    <html>
+    <html style={{ background: "url('/back.jpg')" }}>
       <head>
         <link rel="icon" href="data:image/x-icon;base64,AA" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/png" href="/favicon-32.png" />
         <Meta />
         <Links />
       </head>
-      <body className="w-10/12 m-auto">
+      <body className="w-3/5 min-h-screen mx-auto border-x border-2 px-4 bg-gray-50">
         <Header />
 
         <Outlet />
