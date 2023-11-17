@@ -17,7 +17,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="w-3/5 min-h-screen mx-auto border-x border-2 px-4 bg-gray-50">
+      <body className="w-5/6 xl:w-3/5 min-h-screen mx-auto border-x border-2 px-4 bg-gray-50">
         <Header />
 
         <Outlet />
