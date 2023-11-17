@@ -22,6 +22,7 @@ export default function App() {
 
         <Outlet />
 
+        <script async src="https://stats.richardleek.com/script.js" data-website-id="549d5e91-57c9-4aea-8b3b-139d39a302cd"></script>
         <Scripts />
         <LiveReload />
       </body>
