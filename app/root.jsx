@@ -10,7 +10,6 @@ export default function App() {
   return (
     <html style={{ background: "url('/back.jpg')" }}>
       <head>
-        <link rel="icon" href="data:image/x-icon;base64,AA" />
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" type="image/png" href="/favicon-32.png" />
