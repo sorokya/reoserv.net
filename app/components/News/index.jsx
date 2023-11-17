@@ -7,7 +7,7 @@ export default function News({ articles }) {
       <hr className="border-gray-400" />
       {articles.map(
         (article) => (
-          <Preview article={article} key={article.id} />
+          <Preview article={article} key={article.name} />
         ),
         [],
       )}

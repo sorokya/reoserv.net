@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { FcAbout, FcDownload, FcHome } from 'react-icons/fc/index.js';
+import { FcAbout, FcDownload, FcHome, FcList } from 'react-icons/fc/index.js';
 import { FaGithub } from 'react-icons/fa/index.js';
 import logo from './reoserv-small.png';
 
@@ -20,6 +20,11 @@ export default function Header() {
       href: 'https://github.com/sorokya/reoserv',
       label: 'GitHub',
       icon: <FaGithub className="inline mb-1 mr-1" />,
+    },
+    {
+      href: 'http://apollo-games.com/sln/sln.php',
+      label: 'SLN',
+      icon: <FcList className="inline mb-1 mr-1" />,
     },
   ];
 
