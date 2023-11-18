@@ -10,13 +10,16 @@ export const links = () => [
   { rel: 'stylesheet', href: codeStyles },
 ];
 
-export function meta({ params }) {
+export function meta({ params, data }) {
   const parts = params.name.split('-');
   parts.splice(0, 3); // remove date
   const title = parts
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
-  return [{ title: `${title} | REOSERV` }];
+  return [
+    { title: `${title} | REOSERV` },
+    { name: 'description', value: data.article.description },
+  ];
 }
 
 export async function loader({ request, params }) {

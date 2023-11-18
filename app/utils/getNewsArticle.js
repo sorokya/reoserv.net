@@ -10,6 +10,7 @@ import getPrettyDate from './getPrettyDate';
 const NEWS_PATH = 'news';
 
 export default async function getNewsArticle(name, request) {
+  const clockOffset = request.headers.get('Cookie')?.match(/clockOffset=(\d+)/);
   const file = await fs.open(`${NEWS_PATH}/${name}.md`, 'r');
   const content = await file.readFile('utf-8');
   await file.close();
@@ -27,8 +28,11 @@ export default async function getNewsArticle(name, request) {
   const fm = matter(content);
   return {
     title: fm.data.title,
-    date: getPrettyDate(fm.data.date),
-    content: replaceVideoTags(marked.parse(fm.content)),
+    date: getPrettyDate(fm.data.date, clockOffset),
+    description: fm.data.description,
+    content: replaceVideoTags(
+      marked.parse(`${fm.data.description}\n${fm.content}`),
+    ),
   };
 }
 
