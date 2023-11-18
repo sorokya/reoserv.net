@@ -21,7 +21,6 @@ export async function loader({ request }) {
     const articles = await getNewsFeed(request);
     const body = JSON.stringify({ commits, articles });
     const ETag = etag(body);
-    console.log('etag', ETag);
 
     return new Response(body, {
       headers: {
