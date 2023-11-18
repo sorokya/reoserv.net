@@ -32,7 +32,7 @@ At first I turned to existing tools like Plasmastar's EOStarProxy which can prin
 the server. This wasn't going to be good enough though because it only printed the timestamp to the current second
 and these packets come in multiple times per second.
 
-![eostarproxy](/img/news/eostarproxy.PNG 'Timestamps are there but only in seconds')
+![eostarproxy](/img/news/eostarproxy.png 'Timestamps are there but only in seconds')
 
 # A new proxy
 
