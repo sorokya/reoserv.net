@@ -5,6 +5,11 @@ import getNewsArticle from '../utils/getNewsArticle';
 import styles from '../news.css';
 import codeStyles from 'highlight.js/styles/github.min.css';
 
+export const headers = ({ loaderHeaders }) => ({
+  'Cache-Control': loaderHeaders.get('Cache-Control'),
+  ETag: loaderHeaders.get('ETag'),
+});
+
 export const links = () => [
   { rel: 'stylesheet', href: styles },
   { rel: 'stylesheet', href: codeStyles },
@@ -25,8 +30,12 @@ export function meta({ params, data }) {
 export async function loader({ request, params }) {
   try {
     const article = await getNewsArticle(params.name, request);
-    return json({
-      article,
+    return new Response(JSON.stringify({ article }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'max-age=3600, public',
+        ETag: article.etag,
+      },
     });
   } catch (e) {
     console.error('There was an error getting the article', e);

@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from './fs.server';
 import rssToJson from 'rss-to-json';
 const { parse } = rssToJson;
 import getPrettyDate from './getPrettyDate';
@@ -15,11 +15,13 @@ export default async function getGitFeed(request) {
 
   if (!fileStats || fileAge > MAX_FILE_AGE) {
     const gitFeed = await fetchGitFeed(request);
-    fs.writeFileSync(DATA_FILE_PATH, JSON.stringify(gitFeed));
+    const json = JSON.stringify(gitFeed);
+    fs.writeFileSync(DATA_FILE_PATH, json);
     return gitFeed;
   }
 
-  return JSON.parse(fs.readFileSync(DATA_FILE_PATH));
+  const json = fs.readFileSync(DATA_FILE_PATH);
+  return JSON.parse(json);
 }
 
 async function fetchGitFeed(request) {

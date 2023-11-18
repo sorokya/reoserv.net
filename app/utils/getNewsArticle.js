@@ -1,3 +1,4 @@
+import etag from './etag.server';
 import matter from 'gray-matter';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
@@ -26,13 +27,13 @@ export default async function getNewsArticle(name, request) {
   );
 
   const fm = matter(content);
+  const markdown = `${fm.data.description}\n${fm.content}`;
   return {
     title: fm.data.title,
     date: getPrettyDate(fm.data.date, clockOffset),
     description: fm.data.description,
-    content: replaceVideoTags(
-      marked.parse(`${fm.data.description}\n${fm.content}`),
-    ),
+    etag: etag(markdown),
+    content: replaceVideoTags(marked.parse(markdown)),
   };
 }
 

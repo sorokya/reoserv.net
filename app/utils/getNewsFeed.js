@@ -4,8 +4,6 @@ import fs from 'fs/promises';
 import getPrettyDate from './getPrettyDate';
 
 const NEWS_PATH = 'news';
-const DATA_FILE_PATH = 'news-feed.json';
-const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 export default async function getNewsFeed(request) {
   const files = await fs.readdir(NEWS_PATH);
@@ -15,15 +13,21 @@ export default async function getNewsFeed(request) {
 
   files.sort((a, b) => b.localeCompare(a));
 
+  const clockOffset = request.headers.get('Cookie')?.match(/clockOffset=(\d+)/);
   const newsItems = await Promise.all(
     files.map((file) =>
-      getNewsFile(`${NEWS_PATH}/${file}`, file.substring(0, file.length - 3)),
+      getNewsFile(
+        `${NEWS_PATH}/${file}`,
+        file.substring(0, file.length - 3),
+        clockOffset,
+      ),
     ),
   );
+
   return newsItems;
 }
 
-async function getNewsFile(path, name) {
+async function getNewsFile(path, name, clockOffset) {
   const file = await fs.open(path, 'r');
   const content = await file.readFile('utf-8');
 
@@ -33,6 +37,6 @@ async function getNewsFile(path, name) {
     title: fm.data.title,
     name,
     description: fm.data.description,
-    date: getPrettyDate(fm.data.date),
+    date: getPrettyDate(fm.data.date, clockOffset),
   };
 }
