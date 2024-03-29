@@ -42,8 +42,8 @@ const LIST = [
   { type: 'header', title: 'Getting Started' },
   { type: 'item', title: 'Installation', link: '/docs/installation' },
   { type: 'item', title: 'Database', link: '/docs/database' },
-  { type: 'header', title: 'Configuration' },
-  { type: 'item', title: 'Server', link: '/docs/server' },
+  { type: 'item', title: 'Configuration', link: '/docs/configuration' },
+  { type: 'header', title: 'Data' },
   { type: 'item', title: 'Arenas', link: '/docs/arenas' },
   { type: 'item', title: 'Commands', link: '/docs/commands' },
   {
@@ -52,7 +52,6 @@ const LIST = [
     link: '/docs/packet-rate-limits',
   },
   { type: 'item', title: 'Formulas', link: '/docs/formulas' },
-  { type: 'header', title: 'Data' },
   { type: 'item', title: 'Pub files', link: '/docs/pubs' },
   { type: 'item', title: 'Maps', link: '/docs/maps' },
   { type: 'item', title: 'Quests', link: '/docs/quests' },
@@ -102,7 +101,11 @@ export default function Docs() {
       </div>
       <div className="p-1 md:col-span-5">
         <h1 className="text-3xl mb-2 font-bold">{title}</h1>
-        <div id="article" dangerouslySetInnerHTML={{ __html: content }} />
+        <div
+          id="article"
+          className="pb-2"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
       </div>
     </div>
   );
