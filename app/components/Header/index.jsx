@@ -1,5 +1,10 @@
 import { Link } from '@remix-run/react';
-import { FcAbout, FcDownload, FcHome, FcList } from 'react-icons/fc/index.js';
+import {
+  FcDocument,
+  FcDownload,
+  FcHome,
+  FcList,
+} from 'react-icons/fc/index.js';
 import { FaGithub } from 'react-icons/fa/index.js';
 import logo from './reoserv-small.png';
 
@@ -7,9 +12,9 @@ export default function Header() {
   const links = [
     { href: '/', label: 'Home', icon: <FcHome className="inline mb-1 mr-1" /> },
     {
-      href: '/about',
-      label: 'About',
-      icon: <FcAbout className="inline mb-1 mr-1" />,
+      href: '/docs/installation',
+      label: 'Docs',
+      icon: <FcDocument className="inline mb-1 mr-1" />,
     },
     {
       href: '/downloads',

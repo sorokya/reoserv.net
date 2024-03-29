@@ -1,5 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
-import { json } from '@remix-run/node';
+import { json, redirect } from '@remix-run/node';
 import getNewsArticle from '../utils/getNewsArticle';
 
 import styles from '../news.css';
@@ -39,7 +39,7 @@ export async function loader({ request, params }) {
     });
   } catch (e) {
     console.error('There was an error getting the article', e);
-    return json({});
+    return redirect('/404');
   }
 }
 
