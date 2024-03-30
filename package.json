@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev -c \"node server.mjs\""
+    "dev": "remix dev -c \"node server.mjs\"",
+    "lint": "biome check --apply-unsafe ."
   },
   "keywords": ["reoserv", "reoserv.net", "endless online emulator"],
   "author": "sorokya",
@@ -27,11 +28,9 @@
     "rss-to-json": "^2.1.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.6.3",
     "@remix-run/dev": "^2.2.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-react": "^7.33.2",
-    "prettier": "3.1.0",
     "tailwindcss": "^3.3.5"
-  }
+  },
+  "trustedDependencies": ["@biomejs/biome"]
 }
