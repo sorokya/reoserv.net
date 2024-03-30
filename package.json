@@ -7,9 +7,9 @@
     "build": "remix build",
     "dev": "remix dev -c \"node server.mjs\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["reoserv", "reoserv.net", "endless online emulator"],
+  "author": "sorokya",
+  "license": "MIT",
   "dependencies": {
     "@remix-run/express": "^2.2.0",
     "@remix-run/node": "^2.2.0",
