@@ -1,9 +1,8 @@
-import { Link, useLocation, useLoaderData } from '@remix-run/react';
 import { json, redirect } from '@remix-run/node';
-import getDocsPage from '../utils/getDocsPage';
-
-import styles from '../news.css';
+import { Link, useLoaderData, useLocation } from '@remix-run/react';
 import codeStyles from 'highlight.js/styles/github.min.css';
+import styles from '../news.css';
+import getDocsPage from '../utils/getDocsPage';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -59,16 +58,17 @@ const LIST = [
 ];
 
 function ListHeader({ title }) {
-  return <li className="text-lg font-bold">{title}</li>;
+  return <li className="font-bold text-lg">{title}</li>;
 }
 
 function ListItem({ title, link, active = false }) {
+  const className = active
+    ? 'border-l-amber-300 text-amber-300'
+    : 'border-l-gray-200';
+
   return (
-    <li
-      className={`border-l-2 pl-3 border-l-amber-${
-        active ? '300' : '100'
-      } hover:border-l-amber-400 ${active ? 'text-amber-300' : ''}`}
-    >
+    // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
+    <li className={`border-l-2 pl-3 hover:border-l-amber-400 ${className}`}>
       <Link to={link}>{title}</Link>
     </li>
   );
@@ -80,30 +80,30 @@ export default function Docs() {
   const { title, content } = page;
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-6">
+    <div className="grid md:grid-cols-6 sm:grid-cols-1">
       <div className="p-1 md:col-span-1">
         <ul>
           {LIST.map(({ type, title, link }) => {
             if (type === 'header') {
               return <ListHeader key={title} title={title} />;
-            } else {
-              return (
-                <ListItem
-                  key={title}
-                  title={title}
-                  link={link}
-                  active={link == pathname}
-                />
-              );
             }
+            return (
+              <ListItem
+                key={title}
+                title={title}
+                link={link}
+                active={link === pathname}
+              />
+            );
           })}
         </ul>
       </div>
       <div className="p-1 md:col-span-5">
-        <h1 className="text-3xl mb-2 font-bold">{title}</h1>
+        <h1 className="mb-2 font-bold text-3xl">{title}</h1>
         <div
           id="article"
           className="pb-2"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>

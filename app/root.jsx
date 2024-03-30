@@ -15,7 +15,7 @@ export const links = () => [{ rel: 'stylesheet', href: styles }];
 
 export default function App() {
   return (
-    <html style={{ background: "url('/back.jpg')" }}>
+    <html style={{ background: "url('/back.jpg')" }} lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,7 +36,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="w-5/6 xl:w-3/5 min-h-screen mx-auto border-x border-2 px-4 bg-gray-50">
+      <body className="mx-auto min-h-screen w-5/6 border-2 border-gray-200 border-x bg-gray-50 px-4 xl:w-3/5">
         <Header />
 
         <Outlet />
@@ -45,7 +45,7 @@ export default function App() {
           async
           src="https://stats.richardleek.com/script.js"
           data-website-id="549d5e91-57c9-4aea-8b3b-139d39a302cd"
-        ></script>
+        />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

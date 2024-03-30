@@ -1,5 +1,5 @@
-import fs from './fs.server';
 import rssToJson from 'rss-to-json';
+import fs from './fs.server';
 const { parse } = rssToJson;
 import getPrettyDate from './getPrettyDate';
 
@@ -11,7 +11,9 @@ export default async function getGitFeed(request) {
   // Check file age or existence
   const fileStats =
     fs.existsSync(DATA_FILE_PATH) && fs.statSync(DATA_FILE_PATH);
-  const fileAge = fileStats ? Date.now() - fileStats.mtime.getTime() : Infinity;
+  const fileAge = fileStats
+    ? Date.now() - fileStats.mtime.getTime()
+    : Number.POSITIVE_INFINITY;
 
   if (!fileStats || fileAge > MAX_FILE_AGE) {
     const gitFeed = await fetchGitFeed(request);

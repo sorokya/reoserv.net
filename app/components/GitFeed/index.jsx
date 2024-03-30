@@ -3,7 +3,7 @@ import { Link } from '@remix-run/react';
 export default function GitFeed({ commits }) {
   return (
     <>
-      <h1 className="text-2xl font-bold">Recent Changes</h1>
+      <h1 className="font-bold text-2xl">Recent Changes</h1>
       <hr className="border-gray-400" />
       <ul>
         {commits.map(
@@ -11,7 +11,7 @@ export default function GitFeed({ commits }) {
             <li key={id} className="my-2">
               <Link to={link} className="text-gray-400">
                 {timestamp}:{' '}
-                <p className="font-mono text-sm text-black">{content}</p>
+                <p className="font-mono text-black text-sm">{content}</p>
               </Link>
             </li>
           ),

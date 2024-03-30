@@ -5,7 +5,7 @@ export default function Preview({ article }) {
 
   return (
     <article className="mb-6">
-      <span className="text-gray-400 block">{date}</span>
+      <span className="block text-gray-400">{date}</span>
       <Link to={`/news/${article.name}`} className="text-2xl">
         {title}
       </Link>

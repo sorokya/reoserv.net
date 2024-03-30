@@ -1,11 +1,11 @@
-import etag from './etag.server';
 import matter from 'gray-matter';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
+import etag from './etag.server';
 
 import hljs from 'highlight.js';
 
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 import getPrettyDate from './getPrettyDate';
 
 const NEWS_PATH = 'news';
@@ -44,11 +44,11 @@ function replaceVideoTags(html) {
     const videoTag = html.substring(start, end + 2);
 
     const src = videoTag.match(/src="([^"]+)"/)[1];
-    html = html.replace(
+    const _html = html.replace(
       videoTag,
       `<video controls><source src="${src}" type="video/mp4">Your browser does not support video</video>`,
     );
   }
 
-  return html;
+  return _html;
 }

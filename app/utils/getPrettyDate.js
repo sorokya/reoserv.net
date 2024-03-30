@@ -35,7 +35,7 @@ const offsetDate = (timestamp, offset) => {
 
 const getPrettyDate = (timestamp, clockOffset) => {
   const date = clockOffset
-    ? offsetDate(timestamp, parseInt(clockOffset[1], 10))
+    ? offsetDate(timestamp, Number.parseInt(clockOffset[1], 10))
     : new Date(timestamp);
 
   return `${getMonthName(date)} ${date.getDate()}, ${date.getFullYear()}`;

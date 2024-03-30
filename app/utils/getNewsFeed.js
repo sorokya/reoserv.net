@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 import getPrettyDate from './getPrettyDate';
 
 const NEWS_PATH = 'news';
