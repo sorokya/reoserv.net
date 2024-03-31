@@ -36,18 +36,21 @@ export async function loader({ request, params }) {
 }
 
 export default function Article() {
-  const { article } = useLoaderData();
-  const { title, date, content } = article;
+  const {
+    article: { title, date, content, description },
+  } = useLoaderData();
 
   return (
-    <>
-      <span className="block text-gray-400">{date}</span>
-      <h1 className="mb-2 text-2xl">{title}</h1>
+    <article className="prose prose-base lg:prose-lg">
+      <header>
+        <span className="mb-4 block text-gray-10">{date}</span>
+        <h1 className="mb-0">{title}</h1>
+        <p className="lead mt-4">{description}</p>
+      </header>
       <div
-        className="prose"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </>
+    </article>
   );
 }

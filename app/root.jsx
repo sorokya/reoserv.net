@@ -1,3 +1,5 @@
+import '@fontsource/ubuntu';
+import '@fontsource/ubuntu-mono';
 import {
   Links,
   Meta,
@@ -7,16 +9,16 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from '@remix-run/react';
-
-import styles from './tailwind.css?url';
-
 import { Header } from './components/header';
-
-export const links = () => [{ rel: 'stylesheet', href: styles }];
+import './styles/app.css';
 
 export function Layout({ children }) {
   return (
-    <html style={{ background: "url('/back.jpg')" }} lang="en">
+    <html
+      lang="en"
+      // toggle the below to enable dark mode
+      //  className="group/apptheme dark"
+    >
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,8 +39,10 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body className="mx-auto min-h-screen w-5/6 border-2 border-gray-200 border-x bg-gray-50 px-4 xl:w-3/5">
-        {children}
+      <body className="relative grid min-h-screen font-sans antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] group-[.dark]/apptheme:before:invert-95">
+        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-gray-6 border-x bg-accent-1 px-8 text-gray-12">
+          {children}
+        </main>
         {process.env.NODE_ENV !== 'development' && (
           <script
             async
@@ -59,6 +63,7 @@ export default function App() {
     <>
       <Header />
       <Outlet />
+      <footer className="py-4 text-gray-11 text-sm" />
     </>
   );
 }

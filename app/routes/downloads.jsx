@@ -4,7 +4,7 @@ export function meta() {
 
 export default function Downloads() {
   return (
-    <>
+    <article className="prose prose-base lg:prose-lg">
       <h1 className="font-bold text-2xl">Downloads</h1>
       <p>There are no binary downloads available for REOSERV yet!</p>
 
@@ -78,6 +78,6 @@ password = "<SAME PASSWORD FROM .env>"`}
         <h3 className="text-lg">6. Start reoserv</h3>
         <pre className="border-black bg-gray-200 p-1">docker compose up</pre>
       </div>
-    </>
+    </article>
   );
 }

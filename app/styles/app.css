@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+@import './colors.css';
+@import './typography.css';
+@import './prose.css' layer(utilities);

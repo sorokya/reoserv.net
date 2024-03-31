@@ -51,18 +51,24 @@ const LIST = [
 ];
 
 function ListHeader({ title }) {
-  return <li className="font-bold text-lg">{title}</li>;
+  return (
+    <li className="font-bold pt-6 pb-3 text-gray-12/80 first:pt-0 text-lg">
+      {title}
+    </li>
+  );
 }
 
 function ListItem({ title, link, active = false }) {
   const className = active
-    ? 'border-l-amber-300 text-amber-300'
-    : 'border-l-gray-200';
+    ? 'border-l-accent-7 text-accent-11 font-bold tracking-wide'
+    : 'border-l-gray-4 text-gray-11';
 
   return (
     // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
-    <li className={`border-l-2 pl-3 hover:border-l-amber-400 ${className}`}>
-      <Link prefetch="intent" to={link}>
+    <li
+      className={`border-l-4 transition hover:border-l-accent-4 hover:text-accent-11/80 ${className}`}
+    >
+      <Link prefetch="intent" className="pl-3 py-1 block" to={link}>
         {title}
       </Link>
     </li>
@@ -75,9 +81,9 @@ export default function Docs() {
   const { title, content } = page;
 
   return (
-    <div className="grid md:grid-cols-6 sm:grid-cols-1">
-      <div className="p-1 md:col-span-1">
-        <ul>
+    <div className="grid md:grid-cols-12">
+      <div className="p-1 md:col-span-3">
+        <ul className="grid">
           {LIST.map(({ type, title, link }) => {
             if (type === 'header') {
               return <ListHeader key={title} title={title} />;
@@ -93,10 +99,10 @@ export default function Docs() {
           })}
         </ul>
       </div>
-      <div className="p-1 md:col-span-5">
-        <h1 className="mb-2 font-bold text-3xl">{title}</h1>
+      <div className="prose prose-base lg:prose-lg p-1 md:col-span-9">
+        <h1>{title}</h1>
         <div
-          className="prose pb-2"
+          className="pb-2"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
           dangerouslySetInnerHTML={{ __html: content }}
         />

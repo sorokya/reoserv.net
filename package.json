@@ -14,6 +14,8 @@
   "author": "Richard Leek <richard@richardleek.com>",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/ubuntu": "^5.0.12",
+    "@fontsource/ubuntu-mono": "^5.0.19",
     "@remix-run/express": "^2.8.1",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
