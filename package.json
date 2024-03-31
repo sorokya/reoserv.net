@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev -c \"node server.mjs\"",
+    "dev": "remix dev -c \"node server.js\"",
     "lint": "biome check --apply-unsafe .",
     "lint:docs": "prettier --write *.md **/*.md"
   },
