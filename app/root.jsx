@@ -4,6 +4,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
+  useRouteError,
 } from '@remix-run/react';
 
 import styles from './tailwind.css?url';
@@ -12,7 +14,7 @@ import { Header } from './components/header';
 
 export const links = () => [{ rel: 'stylesheet', href: styles }];
 
-export default function App() {
+export function Layout({ children }) {
   return (
     <html style={{ background: "url('/back.jpg')" }} lang="en">
       <head>
@@ -36,10 +38,7 @@ export default function App() {
         <Links />
       </head>
       <body className="mx-auto min-h-screen w-5/6 border-2 border-gray-200 border-x bg-gray-50 px-4 xl:w-3/5">
-        <Header />
-
-        <Outlet />
-
+        {children}
         <script
           async
           src="https://stats.richardleek.com/script.js"
@@ -49,5 +48,36 @@ export default function App() {
         <Scripts />
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <h1>Error!</h1>
+      <p>{error?.message ?? 'Unknown error'}</p>
+    </>
   );
 }
