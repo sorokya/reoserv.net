@@ -6,7 +6,7 @@ import {
   FcHome,
   FcList,
 } from 'react-icons/fc/index.js';
-import logo from './reoserv-small.png';
+import logo from '../assets/images/reoserv-small.png';
 
 export function Header() {
   const links = [

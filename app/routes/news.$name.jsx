@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import codeStyles from 'highlight.js/styles/github.min.css';
-import { getNewsArticle } from '../utils/getNewsArticle.server';
+import { getNewsArticle } from '../utils/get-news-article.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),

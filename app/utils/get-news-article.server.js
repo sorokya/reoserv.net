@@ -4,9 +4,9 @@ import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
-import { getClockOffset } from './getClockOffset.server';
-import { getPrettyDate } from './getPrettyDate.server';
-import { replaceVideoTags } from './replaceVideoTags.server';
+import { getClockOffset } from './get-clock-offset.server';
+import { getPrettyDate } from './get-pretty-date.server';
+import { replaceVideoTags } from './replace-video-tags.server';
 
 const NEWS_PATH = 'news';
 

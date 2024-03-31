@@ -1,8 +1,8 @@
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import { GitFeed } from '../components/GitFeed';
+import { GitFeed } from '../components/git-feed';
 import etag from '../utils/etag.server';
-import { getGitFeed } from '../utils/getGitFeed.server';
+import { getGitFeed } from '../utils/get-git-feed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
