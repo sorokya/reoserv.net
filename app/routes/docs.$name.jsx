@@ -1,6 +1,6 @@
 import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
-import codeStyles from 'highlight.js/styles/github.min.css';
+import codeStyles from 'highlight.js/styles/github.min.css?url';
 import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
