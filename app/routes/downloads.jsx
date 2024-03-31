@@ -13,7 +13,7 @@ export default function Downloads() {
         Container Registry.
       </p>
 
-      <p className="m-1">
+      <div className="m-1">
         <h2 className="font-bold text-xl">
           Recommended setup with docker compose:
         </h2>
@@ -77,7 +77,7 @@ password = "<SAME PASSWORD FROM .env>"`}
         </pre>
         <h3 className="text-lg">6. Start reoserv</h3>
         <pre className="border-black bg-gray-200 p-1">docker compose up</pre>
-      </p>
+      </div>
     </>
   );
 }
