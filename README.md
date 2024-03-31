@@ -1,7 +1,7 @@
 # Reoserv.net documentation home
 
 This website hosts the documentation for the [reoserv][reoserv] project
-(authored and maintained by [sorokya][sorokya])
+(authored and maintained by [Richard Leek][sorokya])
 
 ## Prerequisites
 
@@ -19,12 +19,6 @@ running:
 bun --version    # eg: 1.0.36
 node --version   # eg: v20.4.0
 ```
-
-Also, install the following VS Code extensions:
-
-- [Biome][biome] for in-editor formatting & linting (on save) for
-  js/ts/jsx/tsx/css/json files
-- [Prettier][prettier] for in-editor formatting of md/mdx files
 
 ## Installation
 

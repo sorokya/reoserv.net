@@ -11,7 +11,7 @@
     "start": "cross-env NODE_ENV=production node ./server.js"
   },
   "keywords": ["reoserv", "reoserv.net", "endless online emulator"],
-  "author": "sorokya",
+  "author": "Richard Leek <richard@richardleek.com>",
   "license": "MIT",
   "dependencies": {
     "@remix-run/express": "^2.8.1",
