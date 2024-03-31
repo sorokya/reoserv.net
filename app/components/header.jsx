@@ -1,11 +1,6 @@
 import { Link } from '@remix-run/react';
-import { FaGithub } from 'react-icons/fa/index.js';
-import {
-  FcDocument,
-  FcDownload,
-  FcHome,
-  FcList,
-} from 'react-icons/fc/index.js';
+import { FaGithub } from 'react-icons/fa6';
+import { FcDocument, FcDownload, FcHome, FcList } from 'react-icons/fc';
 import logo from '../assets/images/reoserv-small.png';
 
 export function Header() {
