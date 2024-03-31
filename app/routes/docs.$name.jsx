@@ -1,7 +1,6 @@
 import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
 import codeStyles from 'highlight.js/styles/github.min.css';
-import styles from '../news.css';
 import getDocsPage from '../utils/getDocsPage.server';
 
 export const headers = ({ loaderHeaders }) => ({
@@ -9,10 +8,7 @@ export const headers = ({ loaderHeaders }) => ({
   ETag: loaderHeaders.get('ETag'),
 });
 
-export const links = () => [
-  { rel: 'stylesheet', href: styles },
-  { rel: 'stylesheet', href: codeStyles },
-];
+export const links = () => [{ rel: 'stylesheet', href: codeStyles }];
 
 export function meta({ data }) {
   return [
@@ -101,8 +97,7 @@ export default function Docs() {
       <div className="p-1 md:col-span-5">
         <h1 className="mb-2 font-bold text-3xl">{title}</h1>
         <div
-          id="article"
-          className="pb-2"
+          className="prose pb-2"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
           dangerouslySetInnerHTML={{ __html: content }}
         />

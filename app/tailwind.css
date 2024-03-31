@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .prose p {
+    margin: 0 0 10px;
+  }
+
+  .prose ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0 0 10px;
+  }
+
+  .prose ol {
+    list-style: decimal;
+    padding-left: 20px;
+    margin: 0 0 10px;
+  }
+
+  .prose h1 {
+    font-size: 2em;
+    margin: 0 0 10px;
+  }
+
+  .prose h2 {
+    font-size: 1.5em;
+    margin: 0 0 10px;
+  }
+
+  .prose h3 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+  }
+
+  .prose h4 {
+    font-size: 1em;
+  }
+
+  .prose table th {
+    border-bottom: 1px solid #000;
+    padding: 5px 10px;
+  }
+
+  .prose table td {
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+  .prose a {
+    color: blue;
+    text-decoration: underline;
+  }
+}
