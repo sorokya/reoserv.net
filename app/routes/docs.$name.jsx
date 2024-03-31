@@ -1,8 +1,8 @@
-import { json, redirect } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
 import codeStyles from 'highlight.js/styles/github.min.css';
 import styles from '../news.css';
-import getDocsPage from '../utils/getDocsPage';
+import getDocsPage from '../utils/getDocsPage.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),

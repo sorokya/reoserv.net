@@ -4,8 +4,8 @@ import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
-import getPrettyDate from './getPrettyDate';
-import { replaceVideoTags } from './replaceVideoTags';
+import getPrettyDate from './getPrettyDate.server';
+import { replaceVideoTags } from './replaceVideoTags.server';
 
 const NEWS_PATH = 'news';
 

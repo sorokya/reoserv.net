@@ -1,6 +1,6 @@
-import { json, redirect } from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import getNewsArticle from '../utils/getNewsArticle';
+import getNewsArticle from '../utils/getNewsArticle.server';
 
 import codeStyles from 'highlight.js/styles/github.min.css';
 import styles from '../news.css';

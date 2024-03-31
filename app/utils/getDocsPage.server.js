@@ -4,7 +4,7 @@ import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
-import { replaceVideoTags } from './replaceVideoTags';
+import { replaceVideoTags } from './replaceVideoTags.server';
 
 const DOCS_PATH = 'docs';
 

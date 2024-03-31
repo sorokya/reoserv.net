@@ -1,7 +1,7 @@
 import matter from 'gray-matter';
 
 import fs from 'node:fs/promises';
-import getPrettyDate from './getPrettyDate';
+import getPrettyDate from './getPrettyDate.server';
 
 const NEWS_PATH = 'news';
 
