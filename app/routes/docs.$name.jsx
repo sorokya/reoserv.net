@@ -1,14 +1,11 @@
 import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
-import codeStyles from 'highlight.js/styles/github.min.css?url';
 import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
   ETag: loaderHeaders.get('ETag'),
 });
-
-export const links = () => [{ rel: 'stylesheet', href: codeStyles }];
 
 export function meta({ data }) {
   return [

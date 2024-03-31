@@ -23,7 +23,7 @@ For Windows users you can download and run [rustup-init.exe](https://win.rustup.
 
 For WSL/Linux/Mac OS you can run the following shell script and follow the prompts.
 
-```bash
+```sh
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
@@ -35,7 +35,7 @@ Once you have installed rust you can get the REOSERV source code by either:
 
 Cloning the GitHub repository (recommended)
 
-```bash
+```sh
 $ git clone https://github.com/sorokya/reoserv
 ```
 
@@ -47,7 +47,7 @@ https://github.com/sorokya/reoserv/archive/refs/heads/master.zip
 
 Once you have the source code in a directory on your machine simply run:
 
-```bash
+```sh
 cargo build
 ```
 

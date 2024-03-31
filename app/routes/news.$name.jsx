@@ -1,14 +1,11 @@
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import codeStyles from 'highlight.js/styles/github.min.css?url';
 import { getNewsArticle } from '../utils/get-news-article.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
   ETag: loaderHeaders.get('ETag'),
 });
-
-export const links = () => [{ rel: 'stylesheet', href: codeStyles }];
 
 export function meta({ params, data }) {
   const parts = params.name.split('-');
@@ -38,7 +35,7 @@ export async function loader({ request, params }) {
   }
 }
 
-export function Article() {
+export default function Article() {
   const { article } = useLoaderData();
   const { title, date, content } = article;
 

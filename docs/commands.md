@@ -7,7 +7,7 @@ Defined in [RON (Rust Object Notation)](https://docs.rs/ron/latest/ron/).
 
 Like the main config file this can also be copied to a local file:
 
-```bash
+```sh
 $ cp Commands.ron Commands.local.ron
 ```
 

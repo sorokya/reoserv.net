@@ -50,4 +50,8 @@
     color: blue;
     text-decoration: underline;
   }
+
+  .shiki {
+    @apply py-4 px-6 my-4 rounded overflow-x-auto;
+  }
 }
