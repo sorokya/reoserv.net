@@ -62,7 +62,9 @@ function ListItem({ title, link, active = false }) {
   return (
     // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
     <li className={`border-l-2 pl-3 hover:border-l-amber-400 ${className}`}>
-      <Link to={link}>{title}</Link>
+      <Link prefetch="intent" to={link}>
+        {title}
+      </Link>
     </li>
   );
 }

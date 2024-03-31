@@ -18,7 +18,7 @@ function Preview({ article }) {
   return (
     <article className="mb-6">
       <div className="text-gray-400">{date}</div>
-      <Link to={`/news/${article.name}`} className="text-2xl">
+      <Link to={`/news/${article.name}`} className="text-2xl" prefetch="intent">
         {title}
       </Link>
       <p className="mt-2">{description}</p>

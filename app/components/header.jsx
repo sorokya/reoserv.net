@@ -50,6 +50,7 @@ export function Header() {
               <Link
                 to={href}
                 className="block w-full rounded-sm border border-amber-600 bg-amber-100 px-2 text-amber-600 hover:bg-amber-600 hover:text-amber-100"
+                prefetch="intent"
               >
                 {icon}
                 {label}
