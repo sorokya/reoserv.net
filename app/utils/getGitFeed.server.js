@@ -2,6 +2,7 @@ import rssToJson from 'rss-to-json';
 import fs from './fs.server';
 const { parse } = rssToJson;
 import getPrettyDate from './getPrettyDate.server';
+import { getClockOffset } from './getClockOffset.server';
 
 const GITHUB_FEED = 'https://github.com/sorokya/reoserv/commits/master.atom';
 const DATA_FILE_PATH = 'git-feed.json';
@@ -27,7 +28,7 @@ export default async function getGitFeed(request) {
 }
 
 async function fetchGitFeed(request) {
-  const clockOffset = request.headers.get('Cookie')?.match(/clockOffset=(\d+)/);
+  const clockOffset = getClockOffset(request);
   const feed = await parse(GITHUB_FEED);
   if (!feed) {
     return [];

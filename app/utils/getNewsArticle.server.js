@@ -6,11 +6,12 @@ import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
 import getPrettyDate from './getPrettyDate.server';
 import { replaceVideoTags } from './replaceVideoTags.server';
+import { getClockOffset } from './getClockOffset.server';
 
 const NEWS_PATH = 'news';
 
 export default async function getNewsArticle(name, request) {
-  const clockOffset = request.headers.get('Cookie')?.match(/clockOffset=(\d+)/);
+  const clockOffset = getClockOffset(request);
   const file = await fs.open(`${NEWS_PATH}/${name}.md`, 'r');
   const content = await file.readFile('utf-8');
   await file.close();
