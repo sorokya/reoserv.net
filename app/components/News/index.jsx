@@ -1,6 +1,6 @@
 import { Link } from '@remix-run/react';
 
-export default function News({ articles }) {
+export function News({ articles }) {
   return (
     <>
       <h1 className="font-bold text-2xl">Latest News</h1>

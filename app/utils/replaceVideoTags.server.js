@@ -1,4 +1,4 @@
-export function replaceVideoTags(html) {
+function replaceVideoTags(html) {
   while (html.includes('{{<video')) {
     const start = html.indexOf('{{<video');
     const end = html.indexOf('}}', start);
@@ -14,3 +14,5 @@ export function replaceVideoTags(html) {
 
   return html;
 }
+
+export { replaceVideoTags };

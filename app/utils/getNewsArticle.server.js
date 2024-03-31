@@ -4,13 +4,13 @@ import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
-import getPrettyDate from './getPrettyDate.server';
-import { replaceVideoTags } from './replaceVideoTags.server';
 import { getClockOffset } from './getClockOffset.server';
+import { getPrettyDate } from './getPrettyDate.server';
+import { replaceVideoTags } from './replaceVideoTags.server';
 
 const NEWS_PATH = 'news';
 
-export default async function getNewsArticle(name, request) {
+async function getNewsArticle(name, request) {
   const clockOffset = getClockOffset(request);
   const file = await fs.open(`${NEWS_PATH}/${name}.md`, 'r');
   const content = await file.readFile('utf-8');
@@ -36,3 +36,5 @@ export default async function getNewsArticle(name, request) {
     content: replaceVideoTags(marked.parse(markdown)),
   };
 }
+
+export { getNewsArticle };

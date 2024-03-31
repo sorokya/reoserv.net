@@ -1,12 +1,12 @@
 import matter from 'gray-matter';
 
 import fs from 'node:fs/promises';
-import getPrettyDate from './getPrettyDate.server';
 import { getClockOffset } from './getClockOffset.server';
+import { getPrettyDate } from './getPrettyDate.server';
 
 const NEWS_PATH = 'news';
 
-export default async function getNewsFeed(request) {
+async function getNewsFeed(request) {
   const files = await fs.readdir(NEWS_PATH);
   if (!files) {
     return [];
@@ -42,3 +42,5 @@ async function getNewsFile(path, name, clockOffset) {
     date: getPrettyDate(fm.data.date, clockOffset),
   };
 }
+
+export { getNewsFeed };

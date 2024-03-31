@@ -1,14 +1,14 @@
 import rssToJson from 'rss-to-json';
 import fs from './fs.server';
 const { parse } = rssToJson;
-import getPrettyDate from './getPrettyDate.server';
 import { getClockOffset } from './getClockOffset.server';
+import { getPrettyDate } from './getPrettyDate.server';
 
 const GITHUB_FEED = 'https://github.com/sorokya/reoserv/commits/master.atom';
 const DATA_FILE_PATH = 'git-feed.json';
 const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-export default async function getGitFeed(request) {
+async function getGitFeed(request) {
   // Check file age or existence
   const fileStats =
     fs.existsSync(DATA_FILE_PATH) && fs.statSync(DATA_FILE_PATH);
@@ -41,3 +41,5 @@ async function fetchGitFeed(request) {
     timestamp: getPrettyDate(item.created, clockOffset),
   }));
 }
+
+export { getGitFeed };

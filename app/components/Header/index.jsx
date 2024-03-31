@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fc/index.js';
 import logo from './reoserv-small.png';
 
-export default function Header() {
+export function Header() {
   const links = [
     { href: '/', label: 'Home', icon: <FcHome className="mr-1 mb-1 inline" /> },
     {

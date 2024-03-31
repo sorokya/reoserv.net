@@ -8,7 +8,7 @@ import { replaceVideoTags } from './replaceVideoTags.server';
 
 const DOCS_PATH = 'docs';
 
-export default async function getDocsPage(name) {
+async function getDocsPage(name) {
   const file = await fs.open(`${DOCS_PATH}/${name}.md`, 'r');
   const content = await file.readFile('utf-8');
   await file.close();
@@ -32,3 +32,5 @@ export default async function getDocsPage(name) {
     content: replaceVideoTags(marked.parse(markdown)),
   };
 }
+
+export { getDocsPage };

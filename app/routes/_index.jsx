@@ -1,10 +1,10 @@
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import GitFeed from '../components/GitFeed';
-import News from '../components/News';
+import { GitFeed } from '../components/GitFeed';
+import { News } from '../components/News';
 import etag from '../utils/etag.server';
-import getGitFeed from '../utils/getGitFeed.server';
-import getNewsFeed from '../utils/getNewsFeed.server';
+import { getGitFeed } from '../utils/getGitFeed.server';
+import { getNewsFeed } from '../utils/getNewsFeed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),

@@ -9,7 +9,7 @@ import {
 
 import styles from './tailwind.css';
 
-import Header from './components/Header';
+import { Header } from './components/Header';
 
 export const links = () => [{ rel: 'stylesheet', href: styles }];
 

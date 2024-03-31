@@ -1,2 +1,1 @@
-import fs from 'node:fs';
-export default fs;
+export { default } from 'node:fs';

@@ -38,4 +38,4 @@ const getPrettyDate = (timestamp, clockOffset) => {
   return `${getMonthName(date)} ${date.getDate()}, ${date.getFullYear()}`;
 };
 
-export default getPrettyDate;
+export { getPrettyDate };

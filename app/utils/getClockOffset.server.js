@@ -3,8 +3,10 @@
 // use a named capture group
 const regex = /clockOffset=(?<clockOffset>[+-\d]+)/;
 
-export function getClockOffset(request) {
+function getClockOffset(request) {
   const cookie = request.headers.get('Cookie');
   const clockOffset = cookie?.match(regex)?.groups?.clockOffset;
   return Number.parseInt(clockOffset ?? 0, 10);
 }
+
+export { getClockOffset };
