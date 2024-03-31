@@ -15,6 +15,7 @@ export default async function getNewsFeed(request) {
   files.sort((a, b) => b.localeCompare(a));
 
   const clockOffset = getClockOffset(request);
+
   const newsItems = await Promise.all(
     files.map((file) =>
       getNewsFile(
