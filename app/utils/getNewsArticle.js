@@ -1,12 +1,11 @@
+import fs from 'node:fs/promises';
 import matter from 'gray-matter';
+import hljs from 'highlight.js';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import etag from './etag.server';
-
-import hljs from 'highlight.js';
-
-import fs from 'node:fs/promises';
 import getPrettyDate from './getPrettyDate';
+import { replaceVideoTags } from './replaceVideoTags';
 
 const NEWS_PATH = 'news';
 
@@ -35,20 +34,4 @@ export default async function getNewsArticle(name, request) {
     etag: etag(markdown),
     content: replaceVideoTags(marked.parse(markdown)),
   };
-}
-
-function replaceVideoTags(html) {
-  while (html.includes('{{<video')) {
-    const start = html.indexOf('{{<video');
-    const end = html.indexOf('}}', start);
-    const videoTag = html.substring(start, end + 2);
-
-    const src = videoTag.match(/src="([^"]+)"/)[1];
-    const _html = html.replace(
-      videoTag,
-      `<video controls><source src="${src}" type="video/mp4">Your browser does not support video</video>`,
-    );
-  }
-
-  return _html;
 }
