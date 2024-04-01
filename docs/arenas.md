@@ -7,7 +7,7 @@ Defined in [RON (Rust Object Notation)](https://docs.rs/ron/latest/ron/).
 
 Like the main config file this can also be copied to a local file:
 
-```bash
+```sh
 $ cp Arenas.ron Arenas.local.ron
 ```
 
@@ -20,7 +20,7 @@ Each arena has the following data:
 
 ### Example of the main red arena in vanilla EO
 
-```ron
+```rust
 (
   map: 46,
   rate: 720,

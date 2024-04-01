@@ -1,19 +1,11 @@
+import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { json, redirect } from '@remix-run/node';
-import getNewsArticle from '../utils/getNewsArticle';
-
-import styles from '../news.css';
-import codeStyles from 'highlight.js/styles/github.min.css';
+import { getNewsArticle } from '../utils/get-news-article.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
   ETag: loaderHeaders.get('ETag'),
 });
-
-export const links = () => [
-  { rel: 'stylesheet', href: styles },
-  { rel: 'stylesheet', href: codeStyles },
-];
 
 export function meta({ params, data }) {
   const parts = params.name.split('-');
@@ -49,9 +41,13 @@ export default function Article() {
 
   return (
     <>
-      <span className="text-gray-400 block">{date}</span>
-      <h1 className="text-2xl mb-2">{title}</h1>
-      <div id="article" dangerouslySetInnerHTML={{ __html: content }} />
+      <span className="block text-gray-400">{date}</span>
+      <h1 className="mb-2 text-2xl">{title}</h1>
+      <div
+        className="prose"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </>
   );
 }

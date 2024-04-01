@@ -7,7 +7,7 @@ REOSERV uses [TOML](https://toml.io/en/) as the configuration language.
 
 Similar to [EOSERV](https://eoserv.net) you can create a copy of the configuration file to avoid checking in to source control.
 
-```bash
+```sh
 $ cp Config.toml Config.local.toml
 ```
 

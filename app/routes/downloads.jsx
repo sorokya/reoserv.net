@@ -5,7 +5,7 @@ export function meta() {
 export default function Downloads() {
   return (
     <>
-      <h1 className="text-2xl font-bold">Downloads</h1>
+      <h1 className="font-bold text-2xl">Downloads</h1>
       <p>There are no binary downloads available for REOSERV yet!</p>
 
       <p className="m-1">
@@ -13,8 +13,8 @@ export default function Downloads() {
         Container Registry.
       </p>
 
-      <p className="m-1">
-        <h2 className="text-xl font-bold">
+      <div className="m-1">
+        <h2 className="font-bold text-xl">
           Recommended setup with docker compose:
         </h2>
         <h3 className="text-lg">1. Clone the repository</h3>
@@ -67,7 +67,7 @@ services:
           {`cp Config.toml Config.local.toml
 nvim Config.local.toml`}
         </pre>
-        <pre className="mt-1 border-black bg-gray-200 p1">
+        <pre className="p1 mt-1 border-black bg-gray-200">
           {`[database]
 host = "db"
 port = "3306"
@@ -77,7 +77,7 @@ password = "<SAME PASSWORD FROM .env>"`}
         </pre>
         <h3 className="text-lg">6. Start reoserv</h3>
         <pre className="border-black bg-gray-200 p-1">docker compose up</pre>
-      </p>
+      </div>
     </>
   );
 }

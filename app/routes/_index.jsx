@@ -1,10 +1,10 @@
-import etag from './etag.server';
-import { useLoaderData } from '@remix-run/react';
 import { json } from '@remix-run/node';
-import News from '../components/News';
-import GitFeed from '../components/GitFeed';
-import getGitFeed from '../utils/getGitFeed';
-import getNewsFeed from '../utils/getNewsFeed';
+import { useLoaderData } from '@remix-run/react';
+import { GitFeed } from '../components/git-feed';
+import { News } from '../components/news';
+import etag from '../utils/etag.server';
+import { getGitFeed } from '../utils/get-git-feed.server';
+import { getNewsFeed } from '../utils/get-news-feed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -39,7 +39,7 @@ export default function Index() {
   const { commits, articles } = useLoaderData();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
       <div className="col-span-2">
         <News articles={articles} />
       </div>

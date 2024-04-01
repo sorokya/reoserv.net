@@ -4,34 +4,47 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev -c \"node server.mjs\""
+    "build": "remix vite:build",
+    "dev": "node ./server.js",
+    "lint": "biome check --apply-unsafe .",
+    "lint:docs": "prettier --write *.md **/*.md",
+    "start": "cross-env NODE_ENV=production node ./server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["reoserv", "reoserv.net", "endless online emulator"],
+  "author": "Richard Leek <richard@richardleek.com>",
+  "license": "MIT",
   "dependencies": {
-    "@remix-run/express": "^2.2.0",
-    "@remix-run/node": "^2.2.0",
-    "@remix-run/react": "^2.2.0",
+    "@remix-run/express": "^2.8.1",
+    "@remix-run/node": "^2.8.1",
+    "@remix-run/react": "^2.8.1",
+    "@tailwindcss/vite": "next",
+    "compression": "^1.7.4",
     "etag": "^1.8.1",
-    "express": "^4.18.2",
+    "express": "^4.19.2",
     "gray-matter": "^4.0.3",
-    "highlight.js": "^11.9.0",
-    "isbot": "^3.7.1",
-    "marked": "^10.0.0",
-    "marked-highlight": "^2.0.7",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.12.0",
-    "rss-to-json": "^2.1.1"
+    "isbot": "^5.1.3",
+    "marked": "^12.0.1",
+    "marked-shiki": "^1.0.1",
+    "morgan": "^1.10.0",
+    "react": "canary",
+    "react-dom": "canary",
+    "react-icons": "^5.0.1",
+    "rss-to-json": "^2.1.1",
+    "shiki": "^1.2.2",
+    "vite-imagetools": "^7.0.1"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.2.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-react": "^7.33.2",
-    "prettier": "3.1.0",
-    "tailwindcss": "^3.3.5"
-  }
+    "@biomejs/biome": "^1.6.3",
+    "@remix-run/dev": "^2.8.1",
+    "cross-env": "^7.0.3",
+    "prettier": "^3.2.5",
+    "tailwindcss": "next",
+    "vite": "^5.2.7"
+  },
+  "overrides": {
+    "react": "canary",
+    "react-dom": "canary",
+    "tailwindcss": "next"
+  },
+  "trustedDependencies": ["@biomejs/biome"]
 }

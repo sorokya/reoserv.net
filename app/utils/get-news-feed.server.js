@@ -1,11 +1,12 @@
 import matter from 'gray-matter';
 
-import fs from 'fs/promises';
-import getPrettyDate from './getPrettyDate';
+import fs from 'node:fs/promises';
+import { getClockOffset } from './get-clock-offset.server';
+import { getPrettyDate } from './get-pretty-date.server';
 
 const NEWS_PATH = 'news';
 
-export default async function getNewsFeed(request) {
+async function getNewsFeed(request) {
   const files = await fs.readdir(NEWS_PATH);
   if (!files) {
     return [];
@@ -13,7 +14,8 @@ export default async function getNewsFeed(request) {
 
   files.sort((a, b) => b.localeCompare(a));
 
-  const clockOffset = request.headers.get('Cookie')?.match(/clockOffset=(\d+)/);
+  const clockOffset = getClockOffset(request);
+
   const newsItems = await Promise.all(
     files.map((file) =>
       getNewsFile(
@@ -40,3 +42,5 @@ async function getNewsFile(path, name, clockOffset) {
     date: getPrettyDate(fm.data.date, clockOffset),
   };
 }
+
+export { getNewsFeed };

@@ -1,8 +1,8 @@
-import etag from './etag.server';
-import { useLoaderData, Link } from '@remix-run/react';
 import { json } from '@remix-run/node';
-import GitFeed from '../components/GitFeed';
-import getGitFeed from '../utils/getGitFeed';
+import { Link, useLoaderData } from '@remix-run/react';
+import { GitFeed } from '../components/git-feed';
+import etag from '../utils/etag.server';
+import { getGitFeed } from '../utils/get-git-feed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -36,9 +36,9 @@ export default function FourOFour() {
   const { commits } = useLoaderData();
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
       <div className="col-span-2">
-        <h1 className="text-3xl font-bold mb-1">404 - Page not found</h1>
+        <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
         <p>
           Click{' '}
           <Link to="/" className="text-blue-500 underline">
