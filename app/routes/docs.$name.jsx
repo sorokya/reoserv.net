@@ -1,5 +1,6 @@
 import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
+import { ProseContainer } from '../components/prose-container';
 import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
@@ -99,13 +100,15 @@ export default function Docs() {
           })}
         </ul>
       </div>
-      <div className="prose prose-sm lg:prose-base p-1 md:col-span-9">
-        <h1>{title}</h1>
-        <div
-          className="pb-2"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+      <div className="md:col-span-9">
+        <ProseContainer>
+          <h1>{title}</h1>
+          <div
+            className="pb-2"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        </ProseContainer>
       </div>
     </div>
   );

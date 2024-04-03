@@ -1,4 +1,5 @@
 import { useLoaderData } from '@remix-run/react';
+import { ProseContainer } from '../components/prose-container';
 import { getDownloadsArticle } from '../utils/get-downloads-article.server';
 
 export function meta() {
@@ -27,7 +28,7 @@ export default function Downloads() {
   } = useLoaderData();
 
   return (
-    <article className="prose dark:prose-invert max-w-[80ch] prose-table:w-auto prose-table:min-w-[60%] prose-table:max-w-full prose-pre:text-[1em]">
+    <ProseContainer>
       <header>
         <span className="mb-4 block text-sand-10 dark:text-sanddark-10">
           Last updated on {lastmod}
@@ -39,6 +40,6 @@ export default function Downloads() {
         // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </article>
+    </ProseContainer>
   );
 }
