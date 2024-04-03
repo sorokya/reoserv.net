@@ -52,7 +52,7 @@ const LIST = [
 
 function ListHeader({ title }) {
   return (
-    <li className="font-bold pt-6 pb-3 text-gray-12/80 first:pt-0 text-lg">
+    <li className="pt-6 pb-3 font-bold text-gray-12/80 text-lg first:pt-0">
       {title}
     </li>
   );
@@ -64,11 +64,11 @@ function ListItem({ title, link, active = false }) {
     : 'border-l-gray-4 text-gray-11';
 
   return (
-    // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
     <li
+      // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
       className={`border-l-4 transition hover:border-l-accent-4 hover:text-accent-11/80 ${className}`}
     >
-      <Link prefetch="intent" className="pl-3 py-1 block" to={link}>
+      <Link prefetch="intent" className="block py-1 pl-3" to={link}>
         {title}
       </Link>
     </li>
