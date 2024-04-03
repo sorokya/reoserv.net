@@ -1,83 +1,44 @@
+import { useLoaderData } from '@remix-run/react';
+import { getDownloadsArticle } from '../utils/get-downloads-article.server';
+
 export function meta() {
   return [{ title: 'Downloads | REOSERV' }];
 }
 
+export async function loader({ request, params }) {
+  try {
+    const article = await getDownloadsArticle(request);
+    return new Response(JSON.stringify({ article }), {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'max-age=3600, public',
+        ETag: article.etag,
+      },
+    });
+  } catch (e) {
+    console.error('There was an error getting the article', e);
+    return redirect('/404');
+  }
+}
+
 export default function Downloads() {
+  const {
+    article: { title, lastmod, content, description },
+  } = useLoaderData();
+
   return (
-    <article className="prose prose-sm lg:prose-base">
-      <h1 className="font-bold text-2xl">Downloads</h1>
-      <p>There are no binary downloads available for REOSERV yet!</p>
-
-      <p className="m-1">
-        <em>Hovever</em>, there is a docker image published at the GitHub
-        Container Registry.
-      </p>
-
-      <div className="m-1">
-        <h2 className="font-bold text-xl">
-          Recommended setup with docker compose:
-        </h2>
-        <h3 className="text-lg">1. Clone the repository</h3>
-        <pre className="border-black bg-gray-200 p-1">
-          git clone https://github.com/sorokya/reoserv.git
-        </pre>
-        <h3 className="text-lg">2. Add your pub and map files</h3>
-        <h3 className="text-lg">3. Create the .env file and edit values</h3>
-        <pre className="border-black bg-gray-200 p-1">
-          {`cp .env.example .env
-nvim .env`}
-        </pre>
-        <h3 className="text-lg">4. Create docker-compose.yml</h3>
-        <pre className="border-black bg-gray-200 p-1">
-          {`version: '3.8'
-
-services:
-  reoserv:
-    image: ghcr.io/sorokya/reoserv:master
-    ports:
-      - 8078:8078
-    volumes:
-      - ./:/reoserv
-    depends_on:
-      db:
-        condition: service_healthy
-  db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}
-      MYSQL_USER: reoserv
-      MYSQL_DATABASE: reoserv
-      MYSQL_PASSWORD: \${MYSQL_REOSERV_PASSWORD}
-      TZ: UTC
-    ports:
-      - 3306:3306
-    volumes:
-      - ./db-init/:/docker-entrypoint-initdb.d/
-    healthcheck:
-      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
-      start_period: 5s
-      interval: 5s
-      timeout: 5s
-      retries: 5`}
-        </pre>
-        <h3 className="text-lg">5. Update config</h3>
-        <pre className="border-black bg-gray-200 p-1">
-          {`cp Config.toml Config.local.toml
-nvim Config.local.toml`}
-        </pre>
-        <pre className="p1 mt-1 border-black bg-gray-200">
-          {`[database]
-host = "db"
-port = "3306"
-name = "reoserv"
-username = "reoserv"
-password = "<SAME PASSWORD FROM .env>"`}
-        </pre>
-        <h3 className="text-lg">6. Start reoserv</h3>
-        <pre className="border-black bg-gray-200 p-1">docker compose up</pre>
-      </div>
+    <article className="prose dark:prose-invert max-w-[80ch] prose-table:w-auto prose-table:min-w-[60%] prose-table:max-w-full prose-pre:text-[1em]">
+      <header>
+        <span className="mb-4 block text-sand-10 dark:text-sanddark-10">
+          Last updated on {lastmod}
+        </span>
+        <h1 className="mb-0">{title}</h1>
+        <p className="lead mt-4">{description}</p>
+      </header>
+      <div
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </article>
   );
 }
