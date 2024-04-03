@@ -52,7 +52,7 @@ const LIST = [
 
 function ListHeader({ title }) {
   return (
-    <li className="pt-6 pb-3 font-bold text-gray-12/80 text-lg first:pt-0">
+    <li className="pt-6 pb-3 font-bold text-lg text-sand-12/80 first:pt-0 dark:text-sanddark-12">
       {title}
     </li>
   );
@@ -60,13 +60,13 @@ function ListHeader({ title }) {
 
 function ListItem({ title, link, active = false }) {
   const className = active
-    ? 'border-l-accent-7 text-accent-11 font-bold tracking-wide'
-    : 'border-l-gray-4 text-gray-11';
+    ? 'border-l-amber-7 dark:border-l-amberdark-7 text-amber-11 dark:text-amberdark-11 font-bold tracking-wide'
+    : 'border-l-sand-4 text-sand-11 dark:border-l-sanddark-4 dark:text-sanddark-11';
 
   return (
     <li
       // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
-      className={`border-l-4 transition hover:border-l-accent-4 hover:text-accent-11/80 ${className}`}
+      className={`border-l-4 transition hover:border-l-amber-4 dark:hover:border-l-amberdark-4 hover:text-amber-11/80 dark:hover:text-amberdark-11/80 ${className}`}
     >
       <Link prefetch="intent" className="block py-1 pl-3" to={link}>
         {title}

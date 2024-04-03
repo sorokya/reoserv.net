@@ -43,7 +43,9 @@ export default function Article() {
   return (
     <article className="prose dark:prose-invert max-w-[80ch] prose-table:w-auto prose-table:min-w-[60%] prose-table:max-w-full prose-pre:text-[1em]">
       <header>
-        <span className="mb-4 block text-gray-10">{date}</span>
+        <span className="mb-4 block text-sand-10 dark:text-sanddark-10">
+          {date}
+        </span>
         <h1 className="mb-0">{title}</h1>
         <p className="lead mt-4">{description}</p>
       </header>
