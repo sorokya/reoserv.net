@@ -99,7 +99,7 @@ export default function Docs() {
           })}
         </ul>
       </div>
-      <div className="prose prose-base lg:prose-lg p-1 md:col-span-9">
+      <div className="prose prose-sm lg:prose-base p-1 md:col-span-9">
         <h1>{title}</h1>
         <div
           className="pb-2"

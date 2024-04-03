@@ -1,5 +1,3 @@
-import '@fontsource/ubuntu';
-import '@fontsource/ubuntu-mono';
 import {
   Links,
   Meta,
@@ -10,15 +8,22 @@ import {
   useRouteError,
 } from '@remix-run/react';
 import { Header } from './components/header';
-import './styles/app.css';
+import styles from './tailwind.css?url';
+
+export const links = () => [
+  { rel: 'icon', type: 'image/png', href: '/favicon-32.png' },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'true' },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+  },
+  { rel: 'stylesheet', href: styles },
+];
 
 export function Layout({ children }) {
   return (
-    <html
-      lang="en"
-      // toggle the below to enable dark mode
-      //  className="group/apptheme dark"
-    >
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,11 +40,10 @@ export function Layout({ children }) {
           name="bingbot"
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
-        <link rel="icon" type="image/png" href="/favicon-32.png" />
         <Meta />
         <Links />
       </head>
-      <body className="relative grid min-h-screen font-sans antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] group-[.dark]/apptheme:before:invert-95">
+      <body className="relative grid min-h-screen font-sans antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] dark:before:invert-95">
         <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-gray-6 border-x bg-accent-1 px-8 text-gray-12">
           {children}
         </main>

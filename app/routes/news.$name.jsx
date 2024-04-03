@@ -41,7 +41,7 @@ export default function Article() {
   } = useLoaderData();
 
   return (
-    <article className="prose prose-base lg:prose-lg">
+    <article className="prose dark:prose-invert max-w-[80ch] prose-table:w-auto prose-table:min-w-[60%] prose-table:max-w-full prose-pre:text-[1em]">
       <header>
         <span className="mb-4 block text-gray-10">{date}</span>
         <h1 className="mb-0">{title}</h1>

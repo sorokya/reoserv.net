@@ -4,7 +4,7 @@ export function meta() {
 
 export default function Downloads() {
   return (
-    <article className="prose prose-base lg:prose-lg">
+    <article className="prose prose-sm lg:prose-base">
       <h1 className="font-bold text-2xl">Downloads</h1>
       <p>There are no binary downloads available for REOSERV yet!</p>
 
