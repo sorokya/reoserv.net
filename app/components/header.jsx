@@ -32,6 +32,7 @@ export function Header() {
     <header className="relative flex-0 space-y-2 py-4">
       <div className="flex justify-between">
         <img
+          loading="preload"
           src={logo.src}
           alt="Reoserv"
           className="inline-block h-12 max-w-full object-contain object-left"
