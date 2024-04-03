@@ -53,7 +53,7 @@ const LIST = [
 
 function ListHeader({ title }) {
   return (
-    <li className="pt-6 pb-3 font-bold text-lg text-sand-12/80 first:pt-0 dark:text-sanddark-12">
+    <li className="pt-6 pb-3 font-bold text-lg text-sand-12 first:pt-0 dark:text-sanddark-12">
       {title}
     </li>
   );

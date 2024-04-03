@@ -39,11 +39,11 @@ export function Header() {
           height={logo.height}
           width={logo.width}
         />
-        <em className="text-sand-11 text-sm italic dark:text-sanddark-11">
+        <em className="text-sand-11 text-sm italic">
           The{' '}
           <Link
             to="https://www.rust-lang.org/"
-            className="font-bold dark:hover:text-amberdark-11 hover:text-amber-11 hover:underline"
+            className="font-bold hover:text-amber-11 hover:underline"
           >
             rust
           </Link>{' '}
@@ -56,7 +56,7 @@ export function Header() {
             <li key={href} className="mb-2 md:mr-3 md:mb-0 md:inline-block">
               <Link
                 to={href}
-                className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 dark:border-amberdark-8 dark:bg-amberdark-2 dark:hover:bg-amberdark-3 hover:bg-amber-3 dark:hover:text-amberdark-11 dark:text-amberdark-12 hover:text-amber-11"
+                className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 hover:bg-amber-3 hover:text-amber-11"
                 prefetch="intent"
               >
                 <span className="text-[0.9em]">{icon}</span>
@@ -67,7 +67,7 @@ export function Header() {
         </ul>
       </nav>
 
-      <hr className="mt-2 border-sand-8 dark:border-sanddark-8" />
+      <hr className="mt-2 border-sand-8" />
     </header>
   );
 }

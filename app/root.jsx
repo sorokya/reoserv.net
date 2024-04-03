@@ -43,8 +43,8 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body className="relative grid min-h-screen font-sans text-sand-12 antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] dark:text-sanddark-12 dark:before:invert-95">
-        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 dark:border-sanddark-7 dark:bg-amberdark-1 md:px-8">
+      <body className="relative grid min-h-screen font-sans text-sand-12 antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] selection:bg-amber-6 dark:before:invert-[.95]">
+        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
           {children}
         </main>
         {process.env.NODE_ENV !== 'development' && (

@@ -1,3 +1,64 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root,
+  .light {
+    --amber-1: #fefdfb;
+    --amber-2: #fefbe9;
+    --amber-3: #fff7c2;
+    --amber-4: #ffee9c;
+    --amber-5: #fbe577;
+    --amber-6: #f3d673;
+    --amber-7: #e9c162;
+    --amber-8: #e2a336;
+    --amber-9: #ffc53d;
+    --amber-10: #ffba18;
+    --amber-11: #ab6400;
+    --amber-12: #4f3422;
+
+    --sand-1: #fdfdfc;
+    --sand-2: #f9f9f8;
+    --sand-3: #f1f0ef;
+    --sand-4: #e9e8e6;
+    --sand-5: #e2e1de;
+    --sand-6: #dad9d6;
+    --sand-7: #cfceca;
+    --sand-8: #bcbbb5;
+    --sand-9: #8d8d86;
+    --sand-10: #82827c;
+    --sand-11: #63635e;
+    --sand-12: #21201c;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --amber-1: #16120c;
+      --amber-2: #1d180f;
+      --amber-3: #302008;
+      --amber-4: #3f2700;
+      --amber-5: #4d3000;
+      --amber-6: #5c3d05;
+      --amber-7: #714f19;
+      --amber-8: #8f6424;
+      --amber-9: #ffc53d;
+      --amber-10: #ffd60a;
+      --amber-11: #ffca16;
+      --amber-12: #ffe7b3;
+
+      --sand-1: #111110;
+      --sand-2: #191918;
+      --sand-3: #222221;
+      --sand-4: #2a2a28;
+      --sand-5: #31312e;
+      --sand-6: #3b3a37;
+      --sand-7: #494844;
+      --sand-8: #62605b;
+      --sand-9: #6f6d66;
+      --sand-10: #7c7b74;
+      --sand-11: #b5b3ad;
+      --sand-12: #eeeeec;
+    }
+  }
+}
