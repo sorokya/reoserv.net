@@ -39,14 +39,20 @@ export default function Index() {
   const { commits, articles } = useLoaderData();
 
   return (
+    <Layout commits={commits}>
+      <header>
+        <h1 className="mb-1 font-bold text-2xl">Latest News</h1>
+        <hr className="border-gray-8" />
+      </header>
+      <News articles={articles} />
+    </Layout>
+  );
+}
+
+export function Layout({ children, commits }) {
+  return (
     <div className="grid grid-cols-12 gap-16">
-      <div className="col-span-12 space-y-6 lg:col-span-7">
-        <header>
-          <h1 className="mb-1 font-bold text-2xl">Latest News</h1>
-          <hr className="border-gray-8" />
-        </header>
-        <News articles={articles} />
-      </div>
+      <div className="col-span-12 space-y-6 lg:col-span-7">{children}</div>
       <div className="col-span-12 space-y-4 self-start border border-accent-6 bg-accent-2 p-6 lg:col-span-5">
         <h2 className="font-bold text-xl">Recent changes</h2>
         <GitFeed commits={commits} />
