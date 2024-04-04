@@ -1,5 +1,4 @@
 import { vitePlugin as remix } from '@remix-run/dev';
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
 
@@ -19,6 +18,5 @@ export default defineConfig({
         });
       },
     }),
-    tailwindcss(),
   ],
 });

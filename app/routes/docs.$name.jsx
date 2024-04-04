@@ -1,5 +1,6 @@
 import { redirect } from '@remix-run/node';
 import { Link, useLoaderData, useLocation } from '@remix-run/react';
+import { ProseContainer } from '../components/prose-container';
 import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
@@ -51,18 +52,24 @@ const LIST = [
 ];
 
 function ListHeader({ title }) {
-  return <li className="font-bold text-lg">{title}</li>;
+  return (
+    <li className="pt-6 pb-3 font-bold text-lg text-sand-12 first:pt-0">
+      {title}
+    </li>
+  );
 }
 
 function ListItem({ title, link, active = false }) {
   const className = active
-    ? 'border-l-amber-300 text-amber-300'
-    : 'border-l-gray-200';
+    ? 'border-l-amber-7 text-amber-11 font-bold tracking-wide'
+    : 'border-l-sand-4 text-sand-11';
 
   return (
-    // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
-    <li className={`border-l-2 pl-3 hover:border-l-amber-400 ${className}`}>
-      <Link prefetch="intent" to={link}>
+    <li
+      // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
+      className={`border-l-4 transition hover:border-l-amber-4 hover:text-amber-11/80 ${className}`}
+    >
+      <Link prefetch="intent" className="block py-1 pl-3" to={link}>
         {title}
       </Link>
     </li>
@@ -75,9 +82,9 @@ export default function Docs() {
   const { title, content } = page;
 
   return (
-    <div className="grid md:grid-cols-6 sm:grid-cols-1">
-      <div className="p-1 md:col-span-1">
-        <ul>
+    <div className="grid md:grid-cols-12">
+      <div className="p-1 md:col-span-3">
+        <ul className="grid">
           {LIST.map(({ type, title, link }) => {
             if (type === 'header') {
               return <ListHeader key={title} title={title} />;
@@ -93,13 +100,15 @@ export default function Docs() {
           })}
         </ul>
       </div>
-      <div className="p-1 md:col-span-5">
-        <h1 className="mb-2 font-bold text-3xl">{title}</h1>
-        <div
-          className="prose pb-2"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+      <div className="md:col-span-9">
+        <ProseContainer>
+          <h1>{title}</h1>
+          <div
+            className="pb-2"
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        </ProseContainer>
       </div>
     </div>
   );

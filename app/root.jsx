@@ -5,18 +5,35 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useLoaderData,
   useRouteError,
 } from '@remix-run/react';
-
-import styles from './tailwind.css?url';
-
+import { json } from '@remix-run/node';
 import { Header } from './components/header';
+import styles from './tailwind.css?url';
+import { getThemeFromCookies } from './utils/theme.server';
 
-export const links = () => [{ rel: 'stylesheet', href: styles }];
+export async function loader({ request }) {
+  const theme = await getThemeFromCookies(request);
+  return json({ theme });
+}
 
-export function Layout({ children }) {
+export const links = () => [
+  { rel: 'icon', type: 'image/png', href: '/favicon-32.png' },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'true' },
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+  },
+  { rel: 'stylesheet', href: styles },
+];
+
+export default function App() {
+  const { theme } = useLoaderData();
+
   return (
-    <html style={{ background: "url('/back.jpg')" }} lang="en">
+    <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,12 +50,15 @@ export function Layout({ children }) {
           name="bingbot"
           content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
         />
-        <link rel="icon" type="image/png" href="/favicon-32.png" />
         <Meta />
         <Links />
       </head>
-      <body className="mx-auto min-h-screen w-5/6 border-2 border-gray-200 border-x bg-gray-50 px-4 xl:w-3/5">
-        {children}
+      <body className="relative grid min-h-screen font-sans text-sand-12 antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] selection:bg-amber-6 dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
+        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
+          <Header theme={theme} />
+          <Outlet />
+          <footer className="py-4 text-sand-11 text-sm" />
+        </main>
         {process.env.NODE_ENV !== 'development' && (
           <script
             async
@@ -51,15 +71,6 @@ export function Layout({ children }) {
         <Scripts />
       </body>
     </html>
-  );
-}
-
-export default function App() {
-  return (
-    <>
-      <Header />
-      <Outlet />
-    </>
   );
 }
 

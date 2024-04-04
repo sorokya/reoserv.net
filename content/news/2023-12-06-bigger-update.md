@@ -8,9 +8,9 @@ lastmod: 2023-12-06T11:03:28+02:00
 I've been having a blast implementing the missing features I mentioned in the
 [last](/news/2023-10-11-big-update) update.
 
-# So what's new in REOSERV?
+## So what's new in REOSERV?
 
-## Features ✨
+### Features ✨
 
 - Switched to [Argon2id](https://en.wikipedia.org/wiki/Argon2) password hashing
 - Lockers and Bank Bob fully implemented
@@ -54,20 +54,20 @@ I've been having a blast implementing the missing features I mentioned in the
   - $mute player (client side only)
   - $global (toggle global channel lock)
 
-## Bug fixes 🐛
+### Bug fixes 🐛
 
 - Fixed adding items to chests
 - Chests are now created when maps are loaded rather than the first time the spawn items event triggers
 - No longer sending player walk packets to the player that walked
   - This caused laggy client behavior that wasn't noticable on localhost
 
-## Code cleanup 🧹
+### Code cleanup 🧹
 
 - Created Dockerfile
 - Switched to rustls for tls encryption
   - This allows the program to easily be containerized
 
-# What's left?
+## What's left?
 
 REOSERV is just missing a few larger features now
 

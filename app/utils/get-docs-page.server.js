@@ -1,6 +1,6 @@
 import { parseMarkdown } from './parse-markdown';
 
-const DOCS_PATH = 'docs';
+const DOCS_PATH = 'content/docs';
 
 async function getDocsPage(name) {
   const file = `${DOCS_PATH}/${name}.md`;

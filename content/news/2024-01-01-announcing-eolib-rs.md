@@ -10,12 +10,12 @@ had ported the eo protocol to XML and that I might switch reoserv over to a libr
 
 Well over the Christmas break I finally got around to it.
 
-# eolib-rs
+## eolib-rs
 
 I'm happy to announce [eolib-rs](https://github.com/sorokya/eolib-rs). It has a lot of improvements
 over my old [eo](https://github.com/sorokya/eo) crate (now archived).
 
-## Improvements
+### Improvements
 
 - Based on the same [XML protocol](https://github.com/cirras/eo-protocol) as the other eolib projects
 - Data reader and writer structs now do data validation and require the user to handle errors
@@ -26,7 +26,7 @@ over my old [eo](https://github.com/sorokya/eo) crate (now archived).
   - This is more accurate to the original game server and client
 - NodeJS is no longer required to build the crate (RIP my [disgusting code generator](https://github.com/sorokya/eo_protocol_parser))
 
-# The great reoserv migration
+## The great reoserv migration
 
 Migrating reoserv was no simple task.
 
@@ -45,7 +45,7 @@ I was able to do a simple find and replace for a lot of things:
 But beyond that it was hours and hours of pain. I won't bore you with the details but I finally got
 everything working with eolib-rs a couple of days ago.
 
-# Some reoserv refactoring
+## Some reoserv refactoring
 
 As I was going through the entire code base making everything work with eolib-rs I saw a ton of
 old code that I hadn't revisited for a year or more. It wasn't pretty.

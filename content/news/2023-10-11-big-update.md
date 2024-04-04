@@ -14,9 +14,9 @@ I'll be honest. I got a little burnt out on reoserv. Lots of stuff has happened 
   - It's being written in Java and using a similar actor model to reoserv. I'm excited to see how it
     goes as he develops and releases it.
 
-# So what's new in REOSERV?
+## So what's new in REOSERV?
 
-## Features ✨
+### Features ✨
 
 - Killing monsters now grants experience and players can level up
 - Players can spend stat points to level up their stats
@@ -28,7 +28,7 @@ I'll be honest. I got a little burnt out on reoserv. Lots of stuff has happened 
 - Players can now open and deposit items into their bank vault
   - But they can't take anything out yet 😅
 
-## Bug fixes 🐛
+### Bug fixes 🐛
 
 - Fixed Server side range checks
   - NPCs shouldn't "disappear" from player view without manually refreshing
@@ -43,7 +43,7 @@ I'll be honest. I got a little burnt out on reoserv. Lots of stuff has happened 
 - Fixed NPC damage handler so that a "Miss" attack still registers the player as an opponent
 - Fixed character loading code so that necklace equipment properly loads
 
-## Code cleanup 🧹
+### Code cleanup 🧹
 
 - Packet handlers now take the existing StreamReader object, rather than allocating a new one
 - Replaced the giant pattern match statement for packet handlers with individual modules for each family.
@@ -53,7 +53,7 @@ I'll be honest. I got a little burnt out on reoserv. Lots of stuff has happened 
   made the output noisy
 - Split up the character struct implementation into smaller modules to make my editor more happy when changing them
 
-# What's left?
+## What's left?
 
 REOSERV is getting closer and closer to feature complete, but there is still **so much** to do.
 
@@ -78,7 +78,7 @@ REOSERV is getting closer and closer to feature complete, but there is still **s
 - Law & Marriage
 - Quest system
 
-# Release?
+## Release?
 
 I don't expect anyone to use REOSERV in its current state, but I do want to begin releasing updates
 and updating the documentation on how to set it up.

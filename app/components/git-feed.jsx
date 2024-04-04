@@ -2,22 +2,21 @@ import { Link } from '@remix-run/react';
 
 export function GitFeed({ commits }) {
   return (
-    <>
-      <h1 className="font-bold text-2xl">Recent Changes</h1>
-      <hr className="border-gray-400" />
-      <ul>
-        {commits.map(
-          ({ id, link, content, timestamp }) => (
-            <li key={id} className="my-2">
-              <Link to={link} className="text-gray-400">
-                {timestamp}:{' '}
-                <p className="font-mono text-black text-sm">{content}</p>
-              </Link>
-            </li>
-          ),
-          [],
-        )}
-      </ul>
-    </>
+    <ul className="grid gap-4">
+      {commits.map(({ id, link, content, timestamp }) => (
+        <li key={id} className="grid">
+          <span className="text-sand-11 text-xs">{timestamp}</span>
+          <Link
+            to={link}
+            target="_blank"
+            className="text-sand-12 transition hover:font-medium hover:text-amber-11"
+          >
+            <span title={content} className="line-clamp-1 text-sm">
+              {content}
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }

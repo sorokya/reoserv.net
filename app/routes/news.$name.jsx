@@ -1,5 +1,6 @@
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { ProseContainer } from '../components/prose-container';
 import { getNewsArticle } from '../utils/get-news-article.server';
 
 export const headers = ({ loaderHeaders }) => ({
@@ -36,18 +37,21 @@ export async function loader({ request, params }) {
 }
 
 export default function Article() {
-  const { article } = useLoaderData();
-  const { title, date, content } = article;
+  const {
+    article: { title, date, content, description },
+  } = useLoaderData();
 
   return (
-    <>
-      <span className="block text-gray-400">{date}</span>
-      <h1 className="mb-2 text-2xl">{title}</h1>
+    <ProseContainer>
+      <header>
+        <span className="mb-4 block text-sand-10">{date}</span>
+        <h1 className="mb-0">{title}</h1>
+        <p className="lead mt-4">{description}</p>
+      </header>
       <div
-        className="prose"
         // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
         dangerouslySetInnerHTML={{ __html: content }}
       />
-    </>
+    </ProseContainer>
   );
 }

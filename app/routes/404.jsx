@@ -1,8 +1,9 @@
 import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import { GitFeed } from '../components/git-feed';
 import etag from '../utils/etag.server';
 import { getGitFeed } from '../utils/get-git-feed.server';
+import { getLatestRelease } from '../utils/get-latest-release.server';
+import { Layout } from './_index';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -16,7 +17,8 @@ export function meta() {
 export async function loader({ request }) {
   try {
     const commits = await getGitFeed(request);
-    const body = JSON.stringify({ commits });
+    const release = await getLatestRelease(request);
+    const body = JSON.stringify({ commits, release });
     const ETag = etag(body);
 
     return new Response(body, {
@@ -33,23 +35,18 @@ export async function loader({ request }) {
 }
 
 export default function FourOFour() {
-  const { commits } = useLoaderData();
+  const { commits, release } = useLoaderData();
 
   return (
-    <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-      <div className="col-span-2">
-        <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
-        <p>
-          Click{' '}
-          <Link to="/" className="text-blue-500 underline">
-            here
-          </Link>{' '}
-          to go home.
-        </p>
-      </div>
-      <div className="col-span-1">
-        <GitFeed commits={commits} />
-      </div>
-    </div>
+    <Layout commits={commits} release={release}>
+      <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
+      <p>
+        Click{' '}
+        <Link to="/" className="text-blue-500 underline">
+          here
+        </Link>{' '}
+        to go home.
+      </p>
+    </Layout>
   );
 }

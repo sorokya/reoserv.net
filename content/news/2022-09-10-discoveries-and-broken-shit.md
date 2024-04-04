@@ -5,7 +5,7 @@ date: 2022-09-10T05:55:30+02:00
 lastmod: 2022-09-10T05:55:30+02:00
 ---
 
-# What's up with NPC movement speed?
+## What's up with NPC movement speed?
 
 In my testing with GameServer I noticed that certain NPCs moved
 a lot faster than they do on the [clone server](https://game.eoserv.net). Especially biters underneath the
@@ -24,7 +24,7 @@ showing the same mobs moving. It might seem a bit slower but that could be due t
 - Ping between the player and server
 - Server load
 
-# Recording the data
+## Recording the data
 
 So we know that NPCs moved faster on the original server but how do we record the speed?
 
@@ -34,7 +34,7 @@ and these packets come in multiple times per second.
 
 ![eostarproxy](/img/news/eostarproxy.png 'Timestamps are there but only in seconds')
 
-# A new proxy
+## A new proxy
 
 I created a new proxy using the existing [eo](https://github.com/sorokya/eo) crate in just an hour or two.
 
@@ -43,7 +43,7 @@ I created a new proxy using the existing [eo](https://github.com/sorokya/eo) cra
 It's pretty basic but it got the job done. With this I was able to accurately measure the rate at which
 NPC update packets were coming in from the server.
 
-# The results
+## The results
 
 Below are the results of the 8 different speed value types for NPC spawns.
 
@@ -58,7 +58,7 @@ Below are the results of the 8 different speed value types for NPC spawns.
 | 6         | 9600ms             | 15000ms (+5400ms)           |
 | 7         | Frozen             | Frozen                      |
 
-# A shoddy implementation
+## A shoddy implementation
 
 I was feeling great after this discovery and quickly went to implement basic NPC movements
 in [reoserv](https://github.com/sorokya/reoserv). The results are.. pretty funny!

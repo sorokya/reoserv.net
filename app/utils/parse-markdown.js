@@ -8,7 +8,7 @@ import { getPrettyDate } from './get-pretty-date.server';
 import { replaceVideoTags } from './replace-video-tags.server';
 
 const highlighter = getHighlighter({
-  langs: ['md', 'sh', 'bash', 'rust', 'plaintext'],
+  langs: ['md', 'sh', 'bash', 'rust', 'plaintext', 'yaml'],
   themes: ['github-dark-dimmed'],
 });
 
@@ -35,6 +35,9 @@ async function parseMarkdown(filepath, { clockOffset } = { clockOffset: 0 }) {
     title: fm.data.title,
     description: fm.data.description,
     date: fm.data.date ? getPrettyDate(fm.data.date, clockOffset) : null,
+    lastmod: fm.data.lastmod
+      ? getPrettyDate(fm.data.lastmod, clockOffset)
+      : null,
     etag: etag(markdown),
     content: replaceVideoTags(markdown),
   };

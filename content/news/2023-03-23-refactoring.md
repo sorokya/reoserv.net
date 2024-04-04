@@ -20,7 +20,7 @@ switching over to Cirras's XML protocol at some point but at the moment the psue
 just fine (aside from it not having ["chunking"](https://github.com/Cirras/eo-protocol/blob/master/docs/chunks.md)
 flags but that's a whole other blog post).
 
-# Refactoring you say?
+## Refactoring you say?
 
 Yes! it started with my frustration with the state of my actors in the server (`player`, `map`, and `world`).
 These files were super long and hard to navigate. Felt like I couldn't find anything easily in them. So I wanted
@@ -28,7 +28,7 @@ to find a way to make them more modular. After a quick search on the web I disco
 [split struct impls across files](https://stackoverflow.com/a/63378744). So I went ahead and did that for the three
 main actors and am happy with the result.
 
-# The packet sequence tangent
+## The packet sequence tangent
 
 After the actor refactoring I ended up trying to fix a long standing bug in reoserv
 The EO networking has a kind of "security" we call the sequence. It works basically like this
@@ -54,7 +54,7 @@ So I figured it would just be cleaner to emulate how the official server does it
 
 Am happy to say that enforced packet sequencing now works perfectly in reoserv and I can stop disabling it while I test things!
 
-# Save the RAM
+## Save the RAM
 
 Another thing I've been meaning to address in reoserv is the gross amount of copying that happens. It's mostly
 in scenarios where we have a packet that we end up sending to more than one player. Such as a player saying something. Take this
@@ -116,7 +116,7 @@ total memory leaked: 812.92KB
 But this will really prevent issues from cropping up further down the road if somebody ever decides to host a server with
 more than one player on it.
 
-# Bonus RAM saving measures
+## Bonus RAM saving measures
 
 I updated the `serialize()` method to take a `StreamBuilder` rather than create its own.
 This means that complex structures with many structure members of their own will always be
@@ -142,7 +142,7 @@ each packet before beginning serialization (e.g `StreamBuilder::with_capacity(TA
 I need to update the protocol parser/generator to be able to define these contants at compile time.
 But that's for another day!
 
-# Conculsion
+## Conculsion
 
 I'm back and working on the project! Did some much needed cleaning up and I'm excited to start working on fun
 new features! Hope you enjoyed reading.
