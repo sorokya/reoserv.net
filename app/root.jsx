@@ -1,3 +1,4 @@
+import { json } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -8,7 +9,6 @@ import {
   useLoaderData,
   useRouteError,
 } from '@remix-run/react';
-import { json } from '@remix-run/node';
 import { Header } from './components/header';
 import styles from './tailwind.css?url';
 import { getThemeFromCookies } from './utils/theme.server';
