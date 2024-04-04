@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 export default {
   // tailwind dark mode based on system preference but not if there's a light class on the html element
-  darkMode: ['variant', '&:not(.light *)'],
+  darkMode: 'class',
   content: ['./app/**/*.{js,jsx,ts,tsx}', './content/**/*.md'],
   theme: {
     colors: {

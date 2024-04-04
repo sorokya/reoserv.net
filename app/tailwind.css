@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  :root,
-  .light {
+  :root:not(.dark) {
+    /* accent */
     --amber-1: #fefdfb;
     --amber-2: #fefbe9;
     --amber-3: #fff7c2;
@@ -17,7 +17,24 @@
     --amber-10: #ffba18;
     --amber-11: #ab6400;
     --amber-12: #4f3422;
+    --amber-a1: #c0800004;
+    --amber-a2: #f4d10016;
+    --amber-a3: #ffde003d;
+    --amber-a4: #ffd40063;
+    --amber-a5: #f8cf0088;
+    --amber-a6: #eab5008c;
+    --amber-a7: #dc9b009d;
+    --amber-a8: #da8a00c9;
+    --amber-a9: #ffb300c2;
+    --amber-a10: #ffb300e7;
+    --amber-a11: #ab6400;
+    --amber-a12: #341500dd;
+    --amber-surface: #fefae4cc;
+    --amber-indicator: var(--amber-9);
+    --amber-track: var(--amber-9);
+    --amber-contrast: #21201c;
 
+    /* gray */
     --sand-1: #fdfdfc;
     --sand-2: #f9f9f8;
     --sand-3: #f1f0ef;
@@ -30,35 +47,107 @@
     --sand-10: #82827c;
     --sand-11: #63635e;
     --sand-12: #21201c;
+    --sand-a1: #55550003;
+    --sand-a2: #25250007;
+    --sand-a3: #20100010;
+    --sand-a4: #1f150019;
+    --sand-a5: #1f180021;
+    --sand-a6: #19130029;
+    --sand-a7: #19140035;
+    --sand-a8: #1915014a;
+    --sand-a9: #0f0f0079;
+    --sand-a10: #0c0c0083;
+    --sand-a11: #080800a1;
+    --sand-a12: #060500e3;
+    --sand-surface: #ffffffcc;
+    --sand-indicator: var(--sand-9);
+    --sand-track: var(--sand-9);
+    --sand-contrast: white;
+
+    /* black & white (shadows) */
+    --black-a1: rgba(0, 0, 0, 0.05);
+    --black-a2: rgba(0, 0, 0, 0.1);
+    --black-a3: rgba(0, 0, 0, 0.15);
+    --black-a4: rgba(0, 0, 0, 0.2);
+    --black-a5: rgba(0, 0, 0, 0.3);
+    --black-a6: rgba(0, 0, 0, 0.4);
+    --black-a7: rgba(0, 0, 0, 0.5);
+    --black-a8: rgba(0, 0, 0, 0.6);
+    --black-a9: rgba(0, 0, 0, 0.7);
+    --black-a10: rgba(0, 0, 0, 0.8);
+    --black-a11: rgba(0, 0, 0, 0.9);
+    --black-a12: rgba(0, 0, 0, 0.95);
+    --white-a1: rgba(255, 255, 255, 0.05);
+    --white-a2: rgba(255, 255, 255, 0.1);
+    --white-a3: rgba(255, 255, 255, 0.15);
+    --white-a4: rgba(255, 255, 255, 0.2);
+    --white-a5: rgba(255, 255, 255, 0.3);
+    --white-a6: rgba(255, 255, 255, 0.4);
+    --white-a7: rgba(255, 255, 255, 0.5);
+    --white-a8: rgba(255, 255, 255, 0.6);
+    --white-a9: rgba(255, 255, 255, 0.7);
+    --white-a10: rgba(255, 255, 255, 0.8);
+    --white-a11: rgba(255, 255, 255, 0.9);
+    --white-a12: rgba(255, 255, 255, 0.95);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root:not(.light) {
-      --amber-1: #16120c;
-      --amber-2: #1d180f;
-      --amber-3: #302008;
-      --amber-4: #3f2700;
-      --amber-5: #4d3000;
-      --amber-6: #5c3d05;
-      --amber-7: #714f19;
-      --amber-8: #8f6424;
-      --amber-9: #ffc53d;
-      --amber-10: #ffd60a;
-      --amber-11: #ffca16;
-      --amber-12: #ffe7b3;
+  :root:not(:not(.dark)) {
+    /* accent */
+    --amber-1: #16120c;
+    --amber-2: #1d180f;
+    --amber-3: #302008;
+    --amber-4: #3f2700;
+    --amber-5: #4d3000;
+    --amber-6: #5c3d05;
+    --amber-7: #714f19;
+    --amber-8: #8f6424;
+    --amber-9: #ffc53d;
+    --amber-10: #ffd60a;
+    --amber-11: #ffca16;
+    --amber-12: #ffe7b3;
+    --amber-a1: #e63c0006;
+    --amber-a2: #fd9b000d;
+    --amber-a3: #fa820022;
+    --amber-a4: #fc820032;
+    --amber-a5: #fd8b0041;
+    --amber-a6: #fd9b0051;
+    --amber-a7: #ffab2567;
+    --amber-a8: #ffae3587;
+    --amber-a9: #ffc53d;
+    --amber-a10: #ffd60a;
+    --amber-a11: #ffca16;
+    --amber-a12: #ffe7b3;
+    --amber-surface: #271f1380;
+    --amber-indicator: var(--amber-9);
+    --amber-track: var(--amber-9);
 
-      --sand-1: #111110;
-      --sand-2: #191918;
-      --sand-3: #222221;
-      --sand-4: #2a2a28;
-      --sand-5: #31312e;
-      --sand-6: #3b3a37;
-      --sand-7: #494844;
-      --sand-8: #62605b;
-      --sand-9: #6f6d66;
-      --sand-10: #7c7b74;
-      --sand-11: #b5b3ad;
-      --sand-12: #eeeeec;
-    }
+    /* gray */
+    --sand-1: #111110;
+    --sand-2: #191918;
+    --sand-3: #222221;
+    --sand-4: #2a2a28;
+    --sand-5: #31312e;
+    --sand-6: #3b3a37;
+    --sand-7: #494844;
+    --sand-8: #62605b;
+    --sand-9: #6f6d66;
+    --sand-10: #7c7b74;
+    --sand-11: #b5b3ad;
+    --sand-12: #eeeeec;
+    --sand-a1: #00000000;
+    --sand-a2: #f4f4f309;
+    --sand-a3: #f6f6f513;
+    --sand-a4: #fefef31b;
+    --sand-a5: #fbfbeb23;
+    --sand-a6: #fffaed2d;
+    --sand-a7: #fffbed3c;
+    --sand-a8: #fff9eb57;
+    --sand-a9: #fffae965;
+    --sand-a10: #fffdee73;
+    --sand-a11: #fffcf4b0;
+    --sand-a12: #fffffded;
+    --sand-surface: #21212080;
+    --sand-indicator: var(--sand-9);
+    --sand-track: var(--sand-9);
   }
 }
