@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import { getClockOffset } from './get-clock-offset.server';
 import { getPrettyDate } from './get-pretty-date.server';
 
-const NEWS_PATH = 'news';
+const NEWS_PATH = 'content/news';
 
 async function getNewsFeed(request) {
   const files = await fs.readdir(NEWS_PATH);

@@ -50,7 +50,7 @@ npc.last_talk = now;
 That's pretty much it for NPC speech. It's not 100% accurate and needs to be fixed once
 combat is implemented but it works.
 
-# Stat calculation
+## Stat calculation
 
 If you've been following along you probably noticed that the health and magic bars
 are always empty in screenshots and recordings of reoserv. This is because I've been
@@ -154,7 +154,7 @@ So anyway! Stats are being calculated now and at least the health and mana bars
 aren't empty anymore. I'm not really sure if hit rate/attack/armor/etc are
 working yet because there is no combat yet. We'll get there soon.
 
-# What's coming next?
+## What's coming next?
 
 There are a few things I could work towards next
 

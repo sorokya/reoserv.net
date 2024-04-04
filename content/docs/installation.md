@@ -27,8 +27,6 @@ For WSL/Linux/Mac OS you can run the following shell script and follow the promp
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-<br />
-
 ### Getting the source code
 
 Once you have installed rust you can get the REOSERV source code by either:
@@ -50,7 +48,5 @@ Once you have the source code in a directory on your machine simply run:
 ```sh
 cargo build
 ```
-
-<br />
 
 Click [here](/docs/database) to continue with the database setup.

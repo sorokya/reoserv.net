@@ -13,10 +13,10 @@ $ cp Arenas.ron Arenas.local.ron
 
 Each arena has the following data:
 
-- map: Map where the arena is
-- rate: Number of seconds before spawning players into the arena
-- block: If there are less players in the arena than this number then more players can join by waiting in a spawn point
-- spawns: A list of spawn points (x,y) and where they teleport the player to in the arena (x,y)
+- `map`: Map where the arena is
+- `rate`: Number of seconds before spawning players into the arena
+- `block`: If there are less players in the arena than this number then more players can join by waiting in a spawn point
+- `spawns`: A list of spawn points (x,y) and where they teleport the player to in the arena (x,y)
 
 ### Example of the main red arena in vanilla EO
 
