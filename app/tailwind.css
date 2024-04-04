@@ -33,7 +33,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not(.light) {
       --amber-1: #16120c;
       --amber-2: #1d180f;
       --amber-3: #302008;
