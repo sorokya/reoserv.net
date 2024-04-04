@@ -8,6 +8,7 @@ export function GitFeed({ commits }) {
           <span className="text-sand-11 text-xs">{timestamp}</span>
           <Link
             to={link}
+            target="_blank"
             className="text-sand-12 transition hover:font-medium hover:text-amber-11"
           >
             <span title={content} className="line-clamp-1 text-sm">

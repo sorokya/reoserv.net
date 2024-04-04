@@ -2,6 +2,7 @@ import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import etag from '../utils/etag.server';
 import { getGitFeed } from '../utils/get-git-feed.server';
+import { getLatestRelease } from '../utils/get-latest-release.server';
 import { Layout } from './_index';
 
 export const headers = ({ loaderHeaders }) => ({
@@ -16,7 +17,8 @@ export function meta() {
 export async function loader({ request }) {
   try {
     const commits = await getGitFeed(request);
-    const body = JSON.stringify({ commits });
+    const release = await getLatestRelease(request);
+    const body = JSON.stringify({ commits, release });
     const ETag = etag(body);
 
     return new Response(body, {
@@ -33,10 +35,10 @@ export async function loader({ request }) {
 }
 
 export default function FourOFour() {
-  const { commits } = useLoaderData();
+  const { commits, release } = useLoaderData();
 
   return (
-    <Layout commits={commits}>
+    <Layout commits={commits} release={release}>
       <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
       <p>
         Click{' '}
