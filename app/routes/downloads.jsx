@@ -30,7 +30,7 @@ export default function Downloads() {
   return (
     <ProseContainer>
       <header>
-        <span className="mb-4 block text-sand-10 dark:text-sanddark-10">
+        <span className="mb-4 block text-sand-10">
           Last updated on {lastmod}
         </span>
         <h1 className="mb-0">{title}</h1>

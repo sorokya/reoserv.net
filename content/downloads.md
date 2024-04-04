@@ -5,7 +5,7 @@ date: 2024-04-03T20:16:42+01:00
 lastmod: 2024-04-03T20:16:42+01:00
 ---
 
-<div class="px-4 md:px-6 text-amber-12 bg-amber-2 border border-amber-6 dark:textamberdark-12 dark:bg-amberdark-2 dark:border-amberdark-6">
+<div class="px-4 md:px-6 text-amber-12 bg-amber-2 border border-amber-6">
   <p>There are no binary downloads available for REOSERV yet!</p>
   <p>However, there is a docker image published at the GitHub Container Registry.</p>
 </div>

@@ -1,7 +1,6 @@
 const baseClasses = `
   prose 
-  dark:prose-invert 
-  max-w-[80ch] 
+  max-w-[75ch] 
   prose-table:w-auto 
   prose-table:min-w-[60%] 
   prose-table:max-w-full 

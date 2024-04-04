@@ -7,7 +7,7 @@
     "build": "remix vite:build",
     "dev": "node ./server.js",
     "lint": "biome check --apply-unsafe .",
-    "lint:docs": "prettier --write *.md **/*.md",
+    "lint:docs": "prettier --write *.md ./content/**/*.md",
     "start": "cross-env NODE_ENV=production node ./server.js"
   },
   "keywords": ["reoserv", "reoserv.net", "endless online emulator"],

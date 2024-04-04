@@ -46,25 +46,32 @@ export default {
           css: {
             color: 'var(--sand-12)',
             '[class~="lead"]': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             a: {
               color: 'var(--amber-12)',
+              textUnderlineOffset: '0.25em',
+              textDecorationThickness: '0.125em',
+              textDecorationStyle: 'dashed',
+            },
+            'a:hover': {
+              color: 'var(--amber-11)',
+              textDecorationStyle: 'solid',
             },
             strong: {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'a strong': {
               color: 'var(--amber-12)',
             },
             'blockquote strong': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-11)',
             },
             'thead th strong': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'ol > li::marker': {
-              color: 'var(--sand-12)',
+              color: 'var(--sand-11)',
             },
             'ul > li::marker': {
               color: 'var(--sand-12)',
@@ -103,31 +110,32 @@ export default {
               color: 'var(--sand-12)',
             },
             code: {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'a code': {
               color: 'var(--amber-12)',
             },
             'h1 code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'h2 code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'h3 code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'h4 code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'blockquote code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             'thead th code': {
-              color: 'var(--sand-12)',
+              color: 'var(--amber-12)',
             },
             pre: {
               color: 'var(--sand-12)',
+              backgroundColor: '#22272e',
             },
             'pre code': {
               color: 'var(--sand-12)',
