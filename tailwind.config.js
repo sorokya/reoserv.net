@@ -52,7 +52,6 @@ export default {
               color: 'var(--amber-12)',
               textUnderlineOffset: '0.25em',
               textDecorationThickness: '0.125em',
-              textDecorationStyle: 'dashed',
             },
             'a:hover': {
               color: 'var(--amber-11)',
