@@ -1,10 +1,11 @@
-import { Link } from '@remix-run/react';
+import { Form, Link } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
+import { LuMoon, LuSun } from 'react-icons/lu';
 import { SiKofi } from 'react-icons/si';
 import logo from '../assets/images/logo-full.png?as=metadata';
 
-export function Header() {
+export function Header({ theme }) {
   const links = [
     { href: '/', label: 'Home', icon: <FcHome /> },
     {
@@ -26,7 +27,7 @@ export function Header() {
       href: 'https://ko-fi.com/sorokya',
       label: 'Support Me on Ko-fi',
       icon: <SiKofi />,
-    }
+    },
   ];
 
   return (
@@ -66,6 +67,19 @@ export function Header() {
               </Link>
             </li>
           ))}
+          <li className="mb-2 md:mr-3 md:mb-0 md:inline-block">
+            <Form action="/theme" method="post">
+              <button
+                type="submit"
+                className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 hover:bg-amber-3 hover:text-amber-11"
+              >
+                <span className="text-[0.9em]">
+                  {theme === 'light' ? <LuSun /> : <LuMoon />}
+                </span>
+                <span>Toggle theme</span>
+              </button>
+            </Form>
+          </li>
         </ul>
       </nav>
 

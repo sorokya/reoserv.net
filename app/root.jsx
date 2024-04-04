@@ -5,10 +5,18 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useLoaderData,
   useRouteError,
 } from '@remix-run/react';
+import { json } from '@remix-run/node';
 import { Header } from './components/header';
 import styles from './tailwind.css?url';
+import { getThemeFromCookies } from './utils/theme.server';
+
+export async function loader({ request }) {
+  const theme = await getThemeFromCookies(request);
+  return json({ theme });
+}
 
 export const links = () => [
   { rel: 'icon', type: 'image/png', href: '/favicon-32.png' },
@@ -21,9 +29,11 @@ export const links = () => [
   { rel: 'stylesheet', href: styles },
 ];
 
-export function Layout({ children }) {
+export default function App() {
+  const { theme } = useLoaderData();
+
   return (
-    <html lang="en">
+    <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,7 +55,9 @@ export function Layout({ children }) {
       </head>
       <body className="relative grid min-h-screen font-sans text-sand-12 antialiased before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url('/back.jpg')] selection:bg-amber-6 dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
         <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
-          {children}
+          <Header theme={theme} />
+          <Outlet />
+          <footer className="py-4 text-sand-11 text-sm" />
         </main>
         {process.env.NODE_ENV !== 'development' && (
           <script
@@ -59,16 +71,6 @@ export function Layout({ children }) {
         <Scripts />
       </body>
     </html>
-  );
-}
-
-export default function App() {
-  return (
-    <>
-      <Header />
-      <Outlet />
-      <footer className="py-4 text-sand-11 text-sm" />
-    </>
   );
 }
 
