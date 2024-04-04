@@ -1,6 +1,7 @@
 import { Link } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
-import { FcDocument, FcDownload, FcHome, FcList } from 'react-icons/fc';
+import { FcDocument, FcHome, FcList } from 'react-icons/fc';
+import { SiKofi } from 'react-icons/si';
 import logo from '../assets/images/logo-full.png?as=metadata';
 
 export function Header() {
@@ -12,11 +13,6 @@ export function Header() {
       icon: <FcDocument />,
     },
     {
-      href: '/downloads',
-      label: 'Downloads',
-      icon: <FcDownload />,
-    },
-    {
       href: 'https://github.com/sorokya/reoserv',
       label: 'GitHub',
       icon: <FaGithub />,
@@ -26,6 +22,11 @@ export function Header() {
       label: 'SLN',
       icon: <FcList />,
     },
+    {
+      href: 'https://ko-fi.com/sorokya',
+      label: 'Support Me on Ko-fi',
+      icon: <SiKofi />,
+    }
   ];
 
   return (
@@ -58,6 +59,7 @@ export function Header() {
                 to={href}
                 className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 hover:bg-amber-3 hover:text-amber-11"
                 prefetch="intent"
+                target={href.indexOf('http') === 0 ? '_blank' : ''}
               >
                 <span className="text-[0.9em]">{icon}</span>
                 <span>{label}</span>
