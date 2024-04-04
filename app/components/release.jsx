@@ -2,7 +2,7 @@ import { Link } from '@remix-run/react';
 
 export function Release({ release }) {
   return (
-    <>
+    <div>
       <span className="text-sand-11 text-xs">{release.timestamp}</span>
       <Link
         to={release.link}
@@ -13,6 +13,6 @@ export function Release({ release }) {
           {release.name}
         </span>
       </Link>
-    </>
+    </div>
   );
 }

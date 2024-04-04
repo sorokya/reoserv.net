@@ -56,11 +56,13 @@ export default function Index() {
 
 export function Layout({ children, commits, release }) {
   return (
-    <div className="grid grid-cols-12 gap-16">
-      <div className="col-span-12 space-y-6 lg:col-span-7">{children}</div>
+    <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="space-y-6 lg:col-span-7">{children}</div>
 
-      <div className="col-span-12 self-start lg:col-span-5">
-        <div className="mb-2 border border-amber-6 bg-amber-2 p-6">
+      <hr className="border-sand-8 lg:hidden" />
+
+      <div className="grid gap-4 self-start lg:col-span-5">
+        <div className="space-y-2 border border-amber-6 bg-amber-2 p-4 lg:p-6">
           <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
             <span>
               <FcDownload />
@@ -70,7 +72,7 @@ export function Layout({ children, commits, release }) {
           <Release release={release} />
         </div>
 
-        <div className="border border-amber-6 bg-amber-2 p-6">
+        <div className="space-y-4 border border-amber-6 bg-amber-2 p-4 lg:p-6">
           <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
             <span>
               <PiScrollLight />

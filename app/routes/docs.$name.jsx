@@ -85,8 +85,8 @@ export default function Docs() {
   const { title, content } = page;
 
   return (
-    <div className="grid md:grid-cols-12">
-      <div className="p-1 md:col-span-3">
+    <div className="grid gap-12 md:grid-cols-4">
+      <div className="p-1 md:col-span-1 md:py-0">
         <ul className="grid">
           {LIST.map(({ type, title, link }) =>
             type === 'header' ? (
@@ -97,7 +97,7 @@ export default function Docs() {
           )}
         </ul>
       </div>
-      <div className="md:col-span-9">
+      <div className="md:col-span-3">
         <ProseContainer>
           <h1>{title}</h1>
           <div
