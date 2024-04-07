@@ -1,14 +1,14 @@
 import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { GitFeed } from '../components/git-feed';
-import { Release } from '../components/release';
-import { News } from '../components/news';
-import etag from '../utils/etag.server';
-import { getGitFeed } from '../utils/get-git-feed.server';
-import { getNewsFeed } from '../utils/get-news-feed.server';
-import { getLatestRelease } from '../utils/get-latest-release.server';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
+import { GitFeed } from '../components/git-feed';
+import { News } from '../components/news';
+import { Release } from '../components/release';
+import etag from '../utils/etag.server';
+import { getGitFeed } from '../utils/get-git-feed.server';
+import { getLatestRelease } from '../utils/get-latest-release.server';
+import { getNewsFeed } from '../utils/get-news-feed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -56,12 +56,14 @@ export default function Index() {
 
 export function Layout({ children, commits, release }) {
   return (
-    <div className="grid grid-cols-12 gap-16">
-      <div className="col-span-12 space-y-6 lg:col-span-7">{children}</div>
+    <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="space-y-6 lg:col-span-7">{children}</div>
 
-      <div className="col-span-12 self-start lg:col-span-5">
-        <div className="border border-amber-6 bg-amber-2 p-6 mb-2">
-          <h2 className="font-bold text-amber-12 text-xl flex w-full items-center gap-1">
+      <hr className="border-sand-8 lg:hidden" />
+
+      <div className="grid gap-4 self-start lg:col-span-5">
+        <div className="space-y-2 border border-amber-6 bg-amber-2 p-4 lg:p-6">
+          <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
             <span>
               <FcDownload />
             </span>
@@ -70,8 +72,8 @@ export function Layout({ children, commits, release }) {
           <Release release={release} />
         </div>
 
-        <div className="border border-amber-6 bg-amber-2 p-6">
-          <h2 className="font-bold text-amber-12 text-xl flex w-full items-center gap-1">
+        <div className="space-y-4 border border-amber-6 bg-amber-2 p-4 lg:p-6">
+          <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
             <span>
               <PiScrollLight />
             </span>

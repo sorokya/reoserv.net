@@ -1,5 +1,5 @@
 import { redirect } from '@remix-run/node';
-import { Link, useLoaderData, useLocation } from '@remix-run/react';
+import { NavLink, useLoaderData, useLocation } from '@remix-run/react';
 import { ProseContainer } from '../components/prose-container';
 import { getDocsPage } from '../utils/get-docs-page.server';
 
@@ -59,48 +59,45 @@ function ListHeader({ title }) {
   );
 }
 
-function ListItem({ title, link, active = false }) {
-  const className = active
-    ? 'border-l-amber-7 text-amber-11 font-bold tracking-wide'
-    : 'border-l-sand-4 text-sand-11';
-
+function ListItem({ title, link }) {
   return (
-    <li
-      // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
-      className={`border-l-4 transition hover:border-l-amber-4 hover:text-amber-11/80 ${className}`}
-    >
-      <Link prefetch="intent" className="block py-1 pl-3" to={link}>
+    <li>
+      <NavLink
+        prefetch="intent"
+        className={({ isActive }) =>
+          // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
+          `block border-l-4 py-1 pl-3 transition hover:border-l-amber-6 hover:text-amber-11 ${
+            isActive
+              ? 'border-l-amber-7 font-bold text-amber-11 tracking-wide'
+              : 'border-l-sand-4 text-sand-11'
+          }`
+        }
+        to={link}
+      >
         {title}
-      </Link>
+      </NavLink>
     </li>
   );
 }
 
 export default function Docs() {
-  const { pathname } = useLocation();
   const { page } = useLoaderData();
   const { title, content } = page;
 
   return (
-    <div className="grid md:grid-cols-12">
-      <div className="p-1 md:col-span-3">
+    <div className="grid gap-12 md:grid-cols-4">
+      <div className="p-1 md:col-span-1 md:py-0">
         <ul className="grid">
-          {LIST.map(({ type, title, link }) => {
-            if (type === 'header') {
-              return <ListHeader key={title} title={title} />;
-            }
-            return (
-              <ListItem
-                key={title}
-                title={title}
-                link={link}
-                active={link === pathname}
-              />
-            );
-          })}
+          {LIST.map(({ type, title, link }) =>
+            type === 'header' ? (
+              <ListHeader key={title} title={title} />
+            ) : (
+              <ListItem key={title} title={title} link={link} />
+            ),
+          )}
         </ul>
       </div>
-      <div className="md:col-span-9">
+      <div className="md:col-span-3">
         <ProseContainer>
           <h1>{title}</h1>
           <div

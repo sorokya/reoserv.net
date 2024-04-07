@@ -1,4 +1,4 @@
-import { themeCookie, getThemeFromCookies } from '../utils/theme.server';
+import { getThemeFromCookies, themeCookie } from '../utils/theme.server';
 
 export async function action({ request }) {
   const currentTheme = await getThemeFromCookies(request);

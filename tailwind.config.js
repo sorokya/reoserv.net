@@ -20,6 +20,7 @@ export default {
         10: 'var(--amber-10)',
         11: 'var(--amber-11)',
         12: 'var(--amber-12)',
+        contrast: 'var(--amber-contrast)',
       },
       sand: {
         1: 'var(--sand-1)',

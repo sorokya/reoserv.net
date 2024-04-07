@@ -1,15 +1,22 @@
-import { Form, Link } from '@remix-run/react';
+import { Form, Link, NavLink } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
 import { LuMoon, LuSun } from 'react-icons/lu';
 import { SiKofi } from 'react-icons/si';
 import logo from '../assets/images/logo-full.png?as=metadata';
 
+const getLinkClasses = (active = false) =>
+  `flex w-full items-center gap-1 rounded-sm border px-2 h-8 sm:h-6 ${
+    active
+      ? 'bg-amber-4 text-amber-11 font-bold border-amber-11 hover:bg-amber-3 hover:text-amber-11'
+      : 'bg-amber-2 text-amber-12 border-amber-8 hover:bg-amber-3 hover:text-amber-11'
+  }`;
+
 export function Header({ theme }) {
   const links = [
     { href: '/', label: 'Home', icon: <FcHome /> },
     {
-      href: '/docs/installation',
+      href: '/docs',
       label: 'Docs',
       icon: <FcDocument />,
     },
@@ -32,7 +39,7 @@ export function Header({ theme }) {
 
   return (
     <header className="relative flex-0 space-y-2 py-4">
-      <div className="flex justify-between">
+      <div className="flex flex-wrap justify-between">
         <img
           loading="preload"
           src={logo.src}
@@ -53,26 +60,23 @@ export function Header({ theme }) {
         </em>
       </div>
       <nav>
-        <ul className="text-center md:text-left">
+        <ul className="flex flex-wrap gap-3">
           {links.map(({ href, label, icon }) => (
-            <li key={href} className="mb-2 md:mr-3 md:mb-0 md:inline-block">
-              <Link
+            <li key={href}>
+              <NavLink
                 to={href}
-                className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 hover:bg-amber-3 hover:text-amber-11"
+                className={({ isActive }) => getLinkClasses(isActive)}
                 prefetch="intent"
                 target={href.indexOf('http') === 0 ? '_blank' : ''}
               >
                 <span className="text-[0.9em]">{icon}</span>
                 <span>{label}</span>
-              </Link>
+              </NavLink>
             </li>
           ))}
-          <li className="mb-2 md:mr-3 md:mb-0 md:inline-block">
+          <li className="absolute top-4 right-4 md:static">
             <Form action="/theme" method="post">
-              <button
-                type="submit"
-                className="flex w-full items-center gap-1 rounded-sm border border-amber-8 bg-amber-2 px-2 text-amber-12 hover:bg-amber-3 hover:text-amber-11"
-              >
+              <button type="submit" className={getLinkClasses()}>
                 <span className="text-[0.9em]">
                   {theme === 'light' ? <LuSun /> : <LuMoon />}
                 </span>
@@ -82,8 +86,7 @@ export function Header({ theme }) {
           </li>
         </ul>
       </nav>
-
-      <hr className="mt-2 border-sand-8" />
+      <hr className="border-amber-8" />
     </header>
   );
 }
