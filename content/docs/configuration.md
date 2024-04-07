@@ -20,7 +20,6 @@ We'll go over the sections you'll likely want to modify now.
 - host: Leave as `0.0.0.0` if you want anyone to be able to connect to your server
 - port: The default port is `8078` the same default port the vanilla client uses
 - generate_pub: Default is `false` but you might want to enable this if you plan to use JSON files for your data
-- num_of_maps: Change to highest map ID for your server
 
 ## Database
 
