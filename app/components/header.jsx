@@ -1,4 +1,4 @@
-import { Form, Link, NavLink } from '@remix-run/react';
+import { useFetcher, Link, NavLink } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
 import { LuMoon, LuSun } from 'react-icons/lu';
@@ -75,14 +75,14 @@ export function Header({ theme }) {
             </li>
           ))}
           <li>
-            <Form action="/theme" method="post">
+            <fetcher.Form action="/theme" method="post">
               <button type="submit" className={getLinkClasses()}>
                 <span className="text-[0.9em]">
                   {theme === 'light' ? <LuSun /> : <LuMoon />}
                 </span>
                 <span>Toggle theme</span>
               </button>
-            </Form>
+            </fetcher.Form>
           </li>
         </ul>
       </nav>
