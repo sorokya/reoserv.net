@@ -49,10 +49,12 @@ export default {
             '[class~="lead"]': {
               color: 'var(--amber-12)',
             },
+            maxWidth: '75ch',
             a: {
               color: 'var(--amber-12)',
               textUnderlineOffset: '0.25em',
               textDecorationThickness: '0.125em',
+              wordBreak: 'break-word',
             },
             'a:hover': {
               color: 'var(--amber-11)',
@@ -111,6 +113,7 @@ export default {
             },
             code: {
               color: 'var(--amber-12)',
+              fontSize: '1em',
             },
             'a code': {
               color: 'var(--amber-12)',
@@ -136,9 +139,17 @@ export default {
             pre: {
               color: 'var(--sand-12)',
               backgroundColor: '#22272e',
+              maxWidth: 'calc(100vw - 2rem)',
+              fontSize: '1em',
+              borderRadius: '0.125rem',
             },
             'pre code': {
               color: 'var(--sand-12)',
+            },
+            table: {
+              width: 'auto',
+              minWidth: '60%',
+              maxWidth: '100%',
             },
             'thead th': {
               color: 'var(--sand-12)',

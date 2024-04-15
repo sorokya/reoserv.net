@@ -65,4 +65,8 @@
     --sand-11: #b5b3ad;
     --sand-12: #eeeeec;
   }
+
+  * {
+    box-sizing: border-box;
+  }
 }
