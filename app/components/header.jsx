@@ -74,7 +74,7 @@ export function Header({ theme }) {
               </NavLink>
             </li>
           ))}
-          <li className="absolute top-4 right-4 md:static">
+          <li>
             <Form action="/theme" method="post">
               <button type="submit" className={getLinkClasses()}>
                 <span className="text-[0.9em]">
