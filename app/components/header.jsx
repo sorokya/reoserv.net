@@ -1,4 +1,4 @@
-import { useFetcher, Link, NavLink } from '@remix-run/react';
+import { Link, NavLink, useFetcher } from '@remix-run/react';
 import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
 import { LuMoon, LuSun } from 'react-icons/lu';
@@ -12,30 +12,32 @@ const getLinkClasses = (active = false) =>
       : 'bg-amber-2 text-amber-12 border-amber-8 hover:bg-amber-3 hover:text-amber-11'
   }`;
 
+const links = [
+  { href: '/', label: 'Home', icon: <FcHome /> },
+  {
+    href: '/docs',
+    label: 'Docs',
+    icon: <FcDocument />,
+  },
+  {
+    href: 'https://github.com/sorokya/reoserv',
+    label: 'GitHub',
+    icon: <FaGithub />,
+  },
+  {
+    href: 'http://apollo-games.com/sln/sln.php',
+    label: 'SLN',
+    icon: <FcList />,
+  },
+  {
+    href: 'https://ko-fi.com/sorokya',
+    label: 'Support Me on Ko-fi',
+    icon: <SiKofi />,
+  },
+];
+
 export function Header({ theme }) {
-  const links = [
-    { href: '/', label: 'Home', icon: <FcHome /> },
-    {
-      href: '/docs',
-      label: 'Docs',
-      icon: <FcDocument />,
-    },
-    {
-      href: 'https://github.com/sorokya/reoserv',
-      label: 'GitHub',
-      icon: <FaGithub />,
-    },
-    {
-      href: 'http://apollo-games.com/sln/sln.php',
-      label: 'SLN',
-      icon: <FcList />,
-    },
-    {
-      href: 'https://ko-fi.com/sorokya',
-      label: 'Support Me on Ko-fi',
-      icon: <SiKofi />,
-    },
-  ];
+  const fetcher = useFetcher();
 
   return (
     <header className="relative flex-0 space-y-2 py-4">

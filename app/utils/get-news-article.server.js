@@ -1,5 +1,5 @@
 import { getClockOffset } from './get-clock-offset.server';
-import { parseMarkdown } from './parse-markdown';
+import { parseMarkdown } from './parse-markdown.server';
 
 const NEWS_PATH = 'content/news';
 
