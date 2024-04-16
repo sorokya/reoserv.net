@@ -1,6 +1,6 @@
-import fs from './fs.server';
-import { getClockOffset } from './get-clock-offset.server';
-import { getPrettyDate } from './get-pretty-date.server';
+import fs from './fs';
+import { getClockOffset } from './get-clock-offset';
+import { getPrettyDate } from './get-pretty-date';
 
 const GITHUB_URL =
   'https://api.github.com/repos/sorokya/reoserv/releases/latest';

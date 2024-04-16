@@ -1,8 +1,8 @@
 import rssToJson from 'rss-to-json';
-import fs from './fs.server';
+import fs from './fs';
 const { parse } = rssToJson;
-import { getClockOffset } from './get-clock-offset.server';
-import { getPrettyDate } from './get-pretty-date.server';
+import { getClockOffset } from './get-clock-offset';
+import { getPrettyDate } from './get-pretty-date';
 
 const GITHUB_FEED = 'https://github.com/sorokya/reoserv/commits/master.atom';
 const DATA_FILE_PATH = 'git-feed.json';

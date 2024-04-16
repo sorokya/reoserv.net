@@ -9,9 +9,9 @@ import {
   useLoaderData,
   useRouteError,
 } from '@remix-run/react';
+import { getThemeFromCookies } from './.server/theme';
 import { Header } from './components/header';
 import styles from './tailwind.css?url';
-import { getThemeFromCookies } from './utils/theme.server';
 
 export async function loader({ request }) {
   const theme = await getThemeFromCookies(request);

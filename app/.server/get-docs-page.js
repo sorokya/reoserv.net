@@ -1,4 +1,4 @@
-import { parseMarkdown } from './parse-markdown.server';
+import { parseMarkdown } from './parse-markdown';
 
 const DOCS_PATH = 'content/docs';
 

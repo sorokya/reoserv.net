@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
+import { getDocsPage } from '../.server/get-docs-page';
 import { ProseContainer } from '../components/prose-container';
-import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
