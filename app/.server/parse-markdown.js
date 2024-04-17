@@ -3,9 +3,9 @@ import matter from 'gray-matter';
 import { Marked } from 'marked';
 import markedShiki from 'marked-shiki';
 import { getHighlighter } from 'shiki';
-import etag from './etag.server';
-import { getPrettyDate } from './get-pretty-date.server';
-import { replaceVideoTags } from './replace-video-tags.server';
+import etag from './etag';
+import { getPrettyDate } from './get-pretty-date';
+import { replaceVideoTags } from './replace-video-tags';
 
 const highlighter = getHighlighter({
   langs: ['md', 'sh', 'bash', 'rust', 'plaintext', 'yaml'],

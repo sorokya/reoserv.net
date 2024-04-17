@@ -2,13 +2,13 @@ import { json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
+import etag from '../.server/etag';
+import { getGitFeed } from '../.server/get-git-feed';
+import { getLatestRelease } from '../.server/get-latest-release';
+import { getNewsFeed } from '../.server/get-news-feed';
 import { GitFeed } from '../components/git-feed';
 import { News } from '../components/news';
 import { Release } from '../components/release';
-import etag from '../utils/etag.server';
-import { getGitFeed } from '../utils/get-git-feed.server';
-import { getLatestRelease } from '../utils/get-latest-release.server';
-import { getNewsFeed } from '../utils/get-news-feed.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),

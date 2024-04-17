@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { getNewsArticle } from '../.server/get-news-article';
 import { ProseContainer } from '../components/prose-container';
-import { getNewsArticle } from '../utils/get-news-article.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),

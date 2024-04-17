@@ -1,8 +1,8 @@
 import matter from 'gray-matter';
 
 import fs from 'node:fs/promises';
-import { getClockOffset } from './get-clock-offset.server';
-import { getPrettyDate } from './get-pretty-date.server';
+import { getClockOffset } from './get-clock-offset';
+import { getPrettyDate } from './get-pretty-date';
 
 const NEWS_PATH = 'content/news';
 

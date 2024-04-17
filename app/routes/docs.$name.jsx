@@ -1,7 +1,7 @@
 import { redirect } from '@remix-run/node';
-import { NavLink, useLoaderData, useLocation } from '@remix-run/react';
+import { NavLink, useLoaderData } from '@remix-run/react';
+import { getDocsPage } from '../.server/get-docs-page';
 import { ProseContainer } from '../components/prose-container';
-import { getDocsPage } from '../utils/get-docs-page.server';
 
 export const headers = ({ loaderHeaders }) => ({
   'Cache-Control': loaderHeaders.get('Cache-Control'),
@@ -89,6 +89,7 @@ export default function Docs() {
       <div className="p-1 md:col-span-1 md:py-0">
         <ul className="grid">
           {LIST.map(({ type, title, link }) =>
+            // biome-ignore lint/correctness/useJsxKeyInIterable: the title is unique across all items
             type === 'header' ? (
               <ListHeader key={title} title={title} />
             ) : (
