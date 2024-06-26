@@ -1,34 +1,37 @@
 import fs from 'node:fs/promises';
 import matter from 'gray-matter';
 import { Marked } from 'marked';
-import markedShiki from 'marked-shiki';
-import { getHighlighter } from 'shiki';
+import { createHighlighter } from 'shiki';
 import etag from './etag';
 import { getPrettyDate } from './get-pretty-date';
 import { replaceVideoTags } from './replace-video-tags';
 
-const highlighter = getHighlighter({
-  langs: ['md', 'sh', 'bash', 'rust', 'plaintext', 'yaml'],
-  themes: ['github-dark-dimmed'],
-});
+let highlighter;
 
 async function parseMarkdown(filepath, { clockOffset } = { clockOffset: 0 }) {
+  if (!highlighter) {
+    highlighter = await createHighlighter({
+      langs: ['md', 'sh', 'bash', 'rust', 'text', 'yaml'],
+      themes: ['github-dark-dimmed'],
+    });
+  }
+
   const contents = await fs.readFile(filepath, { encoding: 'utf-8' });
 
   const fm = matter(contents);
 
   const markdown = await new Marked()
     .use({ async: true, gfm: true })
-    .use(
-      markedShiki({
-        async highlight(code, lang) {
-          return (await highlighter).codeToHtml(code, {
-            lang: lang || 'plaintext',
+    .use({
+      renderer: {
+        code(code, lang) {
+          return highlighter.codeToHtml(code, {
+            lang: lang || 'text',
             theme: 'github-dark-dimmed',
           });
         },
-      }),
-    )
+      },
+    })
     .parse(fm.content);
 
   return {

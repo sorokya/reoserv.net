@@ -137,15 +137,11 @@ export default {
               color: 'var(--amber-12)',
             },
             pre: {
-              color: 'var(--sand-12)',
-              backgroundColor: '#22272e',
               maxWidth: 'calc(100vw - 2rem)',
               fontSize: '1em',
               borderRadius: '0.125rem',
             },
-            'pre code': {
-              color: 'var(--sand-12)',
-            },
+            'pre code': {},
             table: {
               width: 'auto',
               minWidth: '60%',
