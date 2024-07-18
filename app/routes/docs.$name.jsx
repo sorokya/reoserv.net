@@ -65,7 +65,6 @@ function ListItem({ title, link }) {
       <NavLink
         prefetch="intent"
         className={({ isActive }) =>
-          // biome-ignore lint/nursery/useSortedClasses: does not interpolate well
           `block border-l-4 py-1 pl-3 transition hover:border-l-amber-6 hover:text-amber-11 ${
             isActive
               ? 'border-l-amber-7 font-bold text-amber-11 tracking-wide'
@@ -89,7 +88,6 @@ export default function Docs() {
       <div className="p-1 md:col-span-1 md:py-0">
         <ul className="grid">
           {LIST.map(({ type, title, link }) =>
-            // biome-ignore lint/correctness/useJsxKeyInIterable: the title is unique across all items
             type === 'header' ? (
               <ListHeader key={title} title={title} />
             ) : (
