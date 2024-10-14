@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -19,6 +19,7 @@
     }
   },
   "formatter": {
+    "enabled": true,
     "indentStyle": "space"
   },
   "javascript": {
@@ -27,7 +28,8 @@
     }
   },
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "ignore": []
   },
   "vcs": {
     "clientKind": "git",
