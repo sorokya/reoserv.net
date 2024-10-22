@@ -1,6 +1,7 @@
+import type { ActionFunctionArgs } from '@remix-run/node';
 import { getThemeFromCookies, themeCookie } from '../.server/theme';
 
-export async function action({ request }) {
+export async function action({ request }: ActionFunctionArgs) {
   const currentTheme = await getThemeFromCookies(request);
 
   const headers = new Headers();

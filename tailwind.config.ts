@@ -1,6 +1,6 @@
+import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
-/** @type {import('tailwindcss').Config} */
 export default {
   // tailwind dark mode based on system preference but not if there's a light class on the html element
   darkMode: 'class',
@@ -164,4 +164,4 @@ export default {
     require('@tailwindcss/aspect-ratio'),
     require('@tailwindcss/container-queries'),
   ],
-};
+} satisfies Config;

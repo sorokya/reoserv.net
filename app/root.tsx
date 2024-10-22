@@ -1,4 +1,4 @@
-import { json } from '@remix-run/node';
+import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -13,7 +13,7 @@ import { getThemeFromCookies } from './.server/theme';
 import { Header } from './components/header';
 import styles from './tailwind.css?url';
 
-export async function loader({ request }) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const theme = await getThemeFromCookies(request);
   return json({ theme });
 }
@@ -30,7 +30,7 @@ export const links = () => [
 ];
 
 export default function App() {
-  const { theme } = useLoaderData();
+  const { theme } = useLoaderData<typeof loader>();
 
   return (
     <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
@@ -75,7 +75,7 @@ export default function App() {
 }
 
 export function ErrorBoundary() {
-  const error = useRouteError();
+  const error = useRouteError() as Error;
 
   if (isRouteErrorResponse(error)) {
     return (

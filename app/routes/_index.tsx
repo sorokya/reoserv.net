@@ -1,4 +1,8 @@
-import { json } from '@remix-run/node';
+import {
+  type HeadersFunction,
+  json,
+  type LoaderFunctionArgs,
+} from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
@@ -10,16 +14,16 @@ import { GitFeed } from '../components/git-feed';
 import { News } from '../components/news';
 import { Release } from '../components/release';
 
-export const headers = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control'),
-  ETag: loaderHeaders.get('ETag'),
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
+  ETag: loaderHeaders.get('ETag') ?? '',
 });
 
 export function meta() {
   return [{ title: 'Home | REOSERV' }];
 }
 
-export async function loader({ request }) {
+export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const commits = await getGitFeed(request);
     const release = await getLatestRelease(request);
@@ -41,7 +45,7 @@ export async function loader({ request }) {
 }
 
 export default function Index() {
-  const { commits, articles, release } = useLoaderData();
+  const { commits, articles, release } = useLoaderData<typeof loader>();
 
   return (
     <Layout commits={commits} release={release}>
@@ -54,7 +58,15 @@ export default function Index() {
   );
 }
 
-export function Layout({ children, commits, release }) {
+export function Layout({
+  children,
+  commits,
+  release,
+}: {
+  children: React.ReactNode;
+  commits: Awaited<ReturnType<typeof getGitFeed>>;
+  release: Awaited<ReturnType<typeof getLatestRelease>>;
+}) {
   return (
     <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
       <div className="space-y-6 lg:col-span-7">{children}</div>

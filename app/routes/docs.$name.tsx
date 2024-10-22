@@ -1,21 +1,26 @@
-import { redirect } from '@remix-run/node';
+import {
+  type HeadersFunction,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  redirect,
+} from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
 import { getDocsPage } from '../.server/get-docs-page';
 import { ProseContainer } from '../components/prose-container';
 
-export const headers = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control'),
-  ETag: loaderHeaders.get('ETag'),
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
+  ETag: loaderHeaders.get('ETag') ?? '',
 });
 
-export function meta({ data }) {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     { title: `${data.page.title} | Docs | REOSERV` },
     { name: 'description', value: data.page.description },
   ];
-}
+};
 
-export async function loader({ params }) {
+export async function loader({ params }: LoaderFunctionArgs) {
   try {
     const page = await getDocsPage(params.name);
     return new Response(JSON.stringify({ page }), {
@@ -51,7 +56,7 @@ const LIST = [
   { type: 'item', title: 'News', link: '/docs/news' },
 ];
 
-function ListHeader({ title }) {
+function ListHeader({ title }: { title: string }) {
   return (
     <li className="pt-6 pb-3 font-bold text-lg text-sand-12 first:pt-0">
       {title}
@@ -59,7 +64,7 @@ function ListHeader({ title }) {
   );
 }
 
-function ListItem({ title, link }) {
+function ListItem({ title, link }: { title: string; link: string }) {
   return (
     <li>
       <NavLink
@@ -80,7 +85,7 @@ function ListItem({ title, link }) {
 }
 
 export default function Docs() {
-  const { page } = useLoaderData();
+  const { page } = useLoaderData<typeof loader>();
   const { title, content } = page;
 
   return (

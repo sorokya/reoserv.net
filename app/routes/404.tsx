@@ -1,20 +1,24 @@
-import { json } from '@remix-run/node';
+import {
+  type HeadersFunction,
+  type LoaderFunctionArgs,
+  json,
+} from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import etag from '../.server/etag';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
 import { Layout } from './_index';
 
-export const headers = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control'),
-  ETag: loaderHeaders.get('ETag'),
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
+  ETag: loaderHeaders.get('ETag') ?? '',
 });
 
 export function meta() {
   return [{ title: 'Not Found | REOSERV' }];
 }
 
-export async function loader({ request }) {
+export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const commits = await getGitFeed(request);
     const release = await getLatestRelease(request);
@@ -35,7 +39,7 @@ export async function loader({ request }) {
 }
 
 export default function FourOFour() {
-  const { commits, release } = useLoaderData();
+  const { commits, release } = useLoaderData<typeof loader>();
 
   return (
     <Layout commits={commits} release={release}>

@@ -1,15 +1,20 @@
-import { redirect } from '@remix-run/node';
+import {
+  type HeadersFunction,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+  redirect,
+} from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { getNewsArticle } from '../.server/get-news-article';
 import { ProseContainer } from '../components/prose-container';
 
-export const headers = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control'),
-  ETag: loaderHeaders.get('ETag'),
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
+  ETag: loaderHeaders.get('ETag') ?? '',
 });
 
-export function meta({ params, data }) {
-  const parts = params.name.split('-');
+export const meta: MetaFunction<typeof loader> = ({ params, data }) => {
+  const parts = params.name?.split('-') ?? [];
   parts.splice(0, 3); // remove date
   const title = parts
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -18,9 +23,9 @@ export function meta({ params, data }) {
     { title: `${title} | REOSERV` },
     { name: 'description', value: data.article.description },
   ];
-}
+};
 
-export async function loader({ request, params }) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
     const article = await getNewsArticle(params.name, request);
     return new Response(JSON.stringify({ article }), {
@@ -39,7 +44,7 @@ export async function loader({ request, params }) {
 export default function Article() {
   const {
     article: { title, date, content, description },
-  } = useLoaderData();
+  } = useLoaderData<typeof loader>();
 
   return (
     <ProseContainer>
