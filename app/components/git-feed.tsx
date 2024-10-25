@@ -1,6 +1,15 @@
 import { Link } from '@remix-run/react';
 
-export function GitFeed({ commits }) {
+type GitFeedProps = {
+  commits: Array<{
+    id: string;
+    link: string;
+    content: string;
+    timestamp: string;
+  }>;
+};
+
+export function GitFeed({ commits }: GitFeedProps) {
   return (
     <ul className="grid gap-4">
       {commits.map(({ id, link, content, timestamp }) => (

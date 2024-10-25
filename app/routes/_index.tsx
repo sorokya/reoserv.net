@@ -1,7 +1,7 @@
 import {
   type HeadersFunction,
-  json,
   type LoaderFunctionArgs,
+  json,
 } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
