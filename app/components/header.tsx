@@ -43,7 +43,7 @@ export function Header({ theme }) {
     <header className="relative flex-0 space-y-2 py-4">
       <div className="flex flex-wrap justify-between">
         <img
-          loading="preload"
+          loading="eager"
           src={logo.src}
           alt="Reoserv"
           className="inline-block h-12 max-w-full object-contain object-left"
