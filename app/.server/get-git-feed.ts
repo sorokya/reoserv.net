@@ -45,7 +45,7 @@ async function fetchGitFeed(request: Request) {
   const clockOffset = getClockOffset(request);
 
   const response = await fetch(
-    'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=30',
+    'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=20',
   );
 
   if (!response.ok) {
