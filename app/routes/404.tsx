@@ -1,10 +1,10 @@
-import { type LoaderFunctionArgs, json } from '@remix-run/node';
+import type { LoaderFunctionArgs } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
+import { GitFeed } from '~/components/git-feed';
+import { Release } from '~/components/release';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
 import { Layout } from './_index';
-import { GitFeed } from '~/components/git-feed';
-import { Release } from '~/components/release';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
