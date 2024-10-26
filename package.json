@@ -16,6 +16,7 @@
   "author": "Richard Leek <richard@richardleek.com>",
   "license": "MIT",
   "dependencies": {
+    "@epic-web/invariant": "^1.0.0",
     "@remix-run/express": "^2.13.1",
     "@remix-run/node": "^2.13.1",
     "@remix-run/react": "^2.13.1",

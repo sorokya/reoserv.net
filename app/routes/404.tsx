@@ -1,40 +1,20 @@
-import {
-  type HeadersFunction,
-  type LoaderFunctionArgs,
-  json,
-} from '@remix-run/node';
+import { type LoaderFunctionArgs, json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
-import { etag } from '../.server/utils/etag';
 import { Layout } from './_index';
-
-export const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
-  ETag: loaderHeaders.get('ETag') ?? '',
-});
-
-export function meta() {
-  return [{ title: 'Not Found | REOSERV' }];
-}
+import { GitFeed } from '~/components/git-feed';
+import { Release } from '~/components/release';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const commits = await getGitFeed(request);
     const release = await getLatestRelease(request);
-    const body = JSON.stringify({ commits, release });
-    const ETag = etag(body);
 
-    return new Response(body, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'max-age=60, public',
-        ETag,
-      },
-    });
+    return { commits, release };
   } catch (e) {
     console.error('There was an error getting the articles / commit feed', e);
-    return json([]);
+    return { commits: [], release: null };
   }
 }
 
@@ -42,13 +22,17 @@ export default function FourOFour() {
   const { commits, release } = useLoaderData<typeof loader>();
 
   return (
-    <Layout commits={commits} release={release}>
+    <Layout
+      commits={<GitFeed commits={commits} />}
+      release={release ? <Release release={release} /> : null}
+    >
+      <title>404 - Page not found | REOSERV</title>
       <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
       <p>
-        Click{' '}
+        Click
         <Link to="/" className="text-blue-500 underline">
           here
-        </Link>{' '}
+        </Link>
         to go home.
       </p>
     </Layout>

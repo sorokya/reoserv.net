@@ -1,1 +1,1 @@
-export { default, loader, meta, headers } from './404.js';
+export { default, loader } from './404.js';

@@ -47,6 +47,11 @@ async function fetchGitFeed(request: Request) {
   const response = await fetch(
     'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=30',
   );
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch commits from github');
+  }
+
   const feed = (await response.json()) as GithubCommitFeed;
 
   return feed.map(({ sha, html_url, commit }) => ({

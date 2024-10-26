@@ -1,60 +1,51 @@
-import {
-  type HeadersFunction,
-  type LoaderFunctionArgs,
-  type MetaFunction,
-  redirect,
-} from '@remix-run/node';
+import { invariant } from '@epic-web/invariant';
+import { type LoaderFunctionArgs, data, redirect } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
 import { getDocsPage } from '../.server/get-docs-page';
 import { ProseContainer } from '../components/prose-container';
 
-export const headers: HeadersFunction = ({ loaderHeaders }) => ({
-  'Cache-Control': loaderHeaders.get('Cache-Control') ?? '',
-  ETag: loaderHeaders.get('ETag') ?? '',
-});
-
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  return [
-    { title: `${data.page.title} | Docs | REOSERV` },
-    { name: 'description', value: data.page.description },
-  ];
-};
-
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
+    invariant(params.name, 'name is required');
     const page = await getDocsPage(params.name);
-    return new Response(JSON.stringify({ page }), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'max-age=3600, public',
-        ETag: page.etag,
+    return data(
+      { page },
+      {
+        headers: {
+          'Cache-Control': 'max-age=3600, public',
+          ETag: page.etag,
+        },
       },
-    });
+    );
   } catch (e) {
     console.error('There was an error getting the page', e);
     return redirect('/404');
   }
 }
 
-const LIST = [
-  { type: 'header', title: 'Getting Started' },
-  { type: 'item', title: 'Installation', link: '/docs/installation' },
-  { type: 'item', title: 'Database', link: '/docs/database' },
-  { type: 'item', title: 'Configuration', link: '/docs/configuration' },
-  { type: 'header', title: 'Data' },
-  { type: 'item', title: 'Arenas', link: '/docs/arenas' },
-  { type: 'item', title: 'Commands', link: '/docs/commands' },
+const DOCS_NAV_LINKS = [
   {
-    type: 'item',
-    title: 'Packet Rate Limits',
-    link: '/docs/packet-rate-limits',
+    section: 'Getting Started',
+    items: [
+      { title: 'Installation', link: '/docs/installation' },
+      { title: 'Database', link: '/docs/database' },
+      { title: 'Configuration', link: '/docs/configuration' },
+    ],
   },
-  { type: 'item', title: 'Formulas', link: '/docs/formulas' },
-  { type: 'item', title: 'Pub files', link: '/docs/pubs' },
-  { type: 'item', title: 'Maps', link: '/docs/maps' },
-  { type: 'item', title: 'Quests', link: '/docs/quests' },
-  { type: 'item', title: 'News', link: '/docs/news' },
-];
+  {
+    section: 'Data',
+    items: [
+      { title: 'Arenas', link: '/docs/arenas' },
+      { title: 'Commands', link: '/docs/commands' },
+      { title: 'Packet Rate Limits', link: '/docs/packet-rate-limits' },
+      { title: 'Formulas', link: '/docs/formulas' },
+      { title: 'Pub files', link: '/docs/pubs' },
+      { title: 'Maps', link: '/docs/maps' },
+      { title: 'Quests', link: '/docs/quests' },
+      { title: 'News', link: '/docs/news' },
+    ],
+  },
+] as const;
 
 function ListHeader({ title }: { title: string }) {
   return (
@@ -86,31 +77,37 @@ function ListItem({ title, link }: { title: string; link: string }) {
 
 export default function Docs() {
   const { page } = useLoaderData<typeof loader>();
-  const { title, content } = page;
+  const { title, content, description } = page;
 
   return (
-    <div className="grid gap-12 md:grid-cols-4">
-      <div className="p-1 md:col-span-1 md:py-0">
-        <ul className="grid">
-          {LIST.map(({ type, title, link }) =>
-            type === 'header' ? (
-              <ListHeader key={title} title={title} />
-            ) : (
-              <ListItem key={title} title={title} link={link} />
-            ),
-          )}
-        </ul>
+    <>
+      <title>{title} | Docs | REOSERV</title>
+      <meta name="description" content={description} />
+
+      <div className="grid gap-12 md:grid-cols-4">
+        <div className="p-1 md:col-span-1 md:py-0">
+          <ul className="grid">
+            {DOCS_NAV_LINKS.map(({ section, items }) => (
+              <>
+                <ListHeader key={section} title={section} />
+                {items.map(({ title, link }) => (
+                  <ListItem key={title} title={title} link={link} />
+                ))}
+              </>
+            ))}
+          </ul>
+        </div>
+        <div className="md:col-span-3">
+          <ProseContainer>
+            <h1>{title}</h1>
+            <div
+              className="pb-2"
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          </ProseContainer>
+        </div>
       </div>
-      <div className="md:col-span-3">
-        <ProseContainer>
-          <h1>{title}</h1>
-          <div
-            className="pb-2"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: this markdown content isn't user submitted
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
-        </ProseContainer>
-      </div>
-    </div>
+    </>
   );
 }

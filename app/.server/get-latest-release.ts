@@ -8,6 +8,12 @@ type GithubRelease = {
   html_url: string;
 };
 
+type LatestRelease = {
+  name: string;
+  timestamp: string;
+  link: string;
+};
+
 const GITHUB_URL =
   'https://api.github.com/repos/sorokya/reoserv/releases/latest';
 const DATA_FILE_PATH = 'latest-release.json';
@@ -29,7 +35,7 @@ async function getLatestRelease(request: Request) {
   }
 
   const fileContents = fs.readFileSync(DATA_FILE_PATH, { encoding: 'utf8' });
-  const json = JSON.parse(fileContents);
+  const json = JSON.parse(fileContents) as LatestRelease;
   return json;
 }
 
@@ -38,7 +44,7 @@ async function fetchLatestRelease(request: Request) {
   const response = await fetch(GITHUB_URL);
 
   if (!response.ok) {
-    return { error: 'Failed to fetch github release' };
+    throw new Error('Failed to fetch the latest release from github');
   }
 
   const release = (await response.json()) as GithubRelease;
