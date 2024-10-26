@@ -15,7 +15,7 @@ import styles from './tailwind.css?url';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const theme = await getThemeFromCookies(request);
-  return json({ theme });
+  return { theme } as const;
 }
 
 export const links = () => [
@@ -26,6 +26,7 @@ export const links = () => [
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
   },
+  { rel: 'preload', as: 'style', href: styles, type: 'text/css' },
   { rel: 'stylesheet', href: styles },
 ];
 
