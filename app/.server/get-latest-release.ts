@@ -28,7 +28,7 @@ async function getLatestRelease(request: Request) {
     return latestRelease;
   }
 
-  const fileContents = fs.readFileSync(DATA_FILE_PATH, 'utf8');
+  const fileContents = fs.readFileSync(DATA_FILE_PATH, { encoding: 'utf8' });
   const json = JSON.parse(fileContents);
   return json;
 }
