@@ -1,14 +1,22 @@
-import rssToJson from 'rss-to-json';
-import fs from './fs';
-const { parse } = rssToJson;
-import { getClockOffset } from './get-clock-offset';
-import { getPrettyDate } from './get-pretty-date';
+import fs from 'node:fs';
+import RssParser from 'rss-parser';
+import { getClockOffset } from './utils/clock-offset';
+import { getPrettyDate } from './utils/pretty-date';
+
+type Commit = {
+  id: string;
+  link: string;
+  title: string;
+  created: number;
+};
+
+const rssParser = new RssParser();
 
 const GITHUB_FEED = 'https://github.com/sorokya/reoserv/commits/master.atom';
 const DATA_FILE_PATH = 'git-feed.json';
 const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-async function getGitFeed(request) {
+async function getGitFeed(request: Request) {
   // Check file age or existence
   const fileStats =
     fs.existsSync(DATA_FILE_PATH) && fs.statSync(DATA_FILE_PATH);
@@ -23,13 +31,17 @@ async function getGitFeed(request) {
     return gitFeed;
   }
 
-  const json = fs.readFileSync(DATA_FILE_PATH);
-  return JSON.parse(json);
+  const fileContents = fs.readFileSync(DATA_FILE_PATH, 'utf8');
+  const json = JSON.parse(fileContents) as Commit[];
+  return json;
 }
 
-async function fetchGitFeed(request) {
+async function fetchGitFeed(request: Request) {
   const clockOffset = getClockOffset(request);
-  const feed = await parse(GITHUB_FEED);
+  const feed = (await rssParser.parseURL(GITHUB_FEED)) as { items: Commit[] };
+
+  console.log({ feed });
+
   if (!feed) {
     return [];
   }

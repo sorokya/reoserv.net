@@ -1,13 +1,19 @@
-import fs from './fs';
-import { getClockOffset } from './get-clock-offset';
-import { getPrettyDate } from './get-pretty-date';
+import fs from 'node:fs';
+import { getClockOffset } from './utils/clock-offset';
+import { getPrettyDate } from './utils/pretty-date';
+
+type GithubRelease = {
+  name: string;
+  published_at: number;
+  html_url: string;
+};
 
 const GITHUB_URL =
   'https://api.github.com/repos/sorokya/reoserv/releases/latest';
 const DATA_FILE_PATH = 'latest-release.json';
 const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-async function getLatestRelease(request) {
+async function getLatestRelease(request: Request) {
   // Check file age or existence
   const fileStats =
     fs.existsSync(DATA_FILE_PATH) && fs.statSync(DATA_FILE_PATH);
@@ -22,11 +28,12 @@ async function getLatestRelease(request) {
     return latestRelease;
   }
 
-  const json = fs.readFileSync(DATA_FILE_PATH);
-  return JSON.parse(json);
+  const fileContents = fs.readFileSync(DATA_FILE_PATH, 'utf8');
+  const json = JSON.parse(fileContents);
+  return json;
 }
 
-async function fetchLatestRelease(request) {
+async function fetchLatestRelease(request: Request) {
   const clockOffset = getClockOffset(request);
   const response = await fetch(GITHUB_URL);
 
@@ -34,7 +41,7 @@ async function fetchLatestRelease(request) {
     return { error: 'Failed to fetch github release' };
   }
 
-  const release = await response.json();
+  const release = await response.json() as GithubRelease;
 
   return {
     name: release.name,

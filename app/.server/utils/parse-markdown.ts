@@ -1,12 +1,12 @@
 import fs from 'node:fs/promises';
 import frontmatter from 'gray-matter';
 import { Marked } from 'marked';
-import { createHighlighter } from 'shiki';
+import { type Highlighter, createHighlighter } from 'shiki';
 import { etag } from './etag';
 
-let highlighter;
+let highlighter: Highlighter;
 
-async function parseMarkdown(filepath) {
+async function parseMarkdown(filepath: string) {
   if (!highlighter) {
     highlighter = await createHighlighter({
       langs: ['md', 'sh', 'rust', 'text', 'yaml'],
@@ -44,18 +44,21 @@ async function parseMarkdown(filepath) {
   };
 }
 
-function replaceVideoTags(html) {
+function replaceVideoTags(html: string) {
   while (html.includes('{{<video')) {
     const start = html.indexOf('{{<video');
     const end = html.indexOf('}}', start);
     const videoTag = html.substring(start, end + 2);
 
-    const src = videoTag.match(/src="([^"]+)"/)[1];
-    // biome-ignore lint/style/noParameterAssign:
-    html = html.replace(
-      videoTag,
-      `<video controls><source src="${src}" type="video/mp4">Your browser does not support video</video>`,
-    );
+    const matches = videoTag.match(/src="([^"]+)"/);
+    if (matches) {
+      const src = matches[1];
+      // biome-ignore lint/style/noParameterAssign:
+      html = html.replace(
+        videoTag,
+        `<video controls><source src="${src}" type="video/mp4">Your browser does not support video</video>`,
+      );
+    }
   }
 
   return html;

@@ -6,10 +6,10 @@ import {
 import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
-import etag from '../.server/etag';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
 import { getNewsFeed } from '../.server/get-news-feed';
+import { etag } from '../.server/utils/etag';
 import { GitFeed } from '../components/git-feed';
 import { News } from '../components/news';
 import { Release } from '../components/release';

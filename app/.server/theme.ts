@@ -5,7 +5,7 @@ export const themeCookie = createCookie('theme', {
   secure: true,
 });
 
-export async function getThemeFromCookies(request) {
+export async function getThemeFromCookies(request: Request) {
   const theme = await themeCookie.parse(request.headers.get('Cookie'));
-  return theme || 'light';
+  return theme === 'dark' ? 'dark' : 'light';
 }

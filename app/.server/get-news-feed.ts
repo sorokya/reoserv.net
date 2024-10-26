@@ -1,12 +1,12 @@
 import matter from 'gray-matter';
 
 import fs from 'node:fs/promises';
-import { getClockOffset } from './get-clock-offset';
-import { getPrettyDate } from './get-pretty-date';
+import { getClockOffset } from './utils/clock-offset';
+import { getPrettyDate } from './utils/pretty-date';
 
 const NEWS_PATH = 'content/news';
 
-async function getNewsFeed(request) {
+async function getNewsFeed(request: Request) {
   const files = await fs.readdir(NEWS_PATH);
   if (!files) {
     return [];
@@ -29,7 +29,7 @@ async function getNewsFeed(request) {
   return newsItems;
 }
 
-async function getNewsFile(path, name, clockOffset) {
+async function getNewsFile(path: string, name: string, clockOffset: number) {
   const file = await fs.open(path, 'r');
   const content = await file.readFile('utf-8');
 

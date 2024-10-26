@@ -22,7 +22,6 @@
     "better-sqlite3": "^11.5.0",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
-    "etag": "^1.8.1",
     "express": "^4.21.1",
     "gray-matter": "^4.0.3",
     "isbot": "^5.1.17",
@@ -31,6 +30,7 @@
     "react": "rc",
     "react-dom": "rc",
     "react-icons": "^5.3.0",
+    "rss-parser": "^3.13.0",
     "rss-to-json": "^2.1.1",
     "shiki": "^1.22.1"
   },

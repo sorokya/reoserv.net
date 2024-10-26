@@ -1,6 +1,14 @@
 import { Link } from '@remix-run/react';
 
-export function Release({ release }) {
+type ReleaseProps = {
+  release: {
+    timestamp: string;
+    link: string;
+    name: string;
+  };
+};
+
+function Release({ release }: ReleaseProps) {
   return (
     <div>
       <span className="text-sand-11 text-xs">{release.timestamp}</span>
@@ -16,3 +24,5 @@ export function Release({ release }) {
     </div>
   );
 }
+
+export { Release };

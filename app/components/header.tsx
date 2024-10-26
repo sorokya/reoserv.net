@@ -3,6 +3,7 @@ import { FaGithub } from 'react-icons/fa6';
 import { FcDocument, FcHome, FcList } from 'react-icons/fc';
 import { LuMoon, LuSun } from 'react-icons/lu';
 import { SiKofi } from 'react-icons/si';
+// @ts-ignore
 import logo from '../assets/images/logo-full.png?as=metadata';
 
 const getLinkClasses = (active = false) =>
@@ -36,7 +37,11 @@ const links = [
   },
 ];
 
-export function Header({ theme }) {
+type HeaderProps = {
+  theme: 'light' | 'dark';
+};
+
+function Header({ theme }: HeaderProps) {
   const fetcher = useFetcher();
 
   return (
@@ -92,3 +97,5 @@ export function Header({ theme }) {
     </header>
   );
 }
+
+export { Header };

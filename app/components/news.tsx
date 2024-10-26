@@ -1,6 +1,21 @@
 import { Link } from '@remix-run/react';
 
-export function News({ articles }) {
+type Article = {
+  title: string;
+  name: string;
+  description: string;
+  date: string;
+};
+
+type NewsProps = {
+  articles: Article[];
+};
+
+type PreviewProps = {
+  article: Article;
+};
+
+function News({ articles }: NewsProps) {
   return (
     <ul className="grid gap-8">
       {articles.map((article) => (
@@ -12,7 +27,7 @@ export function News({ articles }) {
   );
 }
 
-function Preview({ article }) {
+function Preview({ article }: PreviewProps) {
   const { title, date, description } = article;
 
   return (
@@ -29,3 +44,5 @@ function Preview({ article }) {
     </article>
   );
 }
+
+export { News };
