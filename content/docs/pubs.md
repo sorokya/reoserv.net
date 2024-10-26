@@ -1,6 +1,8 @@
 ---
 title: 'Pub files'
 description: 'In this section you will learn where to put your pub files'
+date: 2024-04-07T10:10:13+02:00
+lastmod: 2024-04-07T10:10:13+02:00
 ---
 
 REOSERV by default will load the binary pub data files. JSON is also supported.

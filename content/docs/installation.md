@@ -1,6 +1,8 @@
 ---
 title: 'Installation'
 description: 'In this section you will learn how to download a prebuilt REOSERV binary or download the source code and build it yourself!'
+date: 2023-11-17T10:10:13+02:00
+lastmod: 2024-04-03T10:10:13+02:00
 ---
 
 ## Download a prebuilt binary for your OS

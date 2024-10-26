@@ -1,6 +1,8 @@
 ---
 title: 'Packet Rate Limits'
 description: 'In this section you will learn how to change the rate limits for packets sent from players'
+date: 2024-03-29T10:10:13+02:00
+lastmod: 2024-04-03T10:10:13+02:00
 ---
 
 Defined in [RON (Rust Object Notation)](https://docs.rs/ron/latest/ron/).

@@ -1,6 +1,8 @@
 ---
 title: 'Database'
 description: 'In this section you will learn how to setup the MySQL database for your server'
+date: 2024-03-29T10:10:13+02:00
+lastmod: 2024-04-03T10:10:13+02:00
 ---
 
 ## MySQL vs MariaDB

@@ -1,6 +1,8 @@
 ---
 title: 'Server Configuration'
 description: 'In this section you will learn how to configure your server'
+date: 2024-03-29T10:10:13+02:00
+lastmod: 2024-04-07T10:10:13+02:00
 ---
 
 REOSERV uses [TOML](https://toml.io/en/) as the configuration language.
