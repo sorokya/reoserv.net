@@ -4,9 +4,9 @@ import {
   json,
 } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
-import { etag } from '../.server/utils/etag';
 import { getGitFeed } from '../.server/get-git-feed';
 import { getLatestRelease } from '../.server/get-latest-release';
+import { etag } from '../.server/utils/etag';
 import { Layout } from './_index';
 
 export const headers: HeadersFunction = ({ loaderHeaders }) => ({

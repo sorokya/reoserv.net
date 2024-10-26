@@ -27,13 +27,16 @@ const getMonthName = (date: Date) => {
   }
 };
 
-const offsetDate = (timestamp: number, offset: number) => {
+const offsetDate = (timestamp: string | number | Date, offset: number) => {
   const date = new Date(timestamp);
   date.setMinutes(date.getMinutes() + offset);
   return date;
 };
 
-const getPrettyDate = (timestamp: number, clockOffset: number) => {
+const getPrettyDate = (
+  timestamp: string | number | Date,
+  clockOffset: number,
+) => {
   const date = offsetDate(timestamp, clockOffset);
   return `${getMonthName(date)} ${date.getDate()}, ${date.getFullYear()}`;
 };

@@ -1,18 +1,23 @@
 import fs from 'node:fs';
-import RssParser from 'rss-parser';
 import { getClockOffset } from './utils/clock-offset';
 import { getPrettyDate } from './utils/pretty-date';
+
+type GithubCommitFeed = Array<{
+  sha: string;
+  html_url: string;
+  commit: {
+    message: string;
+    committer: { date: string };
+  };
+}>;
 
 type Commit = {
   id: string;
   link: string;
-  title: string;
-  created: number;
+  content: string;
+  timestamp: string;
 };
 
-const rssParser = new RssParser();
-
-const GITHUB_FEED = 'https://github.com/sorokya/reoserv/commits/master.atom';
 const DATA_FILE_PATH = 'git-feed.json';
 const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
@@ -38,19 +43,17 @@ async function getGitFeed(request: Request) {
 
 async function fetchGitFeed(request: Request) {
   const clockOffset = getClockOffset(request);
-  const feed = (await rssParser.parseURL(GITHUB_FEED)) as { items: Commit[] };
 
-  console.log({ feed });
+  const response = await fetch(
+    'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=30',
+  );
+  const feed = (await response.json()) as GithubCommitFeed;
 
-  if (!feed) {
-    return [];
-  }
-
-  return feed.items.map((item) => ({
-    id: item.id,
-    link: item.link,
-    content: item.title,
-    timestamp: getPrettyDate(item.created, clockOffset),
+  return feed.map(({ sha, html_url, commit }) => ({
+    id: sha,
+    link: html_url,
+    content: commit.message.split(/\r?\n/)[0],
+    timestamp: getPrettyDate(commit.committer.date, clockOffset),
   }));
 }
 

@@ -41,7 +41,7 @@ async function fetchLatestRelease(request: Request) {
     return { error: 'Failed to fetch github release' };
   }
 
-  const release = await response.json() as GithubRelease;
+  const release = (await response.json()) as GithubRelease;
 
   return {
     name: release.name,
