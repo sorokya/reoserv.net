@@ -1,8 +1,8 @@
 import { invariant } from '@epic-web/invariant';
 import { type LoaderFunctionArgs, data, redirect } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
-import { getDocsPage } from '../.server/get-docs-page';
-import { ProseContainer } from '../components/prose-container';
+import { getDocsPage } from '~/.server/get-docs-page';
+import { ProseContainer } from '~/components/prose-container';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
@@ -81,7 +81,7 @@ export default function Docs() {
 
   return (
     <>
-      <title>{title} | Docs | REOSERV</title>
+      <title>{`${title} | Docs | REOSERV`}</title>
       <meta name="description" content={description} />
 
       <div className="grid gap-12 md:grid-cols-4">

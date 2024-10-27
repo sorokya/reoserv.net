@@ -1,8 +1,8 @@
 import { invariant } from '@epic-web/invariant';
 import { type LoaderFunctionArgs, data, redirect } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
-import { getNewsArticle } from '../.server/get-news-article';
-import { ProseContainer } from '../components/prose-container';
+import { getNewsArticle } from '~/.server/get-news-article';
+import { ProseContainer } from '~/components/prose-container';
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
@@ -30,7 +30,7 @@ export default function Article() {
 
   return (
     <>
-      <title>{title} | REOSERV</title>
+      <title>{`${title} | REOSERV`}</title>
       <meta name="description" content={description} />
 
       <ProseContainer>

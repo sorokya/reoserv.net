@@ -2,12 +2,12 @@ import type { LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
 import { PiScrollLight } from 'react-icons/pi';
-import { getGitFeed } from '../.server/get-git-feed';
-import { getLatestRelease } from '../.server/get-latest-release';
-import { getNewsFeed } from '../.server/get-news-feed';
-import { GitFeed } from '../components/git-feed';
-import { News } from '../components/news';
-import { Release } from '../components/release';
+import { getGitFeed } from '~/.server/get-git-feed';
+import { getLatestRelease } from '~/.server/get-latest-release';
+import { getNewsFeed } from '~/.server/get-news-feed';
+import { GitFeed } from '~/components/git-feed';
+import { News } from '~/components/news';
+import { Release } from '~/components/release';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
@@ -26,17 +26,20 @@ export default function Index() {
   const { commits, articles, release } = useLoaderData<typeof loader>();
 
   return (
-    <Layout
-      commits={<GitFeed commits={commits} />}
-      release={release ? <Release release={release} /> : null}
-    >
+    <>
       <title>Home | REOSERV</title>
-      <header>
-        <h1 className="mb-1 font-bold text-2xl text-amber-12">Latest News</h1>
-        <hr className="border-sand-8" />
-      </header>
-      <News articles={articles} />
-    </Layout>
+
+      <Layout
+        commits={<GitFeed commits={commits} />}
+        release={release ? <Release release={release} /> : null}
+      >
+        <header>
+          <h1 className="mb-1 font-bold text-2xl text-amber-12">Latest News</h1>
+          <hr className="border-sand-8" />
+        </header>
+        <News articles={articles} />
+      </Layout>
+    </>
   );
 }
 

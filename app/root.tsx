@@ -9,8 +9,8 @@ import {
   useLoaderData,
   useRouteError,
 } from '@remix-run/react';
-import { getThemeFromCookies } from './.server/theme';
-import { Header } from './components/header';
+import { getThemeFromCookies } from '~/.server/theme';
+import { Header } from '~/components/header';
 import styles from './tailwind.css?url';
 
 export async function loader({ request }: LoaderFunctionArgs) {

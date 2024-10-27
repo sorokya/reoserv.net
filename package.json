@@ -12,6 +12,9 @@
     "build:contentdb": "node ./database/seed.js",
     "typecheck": "tsc"
   },
+  "paths": {
+    "~/*": ["./app/*"]
+  },
   "keywords": ["reoserv", "reoserv.net", "endless online emulator"],
   "author": "Richard Leek <richard@richardleek.com>",
   "license": "MIT",

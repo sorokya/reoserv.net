@@ -3,7 +3,7 @@ import {
   type LoaderFunctionArgs,
   redirect,
 } from '@remix-run/node';
-import { getThemeFromCookies, themeCookie } from '../.server/theme';
+import { getThemeFromCookies, themeCookie } from '~/.server/theme';
 
 export async function action({ request }: ActionFunctionArgs) {
   const currentTheme = await getThemeFromCookies(request);
