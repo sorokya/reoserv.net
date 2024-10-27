@@ -37,8 +37,8 @@ async function parseMarkdown(filepath: string) {
   return {
     title: fm.data.title,
     description: fm.data.description,
-    date: fm.data.date ?? null,
-    lastmod: fm.data.lastmod ?? null,
+    date: fm.data.date,
+    lastmod: fm.data.lastmod,
     etag: etag(content),
     content,
   };
