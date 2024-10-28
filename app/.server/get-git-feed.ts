@@ -1,27 +1,36 @@
 import fs from 'node:fs';
-import { getClockOffset } from './utils/clock-offset';
-import { getPrettyDate } from './utils/pretty-date';
+import { z } from 'zod';
 
-type GithubCommitFeed = Array<{
-  sha: string;
-  html_url: string;
-  commit: {
-    message: string;
-    committer: { date: string };
-  };
-}>;
+// Define Zod schema for the GitHub API response
+const GithubCommitsAPISchema = z.array(
+  z.object({
+    sha: z.string().min(1),
+    html_url: z.string().url().min(1),
+    commit: z.object({
+      message: z.string().min(1),
+      committer: z.object({
+        date: z.string().datetime().min(1),
+      }),
+    }),
+  }),
+);
 
-type Commit = {
-  id: string;
-  link: string;
-  content: string;
-  timestamp: string;
-};
+// Define Zod schema for the commits stored onto disk
+const StoredCommitsSchema = z.array(
+  z.object({
+    id: z.string().min(1),
+    link: z.string().url().min(1),
+    content: z.string().min(1),
+    timestamp: z.string().datetime().min(1),
+  }),
+);
 
+const GITHUB_URL =
+  'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=20';
 const DATA_FILE_PATH = 'git-feed.json';
 const MAX_FILE_AGE = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-async function getGitFeed(request: Request) {
+async function getGitFeed() {
   // Check file age or existence
   const fileStats =
     fs.existsSync(DATA_FILE_PATH) && fs.statSync(DATA_FILE_PATH);
@@ -30,35 +39,32 @@ async function getGitFeed(request: Request) {
     : Number.POSITIVE_INFINITY;
 
   if (!fileStats || fileAge > MAX_FILE_AGE) {
-    const gitFeed = await fetchGitFeed(request);
-    const json = JSON.stringify(gitFeed);
+    const commits = await fetchGitFeed();
+    const json = JSON.stringify(commits);
     fs.writeFileSync(DATA_FILE_PATH, json);
-    return gitFeed;
+    return commits;
   }
 
   const fileContents = fs.readFileSync(DATA_FILE_PATH, { encoding: 'utf8' });
-  const json = JSON.parse(fileContents) as Commit[];
-  return json;
+  const json = JSON.parse(fileContents);
+  const commits = StoredCommitsSchema.parse(json);
+  return commits;
 }
 
-async function fetchGitFeed(request: Request) {
-  const clockOffset = getClockOffset(request);
-
-  const response = await fetch(
-    'https://api.github.com/repos/sorokya/reoserv/commits?sha=master&per_page=20',
-  );
+async function fetchGitFeed() {
+  const response = await fetch(GITHUB_URL);
 
   if (!response.ok) {
     throw new Error('Failed to fetch commits from github');
   }
 
-  const feed = (await response.json()) as GithubCommitFeed;
+  const commits = GithubCommitsAPISchema.parse(await response.json());
 
-  return feed.map(({ sha, html_url, commit }) => ({
-    id: sha,
-    link: html_url,
-    content: commit.message.split(/\r?\n/)[0],
-    timestamp: getPrettyDate(commit.committer.date, clockOffset),
+  return commits.map((commit) => ({
+    id: commit.sha,
+    link: commit.html_url,
+    content: commit.commit.message.split(/\r?\n/)[0],
+    timestamp: new Date(commit.commit.committer.date).toISOString(),
   }));
 }
 
