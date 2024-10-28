@@ -31,7 +31,7 @@ export default function Component() {
       </div>
       <hr className="border-sand-8 lg:hidden" />
       <div className="grid gap-4 self-start lg:col-span-5">
-        {release ?<Release release={release} /> : null}
+        {release ? <Release release={release} /> : null}
         <GitFeed commits={commits} />
       </div>
     </div>
