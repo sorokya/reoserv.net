@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const GithubReleaseAPISchema = z.object({
   name: z.string().min(1),
-  published_at: z.number(),
+  published_at: z.string().datetime().min(1),
   html_url: z.string().url().min(1),
 });
 

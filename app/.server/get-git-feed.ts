@@ -1,7 +1,6 @@
 import fs from 'node:fs';
 import { z } from 'zod';
 
-// Define Zod schema for the GitHub API response
 const GithubCommitsAPISchema = z.array(
   z.object({
     sha: z.string().min(1),
@@ -15,7 +14,6 @@ const GithubCommitsAPISchema = z.array(
   }),
 );
 
-// Define Zod schema for the commits stored onto disk
 const StoredCommitsSchema = z.array(
   z.object({
     id: z.string().min(1),

@@ -39,8 +39,8 @@ async function parseMarkdown(filepath: string) {
   return {
     title: fm.data.title,
     description: fm.data.description,
-    date: fm.data.date,
-    lastmod: fm.data.lastmod,
+    date: new Date(fm.data.date).toISOString(),
+    lastmod: new Date(fm.data.lastmod).toISOString(),
     etag: etag(content),
     content,
   };
