@@ -4,10 +4,10 @@ import { useLoaderData } from '@remix-run/react';
 import { getNewsArticle } from '~/.server/get-news-article';
 import { ProseContainer } from '~/components/prose-container';
 
-export async function loader({ request, params }: LoaderFunctionArgs) {
+export async function loader({ params }: LoaderFunctionArgs) {
   try {
     invariant(params.name, 'name is required');
-    const article = await getNewsArticle(params.name, request);
+    const article = await getNewsArticle(params.name);
     return data(
       { article },
       {
