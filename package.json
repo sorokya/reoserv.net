@@ -9,7 +9,6 @@
     "lint": "biome check --write --unsafe .",
     "lint:docs": "prettier --write *.md ./content/**/*.md",
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "build:contentdb": "node ./database/seed.js",
     "typecheck": "tsc"
   },
   "paths": {
@@ -23,7 +22,6 @@
     "@remix-run/express": "^2.13.1",
     "@remix-run/node": "^2.13.1",
     "@remix-run/react": "^2.13.1",
-    "better-sqlite3": "^11.5.0",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "express": "^4.21.1",
@@ -34,7 +32,7 @@
     "react": "rc",
     "react-dom": "rc",
     "react-icons": "^5.3.0",
-    "shiki": "^1.22.1",
+    "shiki": "^1.22.2",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -67,10 +65,5 @@
     "react": "rc",
     "react-dom": "rc"
   },
-  "trustedDependencies": [
-    "@biomejs/biome",
-    "better-sqlite3",
-    "esbuild",
-    "sharp"
-  ]
+  "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"]
 }
