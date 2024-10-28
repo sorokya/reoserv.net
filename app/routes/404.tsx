@@ -8,8 +8,8 @@ import { Layout } from './_index';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    const commits = await getGitFeed(request);
-    const release = await getLatestRelease(request);
+    const commits = await getGitFeed();
+    const release = await getLatestRelease();
 
     return { commits, release };
   } catch (e) {
@@ -31,10 +31,10 @@ export default function FourOFour() {
       >
         <h1 className="mb-1 font-bold text-3xl">404 - Page not found</h1>
         <p>
-          Click
+          Click{' '}
           <Link to="/" className="text-blue-500 underline">
             here
-          </Link>
+          </Link>{' '}
           to go home.
         </p>
       </Layout>
