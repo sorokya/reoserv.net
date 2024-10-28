@@ -1,14 +1,12 @@
 import { Link } from '@remix-run/react';
 
-type Commit = {
-  id: string;
-  link: string;
-  content: string;
-  timestamp: string;
-};
-
 type GitFeedProps = {
-  commits: Commit[];
+  commits: Array<{
+    id: string;
+    link: string;
+    content: string;
+    timestamp: string;
+  }>;
 };
 
 function GitFeed({ commits }: GitFeedProps) {
