@@ -76,11 +76,6 @@ export async function getContentBySlug(type: ContentType, slug: string) {
   return store[type]?.[slug];
 }
 
-export async function getContentByEtag(type: ContentType, etag: string) {
-  const store = await getStore();
-  return Object.values(store[type] || {}).find((item) => item.etag === etag);
-}
-
 // For development: reset content store on module reload
 if (process.env.NODE_ENV === 'development') {
   contentStore = null;
