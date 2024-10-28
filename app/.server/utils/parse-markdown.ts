@@ -5,6 +5,7 @@ import { type Highlighter, createHighlighter } from 'shiki';
 import { etag } from './etag';
 
 let highlighter: Highlighter;
+let marked: Marked;
 
 async function parseMarkdown(filepath: string) {
   if (!highlighter) {
@@ -14,13 +15,8 @@ async function parseMarkdown(filepath: string) {
     });
   }
 
-  const fileContents = await fs.readFile(filepath, { encoding: 'utf-8' });
-
-  const fm = frontmatter(fileContents);
-
-  const markdown = await new Marked()
-    .use({ async: true, gfm: true })
-    .use({
+  if (!marked) {
+    marked = new Marked().use({ async: true, gfm: true }).use({
       renderer: {
         code(code) {
           return highlighter.codeToHtml(code.text, {
@@ -29,10 +25,16 @@ async function parseMarkdown(filepath: string) {
           });
         },
       },
-    })
-    .parse(fm.content);
+    });
+  }
 
-  const content = replaceVideoTags(markdown);
+  const fileContents = await fs.readFile(filepath, { encoding: 'utf-8' });
+
+  const fm = frontmatter(fileContents);
+
+  const html = await marked.parse(fm.content);
+
+  const content = replaceVideoTags(html);
 
   return {
     title: fm.data.title,
