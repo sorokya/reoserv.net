@@ -4,15 +4,15 @@ import { parseMarkdown } from './utils/parse-markdown';
 
 type ContentType = 'news' | 'docs';
 
-interface ContentStore {
+type ContentStore = {
   [key: string]: {
     [slug: string]: Awaited<ReturnType<typeof parseMarkdown>>;
   };
-}
+};
 
-interface ContentMeta {
+type ContentMeta = {
   [filePath: string]: number; // Last modified timestamp
-}
+};
 
 // Simple in-memory store
 let contentStore: ContentStore | null = null;

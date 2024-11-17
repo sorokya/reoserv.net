@@ -19,6 +19,7 @@ export default defineConfig({
         v3_throwAbortReason: true,
         v3_lazyRouteDiscovery: true,
         unstable_optimizeDeps: true,
+        unstable_routeConfig: true,
       },
     }),
     imagetools({

@@ -1,33 +1,31 @@
 import fs from 'node:fs/promises';
+import { remember } from '@epic-web/remember';
 import frontmatter from 'gray-matter';
 import { Marked } from 'marked';
-import { type Highlighter, createHighlighter } from 'shiki';
+import { createHighlighter } from 'shiki';
 import { etag } from './etag';
 
-let highlighter: Highlighter;
-let marked: Marked;
+const highlighter = await remember('highlighter', () =>
+  createHighlighter({
+    langs: ['md', 'sh', 'rust', 'text', 'yaml'],
+    themes: ['github-dark-dimmed'],
+  }),
+);
+
+const marked = remember('marked', () =>
+  new Marked().use({ async: true, gfm: true }).use({
+    renderer: {
+      code(code) {
+        return highlighter.codeToHtml(code.text, {
+          lang: code.lang ?? 'text',
+          theme: 'github-dark-dimmed',
+        });
+      },
+    },
+  }),
+);
 
 async function parseMarkdown(filepath: string) {
-  if (!highlighter) {
-    highlighter = await createHighlighter({
-      langs: ['md', 'sh', 'rust', 'text', 'yaml'],
-      themes: ['github-dark-dimmed'],
-    });
-  }
-
-  if (!marked) {
-    marked = new Marked().use({ async: true, gfm: true }).use({
-      renderer: {
-        code(code) {
-          return highlighter.codeToHtml(code.text, {
-            lang: code.lang ?? 'text',
-            theme: 'github-dark-dimmed',
-          });
-        },
-      },
-    });
-  }
-
   const fileContents = await fs.readFile(filepath, { encoding: 'utf-8' });
 
   const fm = frontmatter(fileContents);
