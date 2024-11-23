@@ -68,5 +68,8 @@
     "react": "rc",
     "react-dom": "rc"
   },
-  "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"]
+  "trustedDependencies": ["@biomejs/biome", "esbuild", "sharp"],
+  "engines": {
+    "node": ">=20"
+  }
 }
