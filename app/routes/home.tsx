@@ -1,4 +1,4 @@
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData } from 'react-router';
 import { getNewsFeed } from '~/.server/get-news-feed';
 import { News } from '~/components/news';
 

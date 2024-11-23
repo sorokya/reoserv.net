@@ -1,6 +1,5 @@
 import { invariant } from '@epic-web/invariant';
-import { type LoaderFunctionArgs, data, redirect } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { type LoaderFunctionArgs, data, redirect,useLoaderData } from 'react-router';
 import { getNewsArticle } from '~/.server/get-news-article';
 import { ProseContainer } from '~/components/prose-container';
 

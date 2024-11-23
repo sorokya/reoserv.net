@@ -1,5 +1,10 @@
+.env
+!.env.example
 .cache
+.DS_Store
+.react-router
 build
 node_modules
 git-feed.json
 latest-release.json
+*.tsbuildinfo

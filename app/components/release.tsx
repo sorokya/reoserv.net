@@ -1,5 +1,5 @@
-import { Link } from '@remix-run/react';
 import { FcDownload } from 'react-icons/fc';
+import { Link } from 'react-router';
 
 type ReleaseProps = {
   release: {

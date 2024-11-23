@@ -47,6 +47,19 @@ To build the project, run:
 bun run build
 ```
 
+## Deployment
+
+Deploy the output of `npm run build`
+
+```
+├── package.json
+├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
+├── server.js
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
+```
+
 ## Linting / Formatting
 
 To format, lint and apply fixes at the same time, use:
@@ -61,6 +74,10 @@ To format markdown files (docs, news), use:
 bun run lint:docs
 ```
 
+---
+
+Built with ❤️ using React Router.
+
 [reoserv]: https://github.com/sorokya/reoserv
 [sorokya]: https://github.com/sorokya
 [node]: https://nodejs.org/
@@ -68,3 +85,4 @@ bun run lint:docs
 [reoserv.net]: https://github.com/sorokya/reoserv.net
 [biome]: https://marketplace.visualstudio.com/items?itemName=biomejs.biome
 [prettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+

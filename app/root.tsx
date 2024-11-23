@@ -1,4 +1,3 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
 import {
   Links,
   Meta,
@@ -6,22 +5,22 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
-  useLoaderData,
-  useRouteError,
-} from '@remix-run/react';
+} from 'react-router';
+
 import { getThemeFromCookies } from '~/.server/theme';
 import { Header } from '~/components/header';
+import type { Route } from './+types/root';
 import styles from './tailwind.css?url';
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   const theme = await getThemeFromCookies(request);
   return { theme } as const;
 }
 
-export const links = () => [
+export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/png', href: '/favicon-32.png' },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'true' },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
@@ -30,11 +29,9 @@ export const links = () => [
   { rel: 'stylesheet', href: styles },
 ];
 
-export default function App() {
-  const { theme } = useLoaderData<typeof loader>();
-
+export default function App({ loaderData: { theme } }: Route.ComponentProps) {
   return (
-    <html lang="en" className={theme === 'dark' ? 'dark' : ''}>
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -75,24 +72,31 @@ export default function App() {
   );
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError() as Error;
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  let message = 'Oops!';
+  let details = 'An unexpected error occurred.';
+  let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    return (
-      <>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </>
-    );
+    message = error.status === 404 ? '404' : 'Error';
+    details =
+      error.status === 404
+        ? 'The requested page could not be found.'
+        : error.statusText || details;
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
+    details = error.message;
+    stack = error.stack;
   }
 
   return (
-    <>
-      <h1>Error!</h1>
-      <p>{error?.message ?? 'Unknown error'}</p>
-    </>
+    <main className="container mx-auto p-4 pt-16">
+      <h1>{message}</h1>
+      <p>{details}</p>
+      {stack && (
+        <pre className="w-full overflow-x-auto p-4">
+          <code>{stack}</code>
+        </pre>
+      )}
+    </main>
   );
 }

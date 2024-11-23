@@ -1,11 +1,11 @@
-import type { LoaderFunctionArgs } from '@remix-run/node';
-import { Outlet, useLoaderData } from '@remix-run/react';
+import { Outlet } from 'react-router';
 import { getGitFeed } from '~/.server/get-git-feed';
 import { getLatestRelease } from '~/.server/get-latest-release';
 import { GitFeed } from '~/components/git-feed';
 import { Release } from '~/components/release';
+import type { Route } from './+types/layout';
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   try {
     const commits = await getGitFeed();
     const release = await getLatestRelease();
@@ -17,8 +17,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-export default function Component() {
-  const { commits, release } = useLoaderData<typeof loader>();
+export default function Component({loaderData}: Route.ComponentProps) {
+  const { commits, release } = loaderData;
 
   return (
     <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">

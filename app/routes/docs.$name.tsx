@@ -1,10 +1,10 @@
 import { invariant } from '@epic-web/invariant';
-import { type LoaderFunctionArgs, data, redirect } from '@remix-run/node';
-import { NavLink, useLoaderData } from '@remix-run/react';
+import { type LoaderFunctionArgs, data, redirect,NavLink, useLoaderData } from 'react-router';
 import { getDocsPage } from '~/.server/get-docs-page';
 import { ProseContainer } from '~/components/prose-container';
+import type { Route } from './+types/docs.$name';
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   try {
     invariant(params.name, 'name is required');
     const page = await getDocsPage(params.name);
@@ -75,8 +75,8 @@ function ListItem({ title, link }: { title: string; link: string }) {
   );
 }
 
-export default function Docs() {
-  const { page } = useLoaderData<typeof loader>();
+export default function Docs({loaderData}: Route.ComponentProps) {
+  const { page } = loaderData;
   const { title, content, description } = page;
 
   return (

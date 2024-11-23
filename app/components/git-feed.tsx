@@ -1,5 +1,5 @@
-import { Link } from '@remix-run/react';
 import { PiScrollLight } from 'react-icons/pi';
+import { Link } from 'react-router';
 
 type GitFeedProps = {
   commits: Array<{

@@ -2,9 +2,10 @@ import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
-  // tailwind dark mode based on system preference but not if there's a light class on the html element
-  darkMode: 'class',
-  content: ['./app/**/*.{js,jsx,ts,tsx}', './content/**/*.md'],
+  content: [
+    './app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}',
+    './content/**/*.md',
+  ],
   theme: {
     colors: {
       amber: {

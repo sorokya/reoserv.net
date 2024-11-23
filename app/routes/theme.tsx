@@ -2,8 +2,10 @@ import {
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
   redirect,
-} from '@remix-run/node';
+} from 'react-router';
 import { getThemeFromCookies, themeCookie } from '~/.server/theme';
+import type { Route } from './+types/theme';
+
 
 export async function action({ request }: ActionFunctionArgs) {
   const currentTheme = await getThemeFromCookies(request);
