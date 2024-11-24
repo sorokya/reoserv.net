@@ -1,13 +1,8 @@
-import {
-  type ActionFunctionArgs,
-  type LoaderFunctionArgs,
-  redirect,
-} from 'react-router';
+import { redirect } from 'react-router';
 import { getThemeFromCookies, themeCookie } from '~/.server/theme';
 import type { Route } from './+types/theme';
 
-
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   const currentTheme = await getThemeFromCookies(request);
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
@@ -18,6 +13,6 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 }
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
   throw redirect(request.headers.get('Referer') ?? '/');
 }

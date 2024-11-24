@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 export default {
+  darkMode: 'class',
   content: [
     './app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}',
     './content/**/*.md',

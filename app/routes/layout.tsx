@@ -6,18 +6,13 @@ import { Release } from '~/components/release';
 import type { Route } from './+types/layout';
 
 export async function loader({ request }: Route.LoaderArgs) {
-  try {
-    const commits = await getGitFeed();
-    const release = await getLatestRelease();
+  const commits = await getGitFeed();
+  const release = await getLatestRelease();
 
-    return { commits, release };
-  } catch (e) {
-    console.error(e);
-    throw new Error('There was an error getting the articles / commit feed');
-  }
+  return { commits, release };
 }
 
-export default function Component({loaderData}: Route.ComponentProps) {
+export default function Component({ loaderData }: Route.ComponentProps) {
   const { commits, release } = loaderData;
 
   return (

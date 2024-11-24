@@ -1,25 +1,31 @@
 import { invariant } from '@epic-web/invariant';
-import { type LoaderFunctionArgs, data, redirect,useLoaderData } from 'react-router';
+import { data, redirect, useLoaderData } from 'react-router';
 import { getNewsArticle } from '~/.server/get-news-article';
 import { ProseContainer } from '~/components/prose-container';
+import type { Route } from './+types/news.$name';
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  try {
-    invariant(params.name, 'name is required');
-    const article = await getNewsArticle(params.name);
-    return data(
-      { article },
-      {
-        headers: {
-          'Cache-Control': 'max-age=3600, public',
-          ETag: article.etag,
-        },
-      },
-    );
-  } catch (e) {
-    console.error('There was an error getting the article', e);
+export async function loader({ request, params }: Route.LoaderArgs) {
+  invariant(params.name, 'name is required');
+
+  const article = await getNewsArticle(params.name);
+
+  if (!article) {
     throw redirect('/404');
   }
+
+  if (request.headers.get('If-None-Match') === article.etag) {
+    return data(null, 304);
+  }
+
+  return data(
+    { article },
+    {
+      headers: {
+        'Cache-Control': 'max-age=3600, public',
+        ETag: article.etag,
+      },
+    },
+  );
 }
 
 export default function Article() {

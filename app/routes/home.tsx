@@ -1,24 +1,18 @@
-import { useLoaderData } from 'react-router';
 import { getNewsFeed } from '~/.server/get-news-feed';
 import { News } from '~/components/news';
+import type { Route } from './+types/home';
 
 export async function loader() {
-  try {
-    const articles = await getNewsFeed();
-    return { articles };
-  } catch (e) {
-    console.error(e);
-    throw new Error('There was an error getting the news feed');
-  }
+  const articles = await getNewsFeed();
+  return { articles };
 }
 
-export default function Index() {
-  const { articles } = useLoaderData<typeof loader>();
-
+export default function Home({
+  loaderData: { articles },
+}: Route.ComponentProps) {
   return (
     <>
       <title>Home | REOSERV</title>
-
       <News articles={articles} />
     </>
   );

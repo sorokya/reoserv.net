@@ -5,8 +5,8 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useRouteLoaderData,
 } from 'react-router';
-
 import { getThemeFromCookies } from '~/.server/theme';
 import { Header } from '~/components/header';
 import type { Route } from './+types/root';
@@ -20,7 +20,11 @@ export async function loader({ request }: Route.LoaderArgs) {
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/png', href: '/favicon-32.png' },
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
+  },
   {
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
@@ -29,9 +33,12 @@ export const links: Route.LinksFunction = () => [
   { rel: 'stylesheet', href: styles },
 ];
 
-export default function App({ loaderData: { theme } }: Route.ComponentProps) {
+export function Layout({ children }: { children: React.ReactNode }) {
+  const rootLoaderData = useRouteLoaderData<typeof loader>('root');
+  const theme = rootLoaderData?.theme ?? 'light';
+
   return (
-    <html lang="en">
+    <html lang="en" className={theme}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,7 +61,7 @@ export default function App({ loaderData: { theme } }: Route.ComponentProps) {
       <body className="relative grid min-h-screen font-sans text-sand-12 antialiased selection:bg-amber-6 before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url(/back.jpg)] dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
         <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
           <Header theme={theme} />
-          <Outlet />
+          {children}
           <footer className="py-4 text-sand-11 text-sm" />
         </main>
         {process.env.NODE_ENV !== 'development' && (
@@ -70,6 +77,10 @@ export default function App({ loaderData: { theme } }: Route.ComponentProps) {
       </body>
     </html>
   );
+}
+
+export default function App() {
+  return <Outlet />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

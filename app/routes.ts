@@ -15,7 +15,7 @@ export default [
     index('./routes/docs.index.tsx'),
     route(':name', './routes/docs.$name.tsx'),
   ]),
-    route('news/:name', './routes/news.$name.tsx'),
+  route('news/:name', './routes/news.$name.tsx'),
   route('theme', './routes/theme.tsx'),
   route('*', './routes/$.tsx'),
 ] satisfies RouteConfig;

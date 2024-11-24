@@ -1,26 +1,28 @@
 import { invariant } from '@epic-web/invariant';
-import { type LoaderFunctionArgs, data, redirect,NavLink, useLoaderData } from 'react-router';
+import { NavLink, data, redirect } from 'react-router';
 import { getDocsPage } from '~/.server/get-docs-page';
 import { ProseContainer } from '~/components/prose-container';
 import type { Route } from './+types/docs.$name';
 
 export async function loader({ params }: Route.LoaderArgs) {
-  try {
-    invariant(params.name, 'name is required');
-    const page = await getDocsPage(params.name);
-    return data(
-      { page },
-      {
-        headers: {
-          'Cache-Control': 'max-age=3600, public',
-          ETag: page.etag,
-        },
-      },
-    );
-  } catch (e) {
-    console.error('There was an error getting the page', e);
-    return redirect('/404');
+  invariant(params.name, 'name is required');
+
+  const page = await getDocsPage(params.name);
+
+  if (!page) {
+    throw redirect('/404');
   }
+
+  return data(
+    { page },
+    {
+      status: 200,
+      headers: {
+        'Cache-Control': 'max-age=3600, public',
+        ETag: page.etag,
+      },
+    },
+  );
 }
 
 const DOCS_NAV_LINKS = [
@@ -75,7 +77,7 @@ function ListItem({ title, link }: { title: string; link: string }) {
   );
 }
 
-export default function Docs({loaderData}: Route.ComponentProps) {
+export default function Docs({ loaderData }: Route.ComponentProps) {
   const { page } = loaderData;
   const { title, content, description } = page;
 
