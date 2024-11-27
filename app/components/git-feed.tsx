@@ -12,7 +12,7 @@ type GitFeedProps = {
 
 function GitFeed({ commits }: GitFeedProps) {
   return (
-    <div className="space-y-4 border border-amber-6 bg-amber-2 p-4 lg:p-6">
+    <div className="space-y-4 border border-amber-6 bg-amber-2 p-4">
       <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
         <span>
           <PiScrollLight />

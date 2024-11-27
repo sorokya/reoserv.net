@@ -59,7 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="relative grid min-h-screen font-sans text-sand-12 antialiased selection:bg-amber-6 before:absolute before:top-0 before:bottom-0 before:left-0 before:w-full before:bg-[url(/back.jpg)] dark:before:invert-[.95] dark:before:saturate-[50%] dark:before:sepia-[.85]">
-        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-8">
+        <main className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 border-sand-7 border-x bg-amber-1 px-4 md:px-12">
           <Header theme={theme} />
           {children}
           <footer className="py-4 text-sand-11 text-sm" />

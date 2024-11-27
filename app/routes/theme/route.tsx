@@ -1,6 +1,6 @@
 import { redirect } from 'react-router';
 import { getThemeFromCookies, themeCookie } from '~/.server/theme';
-import type { Route } from './+types/theme';
+import type { Route } from './+types/route';
 
 export async function action({ request }: Route.ActionArgs) {
   const currentTheme = await getThemeFromCookies(request);

@@ -1,8 +1,8 @@
 import { invariant } from '@epic-web/invariant';
-import { data, redirect, useLoaderData } from 'react-router';
+import { redirect } from 'react-router';
 import { getNewsArticle } from '~/.server/get-news-article';
 import { ProseContainer } from '~/components/prose-container';
-import type { Route } from './+types/news.$name';
+import type { Route } from './+types/route';
 
 export async function loader({ request, params }: Route.LoaderArgs) {
   invariant(params.name, 'name is required');
@@ -13,25 +13,13 @@ export async function loader({ request, params }: Route.LoaderArgs) {
     throw redirect('/404');
   }
 
-  if (request.headers.get('If-None-Match') === article.etag) {
-    return data(null, 304);
-  }
-
-  return data(
-    { article },
-    {
-      headers: {
-        'Cache-Control': 'max-age=3600, public',
-        ETag: article.etag,
-      },
-    },
-  );
+  return { article };
 }
 
-export default function Article() {
+export default function Article({ loaderData }: Route.ComponentProps) {
   const {
     article: { title, date, content, description },
-  } = useLoaderData<typeof loader>();
+  } = loaderData;
 
   return (
     <>

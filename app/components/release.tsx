@@ -11,7 +11,7 @@ type ReleaseProps = {
 
 function Release({ release }: ReleaseProps) {
   return (
-    <div className="space-y-2 border border-amber-6 bg-amber-2 p-4 lg:p-6">
+    <div className="space-y-2 border border-amber-6 bg-amber-2 p-4">
       <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
         <span>
           <FcDownload />

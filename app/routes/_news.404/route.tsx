@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-export default function FourOFour() {
+export default function Component() {
   return (
     <>
       <title>404 - Page not found | REOSERV</title>
