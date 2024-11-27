@@ -1,15 +1,26 @@
 import { Outlet } from 'react-router';
 import { getGitFeed } from '~/.server/get-git-feed';
 import { getLatestRelease } from '~/.server/get-latest-release';
+import { getClockOffset } from '~/.server/utils/clock-offset';
+import { getPrettyDate } from '~/.server/utils/pretty-date';
 import { GitFeed } from '~/components/git-feed';
 import { Release } from '~/components/release';
 import type { Route } from './+types/route';
 
-export async function loader() {
+export async function loader({ request }: Route.LoaderArgs) {
   const commits = await getGitFeed();
   const release = await getLatestRelease();
 
-  return { commits, release };
+  return {
+    commits: commits.map((commit) => ({
+      ...commit,
+      localDate: getPrettyDate(commit.timestamp, getClockOffset(request)),
+    })),
+    release: {
+      ...release,
+      localDate: getPrettyDate(release.timestamp, getClockOffset(request)),
+    },
+  };
 }
 
 export default function Component({ loaderData }: Route.ComponentProps) {

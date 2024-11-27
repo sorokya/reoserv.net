@@ -5,6 +5,7 @@ type Article = {
   name: string;
   description: string;
   date: string;
+  localDate: string;
 };
 
 type NewsProps = {
@@ -28,17 +29,17 @@ function News({ articles }: NewsProps) {
 }
 
 function Preview({ article }: PreviewProps) {
-  const { title, date, description } = article;
-
   return (
     <article>
-      <div className="text-sand-11 text-xs">{date}</div>
+      <time dateTime={article.date} className="block text-sand-11 text-xs">
+        {article.localDate}
+      </time>
       <Link to={`/news/${article.name}`} className="group" prefetch="intent">
         <h2 className="font-bold text-amber-12 text-lg transition group-hover:text-amber-11">
-          {title}
+          {article.title}
         </h2>
         <p className="line-clamp-2 text-pretty text-sand-11 transition group-hover:text-amber-11">
-          {description}
+          {article.description}
         </p>
       </Link>
     </article>

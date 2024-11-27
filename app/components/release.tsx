@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 type ReleaseProps = {
   release: {
+    localDate: string;
     timestamp: string;
     link: string;
     name: string;
@@ -19,7 +20,9 @@ function Release({ release }: ReleaseProps) {
         <span>Latest release</span>
       </h2>
       <div>
-        <span className="text-sand-11 text-xs">{release.timestamp}</span>
+        <time dateTime={release.timestamp} className="text-sand-11 text-xs">
+          {release.localDate}
+        </time>
         <Link
           to={release.link}
           target="_blank"

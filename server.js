@@ -43,21 +43,6 @@ if (DEVELOPMENT) {
 
 app.use(morgan('tiny'));
 
-// set a clockOffset cookie to help render dates correctly on the server
-app.use((req, res, next) => {
-  const cookies = req.headers.cookie;
-
-  if (!cookies || !cookies.includes('clockOffset')) {
-    const script = `document.cookie = 'clockOffset=' + (new Date().getTimezoneOffset() * -1) + '; path=/'; window.location.reload();`;
-    res.set('Content-Type', 'text/html');
-    res.set('Set-Cookie', 'clockOffset=0; path=/');
-    res.set('Refresh', `0; url=${req.originalUrl}`);
-    return res.send(`<html><body><script>${script}</script></body></html>`);
-  }
-
-  next();
-});
-
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -7,6 +7,7 @@ type GitFeedProps = {
     link: string;
     content: string;
     timestamp: string;
+    localDate: string;
   }>;
 };
 
@@ -20,16 +21,18 @@ function GitFeed({ commits }: GitFeedProps) {
         <span>Recent changes</span>
       </h2>
       <ul className="grid gap-4">
-        {commits.map(({ id, link, content, timestamp }) => (
-          <li key={id} className="grid">
-            <span className="text-sand-11 text-xs">{timestamp}</span>
+        {commits.map((commit) => (
+          <li key={commit.id} className="grid">
+            <time dateTime={commit.timestamp} className="text-sand-11 text-xs">
+              {commit.localDate}
+            </time>
             <Link
-              to={link}
+              to={commit.link}
               target="_blank"
               className="text-sand-12 transition hover:font-medium hover:text-amber-11"
             >
-              <span title={content} className="line-clamp-1 text-sm">
-                {content}
+              <span title={commit.content} className="line-clamp-1 text-sm">
+                {commit.content}
               </span>
             </Link>
           </li>

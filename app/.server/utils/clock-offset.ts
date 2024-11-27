@@ -1,4 +1,4 @@
-// The clockOffset cookie is set in the entry.server.js file
+// The clockOffset cookie is set in the server/app.ts file
 
 // use a named capture group
 const regex = /clockOffset=(?<clockOffset>[+-\d]+)/;
