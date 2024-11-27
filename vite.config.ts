@@ -8,6 +8,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig(({ isSsrBuild }) => ({
   build: {
     rollupOptions: isSsrBuild ? { input: './server/app.ts' } : undefined,
+    target: 'ESNext',
   },
   css: {
     postcss: { plugins: [tailwindcss, autoprefixer] },

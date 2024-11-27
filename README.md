@@ -8,16 +8,16 @@ This website hosts the documentation for the [reoserv][reoserv] project
 Before you can run this project, you need to have the following installed on
 your machine:
 
-- [Node.js][node] v20+ (for local development with the Remix web framework)
-- [Bun][bun] v1.0.36+ (a modern package manager & script runner for Node.js
+- [Node.js][node] v22+ (for local development with the Remix web framework)
+- [Bun][bun] v1.1.36+ (a modern package manager & script runner for Node.js
   projects)
 
 Verify that both are setup on your system and meet our version requirements by
 running:
 
 ```sh
-bun --version    # eg: 1.0.36
-node --version   # eg: v20.4.0
+bun --version    # eg: 1.1.36
+node --version   # eg: v22.10.0
 ```
 
 ## Installation
