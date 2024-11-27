@@ -2,19 +2,19 @@ import { getNewsFeed } from '~/.server/get-news-feed';
 import { News } from '~/components/news';
 import type { Route } from './+types/route';
 
+export const meta: Route.MetaFunction = () => [
+  { title: 'News | REOSERV' },
+  { name: 'description', content: 'The latest news from the reoserv project' },
+];
+
 export async function loader() {
   const articles = await getNewsFeed();
+
   return { articles };
 }
 
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Component({ loaderData }: Route.ComponentProps) {
   const { articles } = loaderData;
 
-  return (
-    <>
-      <title>Home | REOSERV</title>
-
-      <News articles={articles} />
-    </>
-  );
+  return <News articles={articles} />;
 }
