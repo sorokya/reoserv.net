@@ -1,7 +1,7 @@
 import { FcDownload } from 'react-icons/fc';
 import { Link } from 'react-router';
 
-type ReleaseProps = {
+type LatestReleaseProps = {
   release: {
     localDate: string;
     timestamp: string;
@@ -10,7 +10,7 @@ type ReleaseProps = {
   };
 };
 
-function Release({ release }: ReleaseProps) {
+function LatestRelease({ release }: LatestReleaseProps) {
   return (
     <div className="space-y-2 border border-amber-6 bg-amber-2 p-4">
       <h2 className="flex w-full items-center gap-1 font-bold text-amber-12 text-xl">
@@ -37,4 +37,4 @@ function Release({ release }: ReleaseProps) {
   );
 }
 
-export { Release };
+export { LatestRelease };

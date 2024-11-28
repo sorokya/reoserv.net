@@ -1,11 +1,16 @@
 import { createCookie } from 'react-router';
 
-export const themeCookie = createCookie('theme', {
+const themeCookie = createCookie('theme', {
   httpOnly: true,
   secure: true,
+  sameSite: 'lax',
+  path: '/',
+  maxAge: 0,
 });
 
-export async function getThemeFromCookies(request: Request) {
+async function getThemeFromCookies(request: Request) {
   const theme = await themeCookie.parse(request.headers.get('Cookie'));
   return theme === 'dark' ? 'dark' : 'light';
 }
+
+export { getThemeFromCookies, themeCookie };

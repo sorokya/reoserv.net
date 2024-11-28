@@ -4,7 +4,7 @@ import { getLatestRelease } from '~/.server/get-latest-release';
 import { getClockOffset } from '~/.server/utils/clock-offset';
 import { getPrettyDate } from '~/.server/utils/pretty-date';
 import { GitFeed } from '~/components/git-feed';
-import { Release } from '~/components/release';
+import { LatestRelease } from '~/components/latest-release';
 import type { Route } from './+types/route';
 
 export async function loader({ request }: Route.LoaderArgs) {
@@ -37,7 +37,7 @@ export default function Component({ loaderData }: Route.ComponentProps) {
       </div>
       <hr className="border-sand-8 lg:hidden" />
       <div className="grid gap-4 self-start lg:col-span-4">
-        <Release release={release} />
+        <LatestRelease release={release} />
         <GitFeed commits={commits} />
       </div>
     </div>

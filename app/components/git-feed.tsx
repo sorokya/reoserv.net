@@ -37,7 +37,7 @@ function GitFeed({ commits }: GitFeedProps) {
             </Link>
           </li>
         ))}
-      </ul>{' '}
+      </ul>
     </div>
   );
 }
