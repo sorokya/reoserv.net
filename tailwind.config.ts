@@ -86,6 +86,9 @@ export default {
             blockquote: {
               color: 'var(--sand-12)',
             },
+            'h1, h2, h3, h4': {
+              scrollMarginTop: '2rem',
+            },
             h1: {
               color: 'var(--amber-12)',
             },

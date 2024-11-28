@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import { remember } from '@epic-web/remember';
 import frontmatter from 'gray-matter';
 import { Marked } from 'marked';
+import { getHeadingList, gfmHeadingId } from 'marked-gfm-heading-id';
 import { createHighlighter } from 'shiki';
 import { etag } from './etag';
 
@@ -13,16 +14,19 @@ const highlighter = await remember('highlighter', () =>
 );
 
 const marked = remember('marked', () =>
-  new Marked().use({ async: true, gfm: true }).use({
-    renderer: {
-      code(code) {
-        return highlighter.codeToHtml(code.text, {
-          lang: code.lang ?? 'text',
-          theme: 'github-dark-dimmed',
-        });
+  new Marked()
+    .use({ async: true, gfm: true })
+    .use(gfmHeadingId())
+    .use({
+      renderer: {
+        code(code) {
+          return highlighter.codeToHtml(code.text, {
+            lang: code.lang ?? 'text',
+            theme: 'github-dark-dimmed',
+          });
+        },
       },
-    },
-  }),
+    }),
 );
 
 async function parseMarkdown(filepath: string) {
@@ -34,6 +38,8 @@ async function parseMarkdown(filepath: string) {
 
   const content = replaceVideoTags(html);
 
+  const toc = getHeadingList();
+
   return {
     title: fm.data.title,
     description: fm.data.description,
@@ -41,6 +47,7 @@ async function parseMarkdown(filepath: string) {
     lastmod: new Date(fm.data.lastmod).toISOString(),
     etag: etag(content),
     content,
+    toc,
   };
 }
 
