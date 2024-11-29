@@ -36,7 +36,7 @@ export default function Component({ loaderData }: Route.ComponentProps) {
   return (
     <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
       <ProseContainer className="lg:col-span-2">
-        <header>
+        <header id="top">
           <time dateTime={article.date} className="mb-4 block text-sand-10">
             {article.localDate}
           </time>

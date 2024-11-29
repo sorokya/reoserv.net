@@ -22,11 +22,7 @@ function News({ articles }: NewsProps) {
             >
               {article.localDate}
             </time>
-            <Link
-              to={`/${article.key}`}
-              className="group"
-              prefetch="intent"
-            >
+            <Link to={`/${article.key}`} className="group" prefetch="intent">
               <h2 className="font-bold text-amber-12 text-lg transition group-hover:text-amber-11">
                 {article.title}
               </h2>
