@@ -31,7 +31,7 @@ function TableOfContents({ toc }: TableOfContentsProps) {
           <li key={item.id}>
             <Link href={`#${item.id}`}>
               {item.level === 3 ? (
-                <span className="text-xs pl-2 pr-1" aria-hidden="true">
+                <span className="pr-1 pl-2 text-xs" aria-hidden="true">
                   ⤷
                 </span>
               ) : null}
