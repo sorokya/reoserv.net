@@ -8,3 +8,4 @@ node_modules
 git-feed.json
 latest-release.json
 *.tsbuildinfo
+.tool-versions
