@@ -5,9 +5,9 @@ async function getNewsFeed() {
 
   return Object.entries(articles)
     .sort(([a], [b]) => b.localeCompare(a))
-    .map(([name, article]) => ({
+    .map(([key, article]) => ({
+      key,
       title: article.title,
-      name,
       description: article.description,
       date: article.date,
     }));

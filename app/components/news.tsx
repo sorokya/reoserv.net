@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 type NewsProps = {
   articles: Array<{
     title: string;
-    name: string;
+    key: string;
     description: string;
     date: string;
     localDate: string;
@@ -14,7 +14,7 @@ function News({ articles }: NewsProps) {
   return (
     <ul className="grid gap-8">
       {articles.map((article) => (
-        <li key={article.name}>
+        <li key={article.key}>
           <article>
             <time
               dateTime={article.date}
@@ -23,7 +23,7 @@ function News({ articles }: NewsProps) {
               {article.localDate}
             </time>
             <Link
-              to={`/news/${article.name}`}
+              to={`/${article.key}`}
               className="group"
               prefetch="intent"
             >

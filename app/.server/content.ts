@@ -1,82 +1,70 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { glob } from 'glob';
 import { parseMarkdown } from './utils/parse-markdown';
 
-type ContentType = 'news' | 'docs';
-
-type ContentStore = {
-  [key: string]: {
-    [slug: string]: Awaited<ReturnType<typeof parseMarkdown>>;
-  };
-};
-
-type ContentMeta = {
-  [filePath: string]: number; // Last modified timestamp
-};
+type Content = Awaited<ReturnType<typeof parseMarkdown>>;
+type ContentValue = { content: Content; mtimeMs: number };
+type ContentStore = Record<string, ContentValue>;
 
 // Simple in-memory store
 let contentStore: ContentStore | null = null;
-const contentMeta: ContentMeta = {};
 
-async function loadContentType(type: ContentType) {
-  const dirPath = path.join('content', type);
-  const files = await fs.readdir(dirPath);
+async function getFileContent(
+  filePath: string,
+  cached?: ContentValue,
+): Promise<ContentValue> {
+  const stats = await fs.stat(filePath);
 
-  const contents = await Promise.all(
-    files
-      .filter((file) => file.endsWith('.md'))
-      .map(async (file) => {
-        const slug = file.replace(/\.md$/, '');
-        const filePath = path.join(dirPath, file);
+  if (cached && cached.mtimeMs === stats.mtimeMs) {
+    return cached;
+  }
 
-        // In dev mode, check if file has changed
-        if (process.env.NODE_ENV === 'development') {
-          const stats = await fs.stat(filePath);
-          if (contentStore && contentMeta[filePath] === stats.mtimeMs) {
-            return [slug, contentStore[type][slug]] as const;
-          }
-          contentMeta[filePath] = stats.mtimeMs;
-        }
-
-        const content = await parseMarkdown(filePath);
-        return [slug, content] as const;
-      }),
-  );
-
-  return Object.fromEntries(contents);
+  const content = await parseMarkdown(filePath);
+  return { content, mtimeMs: stats.mtimeMs };
 }
 
 async function loadAllContent(): Promise<ContentStore> {
-  const contentTypes: ContentType[] = ['docs', 'news'];
+  const files = await glob('content/**/*.md');
+
   const contents = await Promise.all(
-    contentTypes.map(
-      async (type) => [type, await loadContentType(type)] as const,
-    ),
+    files.map(async (filePath) => {
+      const key = filePath.replace(/^content\//, '').replace(/\.md$/, '');
+
+      try {
+        const content = await getFileContent(filePath, contentStore?.[key]);
+        return [key, content] as const;
+      } catch (error) {
+        console.error(`Failed to load content for ${key}:`, error);
+        return undefined;
+      }
+    }),
   );
 
-  return Object.fromEntries(contents);
+  return Object.fromEntries(contents.filter(Boolean));
 }
 
-// Initialize or get content store
 async function getStore(): Promise<ContentStore> {
-  if (!contentStore) {
+  if (process.env.NODE_ENV === 'development' || !contentStore) {
     contentStore = await loadAllContent();
   }
   return contentStore;
 }
 
-// Public API
-export async function getContentByType(type: ContentType) {
+async function getContentByType(
+  type: string,
+): Promise<Record<string, Content>> {
   const store = await getStore();
-  return store[type] || {};
+  return Object.fromEntries(
+    Object.entries(store)
+      .filter(([key]) => key.startsWith(`${type}/`))
+      .map(([key, data]) => [key, data.content]),
+  );
 }
 
-export async function getContentBySlug(type: ContentType, slug: string) {
+async function getContentByKey(key: string): Promise<Content | undefined> {
   const store = await getStore();
-  return store[type]?.[slug];
+  return store[key]?.content;
 }
 
-// For development: reset content store on module reload
-if (process.env.NODE_ENV === 'development') {
-  contentStore = null;
-}
+export { getContentByKey, getContentByType };
