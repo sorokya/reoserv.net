@@ -13,7 +13,7 @@ const getLinkClasses = (active = false) =>
       : 'bg-amber-2 text-amber-12 border-amber-8 hover:bg-amber-3 hover:text-amber-11'
   }`;
 
-const HEADER_LINKS = [
+const LINKS = [
   { href: '/', label: 'Home', icon: <FcHome /> },
   {
     href: '/docs',
@@ -68,7 +68,7 @@ function Header({ theme }: HeaderProps) {
       </div>
       <nav>
         <ul className="flex flex-wrap gap-3">
-          {HEADER_LINKS.map(({ href, label, icon }) => (
+          {LINKS.map(({ href, label, icon }) => (
             <li key={href}>
               <NavLink
                 to={href}

@@ -8,8 +8,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   build: {
     target: 'ES2022',
-    minify: true,
-    cssMinify: true,
   },
   css: {
     postcss: { plugins: [tailwindcss, autoprefixer] },

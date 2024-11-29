@@ -1,3 +1,4 @@
+import type * as React from 'react';
 import {
   Links,
   Meta,
@@ -25,7 +26,9 @@ export const links: Route.LinksFunction = () => [
     rel: 'stylesheet',
     href: 'https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap',
   },
-  { rel: 'preload', as: 'style', href: styles, type: 'text/css' },
+  ...(process.env.NODE_ENV === 'production'
+    ? [{ rel: 'preload', as: 'style', href: styles, type: 'text/css' }]
+    : []),
   { rel: 'stylesheet', href: styles },
 ];
 

@@ -49,15 +49,20 @@ bun run build
 
 ## Deployment
 
-Deploy the output of `npm run build`
+Deploy the output of `bun run build`
 
 ```
 ├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── server.js
+├── bun.lockb
 ├── build/
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
+```
+
+Serve in production with:
+
+```
+bun run start
 ```
 
 ## Linting / Formatting
@@ -85,4 +90,3 @@ Built with ❤️ using React Router.
 [reoserv.net]: https://github.com/sorokya/reoserv.net
 [biome]: https://marketplace.visualstudio.com/items?itemName=biomejs.biome
 [prettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
-
