@@ -5,10 +5,11 @@ import { defineConfig } from 'vite';
 import { imagetools } from 'vite-imagetools';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineConfig(({ isSsrBuild }) => ({
+export default defineConfig({
   build: {
-    rollupOptions: isSsrBuild ? { input: './server/app.ts' } : undefined,
-    target: 'ESNext',
+    target: 'ES2022',
+    minify: true,
+    cssMinify: true,
   },
   css: {
     postcss: { plugins: [tailwindcss, autoprefixer] },
@@ -24,4 +25,4 @@ export default defineConfig(({ isSsrBuild }) => ({
       },
     }),
   ],
-}));
+});
