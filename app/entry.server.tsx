@@ -48,11 +48,7 @@ export default function handleRequest(
         : 'onShellReady';
 
     const { pipe, abort } = renderToPipeableStream(
-      <ServerRouter
-        context={routerContext}
-        url={request.url}
-        abortDelay={streamTimeout}
-      />,
+      <ServerRouter context={routerContext} url={request.url} />,
       {
         [readyOption]() {
           shellRendered = true;
@@ -86,6 +82,8 @@ export default function handleRequest(
       },
     );
 
-    setTimeout(abort, streamTimeout * 2);
+    // Abort the rendering stream after the `streamTimeout` so it has tine to
+    // flush down the rejected boundaries
+    setTimeout(abort, streamTimeout + 1000);
   });
 }

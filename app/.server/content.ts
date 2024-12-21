@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-import path from 'node:path';
 import { glob } from 'glob';
 import { parseMarkdown } from './utils/parse-markdown';
 
