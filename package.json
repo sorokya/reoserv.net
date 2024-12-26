@@ -24,7 +24,7 @@
     "@react-router/serve": "^7.1.1",
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3",
-    "isbot": "^5.1.18",
+    "isbot": "^5.1.19",
     "marked": "^15.0.4",
     "marked-gfm-heading-id": "^4.1.1",
     "react": "^19.0.0",
@@ -51,7 +51,7 @@
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5",
+    "vite": "^6.0.6",
     "vite-imagetools": "^7.0.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
