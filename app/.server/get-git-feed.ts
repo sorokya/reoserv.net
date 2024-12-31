@@ -46,6 +46,7 @@ async function getGitFeed() {
   const fileContents = fs.readFileSync(DATA_FILE_PATH, { encoding: 'utf8' });
   const json = JSON.parse(fileContents);
   const commits = StoredCommitsSchema.parse(json);
+
   return commits;
 }
 
