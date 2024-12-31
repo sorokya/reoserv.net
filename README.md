@@ -8,16 +8,16 @@ This website hosts the documentation for the [reoserv][reoserv] project
 Before you can run this project, you need to have the following installed on
 your machine:
 
-- [Node.js][node] v22+ (for local development with the Remix web framework)
-- [Bun][bun] v1.1.36+ (a modern package manager & script runner for Node.js
+- [Node.js][node] v22+ (for local development with the React Router v7 web framework)
+- [Bun][bun] v1.1.42+ (a modern package manager & script runner for Node.js
   projects)
 
 Verify that both are setup on your system and meet our version requirements by
 running:
 
 ```sh
-bun --version    # eg: 1.1.36
-node --version   # eg: v22.10.0
+bun --version    # eg: 1.1.42
+node --version   # eg: v22.12.0
 ```
 
 ## Installation
@@ -30,7 +30,7 @@ bun install
 
 ## Local development
 
-To start the remix dev server, run:
+To start the React Router dev server, run:
 
 ```sh
 bun run dev
