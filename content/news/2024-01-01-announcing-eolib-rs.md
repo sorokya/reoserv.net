@@ -1,8 +1,8 @@
 ---
 title: 'Announcing eolib-rs!'
 description: 'I finally got around to making eolib-rs and migrated reoserv to it'
-date: 2024-01:01:28+02:00
-lastmod: 2024-01-01:03:28+02:00
+date: 2024-01-01T03:28:00+02:00
+lastmod: 2024-01-01T03:28:00+02:00
 ---
 
 I mentioned [last March](/news/2023-03-23-refactoring) that [@cirras](https://github.com/cirras)

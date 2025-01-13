@@ -8,16 +8,16 @@ This website hosts the documentation for the [reoserv][reoserv] project
 Before you can run this project, you need to have the following installed on
 your machine:
 
-- [Node.js][node] v20+ (for local development with the Remix web framework)
-- [Bun][bun] v1.0.36+ (a modern package manager & script runner for Node.js
+- [Node.js][node] v22+ (for local development with the React Router v7 web framework)
+- [Bun][bun] v1.1.42+ (a modern package manager & script runner for Node.js
   projects)
 
 Verify that both are setup on your system and meet our version requirements by
 running:
 
 ```sh
-bun --version    # eg: 1.0.36
-node --version   # eg: v20.4.0
+bun --version    # eg: 1.1.42
+node --version   # eg: v22.12.0
 ```
 
 ## Installation
@@ -30,7 +30,7 @@ bun install
 
 ## Local development
 
-To start the remix dev server, run:
+To start the React Router dev server, run:
 
 ```sh
 bun run dev
@@ -47,6 +47,24 @@ To build the project, run:
 bun run build
 ```
 
+## Deployment
+
+Deploy the output of `bun run build`
+
+```
+├── package.json
+├── bun.lockb
+├── build/
+│   ├── client/    # Static assets
+│   └── server/    # Server-side code
+```
+
+Serve in production with:
+
+```
+bun run start
+```
+
 ## Linting / Formatting
 
 To format, lint and apply fixes at the same time, use:
@@ -60,6 +78,10 @@ To format markdown files (docs, news), use:
 ```sh
 bun run lint:docs
 ```
+
+---
+
+Built with ❤️ using React Router.
 
 [reoserv]: https://github.com/sorokya/reoserv
 [sorokya]: https://github.com/sorokya
