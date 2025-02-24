@@ -7,7 +7,7 @@ import { Link, NavLink, useFetcher } from 'react-router';
 import logo from '../assets/images/logo-full.png?as=metadata';
 
 const getLinkClasses = (active = false) =>
-  `flex w-full items-center gap-1 rounded-sm border px-2 h-8 sm:h-6 ${
+  `flex w-full items-center gap-1 rounded-sm border px-2 h-8 sm:h-6 cursor-pointer ${
     active
       ? 'bg-amber-4 text-amber-11 font-bold border-amber-11 hover:bg-amber-3 hover:text-amber-11'
       : 'bg-amber-2 text-amber-12 border-amber-8 hover:bg-amber-3 hover:text-amber-11'
