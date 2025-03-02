@@ -2,8 +2,6 @@
 @plugin "@tailwindcss/typography";
 @plugin "@tailwindcss/forms";
 
-@config '../tailwind.config.ts';
-
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -91,5 +89,100 @@
     --color-sand-10: #7c7b74;
     --color-sand-11: #b5b3ad;
     --color-sand-12: #eeeeec;
+  }
+}
+
+@utility prose {
+  /* Typography customization */
+  --tw-prose-body: var(--color-sand-12);
+  --tw-prose-headings: var(--color-amber-12);
+  --tw-prose-lead: var(--color-amber-12);
+  --tw-prose-links: var(--color-amber-12);
+  --tw-prose-bold: var(--color-amber-12);
+  --tw-prose-counters: var(--color-sand-11);
+  --tw-prose-bullets: var(--color-sand-12);
+  --tw-prose-hr: var(--color-sand-12);
+  --tw-prose-kbd: var(--color-amber-12);
+  --tw-prose-quotes: var(--color-sand-12);
+  --tw-prose-quote-borders: var(--color-sand-12);
+  --tw-prose-captions: var(--color-sand-12);
+  --tw-prose-code: var(--color-amber-12);
+  --tw-prose-pre-code: var(--color-amber-12);
+  --tw-prose-pre-bg: var(--color-sand-3);
+  --tw-prose-th-borders: var(--color-sand-12);
+  --tw-prose-td-borders: var(--color-sand-12);
+
+  max-width: 75ch;
+
+  a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 0.125em;
+    word-break: break-word;
+
+    &:hover {
+      text-decoration-style: solid;
+    }
+  }
+
+  blockquote {
+    strong {
+      color: var(--color-amber-11);
+    }
+
+    code {
+      color: var(--color-amber-12);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    scroll-margin-top: 2rem;
+  }
+
+  code {
+    font-size: 1em;
+  }
+
+  pre {
+    max-width: calc(100vw - 2rem);
+    font-size: 1em;
+    border-radius: 0.125rem;
+  }
+
+  table {
+    width: auto;
+    min-width: 60%;
+    max-width: 100%;
+  }
+
+  a:hover {
+    color: var(--color-amber-11);
+  }
+
+  dt {
+    color: var(--color-sand-12);
+  }
+
+  a code,
+  h1 code,
+  h2 code,
+  h3 code,
+  h4 code {
+    color: var(--color-amber-12);
+  }
+
+  thead th {
+    color: var(--color-sand-12);
+  }
+
+  thead th strong,
+  thead th code {
+    color: var(--color-amber-12);
+  }
+
+  figcaption {
+    color: var(--color-sand-12);
   }
 }
