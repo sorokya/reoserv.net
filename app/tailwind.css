@@ -1,72 +1,188 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    box-sizing: border-box;
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Ubuntu", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: "Ubuntu Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* accent */
+  --color-amber-1: #fefdfb;
+  --color-amber-2: #fefbe9;
+  --color-amber-3: #fff7c2;
+  --color-amber-4: #ffee9c;
+  --color-amber-5: #fbe577;
+  --color-amber-6: #f3d673;
+  --color-amber-7: #e9c162;
+  --color-amber-8: #e2a336;
+  --color-amber-9: #ffc53d;
+  --color-amber-10: #ffba18;
+  --color-amber-11: #ab6400;
+  --color-amber-12: #4f3422;
+  --color-amber-contrast: #21201c;
+
+  /* gray */
+  --color-sand-1: #fdfdfc;
+  --color-sand-2: #f9f9f8;
+  --color-sand-3: #f1f0ef;
+  --color-sand-4: #e9e8e6;
+  --color-sand-5: #e2e1de;
+  --color-sand-6: #dad9d6;
+  --color-sand-7: #cfceca;
+  --color-sand-8: #bcbbb5;
+  --color-sand-9: #8d8d86;
+  --color-sand-10: #82827c;
+  --color-sand-11: #63635e;
+  --color-sand-12: #21201c;
+}
 
 @layer base {
-  :root,
-  .light {
-    /* accent */
-    --amber-1: #fefdfb;
-    --amber-2: #fefbe9;
-    --amber-3: #fff7c2;
-    --amber-4: #ffee9c;
-    --amber-5: #fbe577;
-    --amber-6: #f3d673;
-    --amber-7: #e9c162;
-    --amber-8: #e2a336;
-    --amber-9: #ffc53d;
-    --amber-10: #ffba18;
-    --amber-11: #ab6400;
-    --amber-12: #4f3422;
-    --amber-contrast: #21201c;
-
-    /* gray */
-    --sand-1: #fdfdfc;
-    --sand-2: #f9f9f8;
-    --sand-3: #f1f0ef;
-    --sand-4: #e9e8e6;
-    --sand-5: #e2e1de;
-    --sand-6: #dad9d6;
-    --sand-7: #cfceca;
-    --sand-8: #bcbbb5;
-    --sand-9: #8d8d86;
-    --sand-10: #82827c;
-    --sand-11: #63635e;
-    --sand-12: #21201c;
-  }
-
   .dark {
     /* accent */
-    --amber-1: #16120c;
-    --amber-2: #1d180f;
-    --amber-3: #302008;
-    --amber-4: #3f2700;
-    --amber-5: #4d3000;
-    --amber-6: #5c3d05;
-    --amber-7: #714f19;
-    --amber-8: #8f6424;
-    --amber-9: #ffc53d;
-    --amber-10: #ffd60a;
-    --amber-11: #ffca16;
-    --amber-12: #ffe7b3;
-    --amber-contrast: white;
+    --color-amber-1: #16120c;
+    --color-amber-2: #1d180f;
+    --color-amber-3: #302008;
+    --color-amber-4: #3f2700;
+    --color-amber-5: #4d3000;
+    --color-amber-6: #5c3d05;
+    --color-amber-7: #714f19;
+    --color-amber-8: #8f6424;
+    --color-amber-9: #ffc53d;
+    --color-amber-10: #ffd60a;
+    --color-amber-11: #ffca16;
+    --color-amber-12: #ffe7b3;
+    --color-amber-contrast: white;
 
     /* gray */
-    --sand-1: #111110;
-    --sand-2: #191918;
-    --sand-3: #222221;
-    --sand-4: #2a2a28;
-    --sand-5: #31312e;
-    --sand-6: #3b3a37;
-    --sand-7: #494844;
-    --sand-8: #62605b;
-    --sand-9: #6f6d66;
-    --sand-10: #7c7b74;
-    --sand-11: #b5b3ad;
-    --sand-12: #eeeeec;
+    --color-sand-1: #111110;
+    --color-sand-2: #191918;
+    --color-sand-3: #222221;
+    --color-sand-4: #2a2a28;
+    --color-sand-5: #31312e;
+    --color-sand-6: #3b3a37;
+    --color-sand-7: #494844;
+    --color-sand-8: #62605b;
+    --color-sand-9: #6f6d66;
+    --color-sand-10: #7c7b74;
+    --color-sand-11: #b5b3ad;
+    --color-sand-12: #eeeeec;
+  }
+}
+
+@utility prose {
+  /* Typography customization */
+  --tw-prose-body: var(--color-sand-12);
+  --tw-prose-headings: var(--color-amber-12);
+  --tw-prose-lead: var(--color-amber-12);
+  --tw-prose-links: var(--color-amber-12);
+  --tw-prose-bold: var(--color-amber-12);
+  --tw-prose-counters: var(--color-sand-11);
+  --tw-prose-bullets: var(--color-sand-12);
+  --tw-prose-hr: var(--color-sand-12);
+  --tw-prose-kbd: var(--color-amber-12);
+  --tw-prose-quotes: var(--color-sand-12);
+  --tw-prose-quote-borders: var(--color-sand-12);
+  --tw-prose-captions: var(--color-sand-12);
+  --tw-prose-code: var(--color-amber-12);
+  --tw-prose-pre-code: var(--color-amber-12);
+  --tw-prose-pre-bg: var(--color-sand-3);
+  --tw-prose-th-borders: var(--color-sand-12);
+  --tw-prose-td-borders: var(--color-sand-12);
+
+  max-width: 75ch;
+
+  a {
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 0.125em;
+    word-break: break-word;
+
+    &:hover {
+      text-decoration-style: solid;
+    }
   }
 
-  * {
-    box-sizing: border-box;
+  blockquote {
+    strong {
+      color: var(--color-amber-11);
+    }
+
+    code {
+      color: var(--color-amber-12);
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    scroll-margin-top: 2rem;
+  }
+
+  code {
+    font-size: 1em;
+  }
+
+  pre {
+    max-width: calc(100vw - 2rem);
+    font-size: 1em;
+    border-radius: 0.125rem;
+  }
+
+  table {
+    width: auto;
+    min-width: 60%;
+    max-width: 100%;
+  }
+
+  a:hover {
+    color: var(--color-amber-11);
+  }
+
+  dt {
+    color: var(--color-sand-12);
+  }
+
+  a code,
+  h1 code,
+  h2 code,
+  h3 code,
+  h4 code {
+    color: var(--color-amber-12);
+  }
+
+  thead th {
+    color: var(--color-sand-12);
+  }
+
+  thead th strong,
+  thead th code {
+    color: var(--color-amber-12);
+  }
+
+  figcaption {
+    color: var(--color-sand-12);
   }
 }
