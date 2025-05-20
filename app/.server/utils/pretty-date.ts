@@ -18,14 +18,8 @@ const getMonthName = (date: Date) => {
   return monthNames[date.getMonth()];
 };
 
-const offsetDate = (timestamp: Timestamp, offset: number) => {
+const getPrettyDate = (timestamp: Timestamp) => {
   const date = new Date(timestamp);
-  date.setMinutes(date.getMinutes() + offset);
-  return date;
-};
-
-const getPrettyDate = (timestamp: Timestamp, clockOffset: number) => {
-  const date = offsetDate(timestamp, clockOffset);
   return `${getMonthName(date)} ${date.getDate()}, ${date.getFullYear()}`;
 };
 

@@ -11,7 +11,6 @@ import {
 import { getThemeFromCookies } from '~/.server/theme';
 import { Header } from '~/components/header';
 import type { Route } from './+types/root';
-import { getClockOffset } from './.server/utils/clock-offset';
 import styles from './tailwind.css?url';
 
 export const links: Route.LinksFunction = () => [
@@ -34,8 +33,7 @@ export const links: Route.LinksFunction = () => [
 
 export async function loader({ request }: Route.LoaderArgs) {
   const theme = await getThemeFromCookies(request);
-  const clockOffset = getClockOffset(request);
-  return { theme, clockOffset } as const;
+  return { theme } as const;
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
