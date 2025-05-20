@@ -1,6 +1,5 @@
 import { redirect } from 'react-router';
 import { getNewsArticle } from '~/.server/get-news-article';
-import { getClockOffset } from '~/.server/utils/clock-offset';
 import { getPrettyDate } from '~/.server/utils/pretty-date';
 import { ProseContainer } from '~/components/prose-container';
 import type { Route } from './+types/route';
@@ -15,7 +14,7 @@ export const meta: Route.MetaFunction = ({ data }) => {
   ];
 };
 
-export async function loader({ params, request }: Route.LoaderArgs) {
+export async function loader({ params }: Route.LoaderArgs) {
   const article = await getNewsArticle(params.name);
 
   if (!article) {
@@ -25,7 +24,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
   return {
     article: {
       ...article,
-      localDate: getPrettyDate(article.date, getClockOffset(request)),
+      localDate: getPrettyDate(article.date),
     },
   };
 }

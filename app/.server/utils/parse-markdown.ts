@@ -8,7 +8,7 @@ import { etag } from './etag';
 
 const highlighter = await remember('highlighter', () =>
   createHighlighter({
-    langs: ['md', 'sh', 'rust', 'text', 'yaml'],
+    langs: ['md', 'sh', 'rust', 'text', 'yaml', 'sql', 'toml'],
     themes: ['github-dark-dimmed'],
   }),
 );
