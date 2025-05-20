@@ -4,6 +4,8 @@ const LINKS = [
   {
     section: 'Getting Started',
     items: [
+      { title: 'Quick Start', link: '/docs/quick-start' },
+      { title: 'Quick Start (spanish)', link: '/docs/quick-start-es' },
       { title: 'Installation', link: '/docs/installation' },
       { title: 'Database', link: '/docs/database' },
       { title: 'Configuration', link: '/docs/configuration' },
