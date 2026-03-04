@@ -75,6 +75,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             data-website-id="549d5e91-57c9-4aea-8b3b-139d39a302cd"
           />
         )}
+        <script src="https://keepandroidopen.org/banner.js" async defer />
         <ScrollRestoration />
         <Scripts />
       </body>
